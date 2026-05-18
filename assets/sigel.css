@@ -1,0 +1,141 @@
+/* SIGEL — estilos complementarios */
+
+.nav-link {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.15s;
+}
+.nav-link:hover:not(.bg-sigel-accent) {
+  background: rgba(255, 255, 255, 0.1);
+}
+.nav-link.active {
+  background: rgba(255, 255, 255, 0.15);
+  font-weight: 600;
+}
+
+.card {
+  background: white;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.04);
+  padding: 1.25rem;
+}
+
+.semaforo-dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px white, 0 0 4px rgba(0, 0, 0, 0.2);
+}
+.semaforo-VERDE   { background: #16A34A; }
+.semaforo-AMARILLO{ background: #F59E0B; }
+.semaforo-ROJO    { background: #DC2626; }
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.badge-EXCELENTE { background: #DCFCE7; color: #166534; }
+.badge-ALTO      { background: #ECFCCB; color: #3F6212; }
+.badge-MEDIO     { background: #FEF3C7; color: #92400E; }
+.badge-BAJO      { background: #FED7AA; color: #9A3412; }
+.badge-CRITICO   { background: #FEE2E2; color: #991B1B; }
+
+.btn-primary {
+  background: #1E3A8A;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+.btn-primary:hover { background: #1E40AF; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-accent {
+  background: #D97706;
+  color: white;
+  padding: 0.7rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+.btn-accent:hover { background: #B45309; }
+
+.likert {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.likert button {
+  padding: 0.75rem;
+  border: 2px solid #E2E8F0;
+  border-radius: 0.5rem;
+  background: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  min-height: 44px;          /* Touch-target accesible WCAG */
+}
+.likert button:hover { border-color: #1E3A8A; transform: translateY(-1px); }
+.likert button:focus-visible {
+  outline: 2px solid #1E3A8A;
+  outline-offset: 2px;
+}
+.likert button.selected {
+  background: #1E3A8A;
+  color: white;
+  border-color: #1E3A8A;
+  box-shadow: 0 2px 4px rgba(30, 58, 138, 0.2);
+}
+
+/* Estados de focus consistentes para accesibilidad */
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible {
+  outline: 2px solid #1E3A8A;
+  outline-offset: 2px;
+}
+
+/* Mejoras mobile */
+@media (max-width: 640px) {
+  .likert button { padding: 0.6rem 0.4rem; font-size: 0.95rem; }
+  .card { padding: 1rem; }
+  #map { height: 460px; }
+}
+
+.bar {
+  height: 8px;
+  background: linear-gradient(to right, #DC2626 0%, #F59E0B 50%, #16A34A 100%);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  right: 0;
+  transition: width 0.3s;
+}
+
+/* Map */
+#map { height: 600px; border-radius: 0.75rem; }
+.leaflet-popup-content { font-family: 'Inter', sans-serif; }
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Print-friendly */
+@media print {
+  header, footer, nav, .no-print { display: none !important; }
+}
