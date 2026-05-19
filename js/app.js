@@ -22,6 +22,7 @@ import { viewMapa, mountMapa } from './views/mapa.js';
 import { viewGad } from './views/gad.js';
 import { viewEvaluar } from './views/evaluar.js';
 import { viewMetodologia } from './views/metodologia.js';
+import { viewCalculadora, mountCalculadora } from './views/calculadora.js';
 import { exportarEvaluacionPdf } from './features/pdf/index.js';
 
 const state = {
@@ -83,6 +84,9 @@ function router() {
   } else if (parts[0] === 'metodologia') {
     state.route = 'metodologia';
     html = viewMetodologia();
+  } else if (parts[0] === 'calculadora') {
+    state.route = 'calculadora';
+    html = viewCalculadora(state);
   } else {
     html = /*html*/`<div class="max-w-2xl mx-auto px-4 py-16 text-center">
       <h1 class="font-display font-bold text-2xl">404 — Ruta no encontrada</h1>
@@ -96,6 +100,9 @@ function router() {
 
   if (state.route === 'mapa') {
     mountMapa(state).catch(console.error);
+  }
+  if (state.route === 'calculadora') {
+    mountCalculadora();
   }
   if (state.route === 'evaluar') {
     // Reposicionar foco en el filtro si el usuario estaba escribiendo
