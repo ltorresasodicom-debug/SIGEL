@@ -94,6 +94,46 @@ export function viewMetodologia() {
       Next.js + scrapers + manifiestos K8s + CI/CD) está disponible en
       <a href="https://github.com/ltorresasodicom-debug/ASODICOM" class="text-sigel-primary underline">GitHub</a>.
     </p>
-  </div>
-  `;
+
+    <h2 class="font-display font-bold text-2xl mt-10">Autoría</h2>
+    <div class="card mt-3 creator-card">
+      <div class="creator-photo">
+        <img src="./assets/brand/luis-adrian-torres.jpg" alt="Soc. Luis Adrián Torres E."
+             loading="lazy"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="brand-mono">LT</span>
+      </div>
+      <div class="flex-1 min-w-[220px]">
+        <div class="font-display font-bold text-lg">Soc. Luis Adrián Torres E.</div>
+        <div class="text-sm text-slate-500">Sociólogo · Creador y director metodológico de SIGEL</div>
+        <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+          Diseño del Índice Nacional de Gestión Local (INGEL), la arquitectura
+          de evaluación ciudadana y la integración de fuentes oficiales.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-3">
+          <a href="mailto:ltorres.asodicom@gmail.com"
+             class="chip text-xs hover:border-sigel-primary transition">
+            <span class="dot" style="background:var(--sigel-primary)"></span>ltorres.asodicom@gmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/luis-adri%C3%A1n-torres-enr%C3%ADquez/"
+             target="_blank" rel="noopener noreferrer"
+             class="chip text-xs hover:border-sigel-primary transition">
+            <span class="dot" style="background:#0A66C2"></span>LinkedIn ↗
+          </a>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 sm:flex-col sm:items-end">
+        <span class="brand-logo" aria-label="ASODICOM">
+          <img src="./assets/brand/asodicom.png" alt="ASODICOM" loading="lazy"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="brand-mono" style="display:none;color:var(--sigel-primary);border-color:var(--c-border)">ASODICOM</span>
+        </span>
+        <span class="brand-logo" aria-label="Latam Cifras">
+          <img src="./assets/brand/latam-cifras.png" alt="Latam Cifras" loading="lazy"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="brand-mono" style="display:none;color:var(--sigel-primary);border-color:var(--c-border)">latam·cifras</span>
+        </span>
+      </div>
+    </div>
+  </div>`;
 }

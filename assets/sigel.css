@@ -401,6 +401,68 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
   .card { padding: var(--sp-4); }
 }
 
+/* ── Branding institucional ──────────────────────────────────────────────── */
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  height: 38px;
+}
+.brand-logo img {
+  height: 38px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  filter: grayscale(1) brightness(1.7);
+  opacity: 0.75;
+  transition: filter var(--t-base), opacity var(--t-base);
+}
+.brand-logo:hover img { filter: none; opacity: 1; }
+.brand-mono {
+  align-items: center;
+  height: 38px;
+  padding: 0 0.85rem;
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--r-md);
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: #CBD5E1;
+}
+
+/* Tarjeta de autoría / creador */
+.creator-card {
+  display: flex;
+  gap: var(--sp-5);
+  align-items: center;
+  flex-wrap: wrap;
+}
+.creator-photo {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  flex: none;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--sigel-primary), var(--sigel-secondary));
+  box-shadow: var(--sh-md), 0 0 0 3px #fff, 0 0 0 4px var(--c-border);
+}
+.creator-photo img { width: 100%; height: 100%; object-fit: cover; }
+.creator-photo .brand-mono {
+  display: none;
+  width: 100%; height: 100%;
+  border: 0; border-radius: 0; padding: 0;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.6rem;
+  background: transparent;
+}
+
+@media (max-width: 640px) {
+  .brand-logo, .brand-logo img, .brand-mono { height: 32px; }
+  .creator-card { gap: var(--sp-4); }
+}
+
 /* ── Print ───────────────────────────────────────────────────────────────── */
 @media print {
   header, footer, nav, .no-print { display: none !important; }
