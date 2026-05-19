@@ -122,7 +122,9 @@ export function viewMetodologia() {
           </a>
         </div>
       </div>
-      <div class="flex items-center gap-4 sm:flex-col sm:items-end">
+      <div class="flex flex-col items-center sm:items-end gap-2">
+        <span class="text-[11px] uppercase tracking-widest text-slate-400">Con el apoyo de</span>
+        <div class="flex items-center gap-4">
         <span class="brand-logo" aria-label="ASODICOM">
           <img src="./assets/brand/asodicom.png" alt="ASODICOM" loading="lazy"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -133,6 +135,7 @@ export function viewMetodologia() {
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <span class="brand-mono" style="display:none;color:var(--sigel-primary);border-color:var(--c-border)">latam·cifras</span>
         </span>
+        </div>
       </div>
     </div>
   </div>`;
