@@ -34,6 +34,13 @@
           sans:    ['Inter', 'system-ui', 'sans-serif'],
           display: ['Manrope', 'system-ui', 'sans-serif'],
         },
+        borderRadius: { xl: '1rem', '2xl': '1.25rem' },
+        boxShadow: {
+          card:  '0 1px 3px rgba(15,23,42,0.06), 0 1px 2px rgba(15,23,42,0.04)',
+          soft:  '0 4px 12px rgba(15,23,42,0.07), 0 2px 4px rgba(15,23,42,0.04)',
+          lift:  '0 12px 28px rgba(15,23,42,0.10), 0 4px 8px rgba(15,23,42,0.05)',
+        },
+        letterSpacing: { widest: '0.18em' },
       },
     },
   };
@@ -42,43 +49,57 @@
 
 <body class="bg-slate-50 text-slate-900 antialiased">
 
+<a href="#app" class="skip-link">Saltar al contenido principal</a>
+
 <!-- ╔══════ HEADER ══════╗ -->
-<header class="bg-sigel-primary text-white sticky top-0 z-50 shadow-lg">
+<header class="bg-sigel-primary/95 backdrop-blur text-white sticky top-0 z-50 shadow-lg border-b border-white/10">
   <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-    <a href="#/" data-route="home" class="flex items-center gap-3 group">
-      <svg class="w-8 h-8 text-sigel-accent" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1l9 4v6c0 5.5-3.8 10.7-9 12-5.2-1.3-9-6.5-9-12V5l9-4z"/></svg>
+    <a href="#/" data-route="home" class="flex items-center gap-3 group rounded-lg" aria-label="SIGEL Ecuador — inicio">
+      <span class="grid place-items-center w-9 h-9 rounded-lg bg-white/10 group-hover:bg-white/15 transition">
+        <svg class="w-6 h-6 text-sigel-accent" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l9 4v6c0 5.5-3.8 10.7-9 12-5.2-1.3-9-6.5-9-12V5l9-4z"/></svg>
+      </span>
       <div>
-        <div class="font-display font-extrabold text-xl tracking-tight">SIGEL</div>
-        <div class="text-[10px] uppercase tracking-widest opacity-80">Ecuador Evalúa</div>
+        <div class="font-display font-extrabold text-xl tracking-tight leading-none">SIGEL</div>
+        <div class="text-[10px] uppercase tracking-widest opacity-80 mt-0.5">Ecuador Evalúa</div>
       </div>
     </a>
-    <nav class="hidden md:flex items-center gap-1 text-sm font-medium">
+    <nav class="hidden md:flex items-center gap-1 text-sm font-medium" aria-label="Navegación principal">
       <a href="#/" data-route="home"        class="nav-link">Inicio</a>
       <a href="#/ranking" data-route="ranking" class="nav-link">Ranking</a>
       <a href="#/mapa"    data-route="mapa"    class="nav-link">Mapa</a>
-      <a href="#/evaluar" data-route="evaluar" class="nav-link bg-sigel-accent hover:bg-orange-600">📋 Evaluar</a>
+      <a href="#/evaluar" data-route="evaluar" class="nav-link bg-sigel-accent hover:bg-sigel-accent/85 font-semibold shadow-sm">📋 Evaluar</a>
       <a href="#/metodologia" data-route="metodologia" class="nav-link">Metodología</a>
     </nav>
-    <button id="menu-mobile-btn" class="md:hidden p-2" aria-label="Menú">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    <button id="menu-mobile-btn" class="md:hidden p-2.5 rounded-lg hover:bg-white/10 transition" aria-label="Abrir menú de navegación">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
     </button>
   </div>
-  <nav id="menu-mobile" class="md:hidden hidden bg-blue-900 px-4 py-3 space-y-2 text-sm">
-    <a href="#/" data-route="home" class="block py-2">Inicio</a>
-    <a href="#/ranking" data-route="ranking" class="block py-2">Ranking</a>
-    <a href="#/mapa" data-route="mapa" class="block py-2">Mapa</a>
-    <a href="#/evaluar" data-route="evaluar" class="block py-2 font-bold">📋 Crear evaluación</a>
-    <a href="#/metodologia" data-route="metodologia" class="block py-2">Metodología</a>
+  <nav id="menu-mobile" class="md:hidden hidden border-t border-white/10 bg-sigel-primary px-4 py-3 space-y-1 text-sm" aria-label="Navegación móvil">
+    <a href="#/" data-route="home" class="block py-2.5 px-3 rounded-lg hover:bg-white/10 transition">Inicio</a>
+    <a href="#/ranking" data-route="ranking" class="block py-2.5 px-3 rounded-lg hover:bg-white/10 transition">Ranking</a>
+    <a href="#/mapa" data-route="mapa" class="block py-2.5 px-3 rounded-lg hover:bg-white/10 transition">Mapa</a>
+    <a href="#/evaluar" data-route="evaluar" class="block py-2.5 px-3 rounded-lg bg-sigel-accent font-semibold">📋 Crear evaluación</a>
+    <a href="#/metodologia" data-route="metodologia" class="block py-2.5 px-3 rounded-lg hover:bg-white/10 transition">Metodología</a>
   </nav>
 </header>
 
 <!-- ╔══════ APP CONTAINER (routes mount here) ══════╗ -->
-<main id="app" class="min-h-screen">
-  <div class="flex items-center justify-center py-32">
-    <div class="text-center">
-      <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-sigel-primary border-t-transparent"></div>
-      <p class="mt-4 text-slate-600">Cargando SIGEL…</p>
+<main id="app" class="min-h-screen" tabindex="-1">
+  <div class="max-w-7xl mx-auto px-4 py-12" role="status" aria-label="Cargando SIGEL">
+    <div class="skeleton skeleton-block" style="height:180px"></div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+      <div class="skeleton skeleton-block" style="height:96px"></div>
+      <div class="skeleton skeleton-block" style="height:96px"></div>
+      <div class="skeleton skeleton-block" style="height:96px"></div>
+      <div class="skeleton skeleton-block" style="height:96px"></div>
     </div>
+    <div class="skeleton skeleton-text mt-8" style="width:40%;height:1.4rem"></div>
+    <div class="grid md:grid-cols-3 gap-4 mt-4">
+      <div class="skeleton skeleton-block"></div>
+      <div class="skeleton skeleton-block"></div>
+      <div class="skeleton skeleton-block"></div>
+    </div>
+    <span class="sr-only">Cargando SIGEL…</span>
   </div>
 </main>
 
@@ -92,9 +113,9 @@
     <div>
       <div class="font-semibold text-white mb-3">Plataforma</div>
       <ul class="space-y-1.5 opacity-80">
-        <li><a href="#/ranking" class="hover:text-sigel-accent">Ranking nacional</a></li>
-        <li><a href="#/mapa" class="hover:text-sigel-accent">Mapa interactivo</a></li>
-        <li><a href="#/evaluar" class="hover:text-sigel-accent">Crear evaluación</a></li>
+        <li><a href="#/ranking" class="hover:text-sigel-accent transition">Ranking nacional</a></li>
+        <li><a href="#/mapa" class="hover:text-sigel-accent transition">Mapa interactivo</a></li>
+        <li><a href="#/evaluar" class="hover:text-sigel-accent transition">Crear evaluación</a></li>
       </ul>
     </div>
     <div>
@@ -111,7 +132,7 @@
       <ul class="space-y-1.5 opacity-80">
         <li>Licencia AGPL-3.0</li>
         <li>Datos abiertos CC-BY 4.0</li>
-        <li><a href="https://github.com/ltorresasodicom-debug/ASODICOM" class="hover:text-sigel-accent">Código fuente ↗</a></li>
+        <li><a href="https://github.com/ltorresasodicom-debug/ASODICOM" target="_blank" rel="noopener noreferrer" class="hover:text-sigel-accent transition">Código fuente ↗</a></li>
       </ul>
     </div>
   </div>
