@@ -87,6 +87,8 @@ export function viewGad(state, gadId) {
 
     ${g.indicadores ? renderIndicadoresInec(g.indicadores) : ''}
 
+    ${g.fuentesExternas ? renderFuentesExternas(g) : ''}
+
     <section class="mt-6 text-center">
       <a href="#/evaluar?gad=${g.id}" class="btn-accent inline-block">📋 Crear mi evaluación de ${g.nombre.replace(/^GAD .* de /, '')}</a>
     </section>
@@ -139,6 +141,43 @@ function inecPanel(titulo, sigla, d) {
         ${inecBar('Operación del servicio', d.operacion)}
       </div>
     </div>`;
+}
+
+// ── Fuentes externas (capa desacoplada; SIL/ArcGIS · datosabiertos/CKAN) ────
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  }[c]));
+}
+
+function renderFuentesExternas(g) {
+  const val = g.fuenteValidacion === 'consistente'
+    ? `<span class="chip text-xs"><span class="dot" style="background:var(--c-verde)"></span>Validación: consistente</span>`
+    : `<span class="chip text-xs"><span class="dot" style="background:var(--c-amarillo)"></span>Validación: revisar provincia</span>`;
+  return /*html*/`
+    <section class="card mt-5">
+      <div class="flex flex-wrap items-end justify-between gap-2 mb-1">
+        <h2 class="font-display font-bold text-xl">Fuentes externas de referencia</h2>
+        ${val}
+      </div>
+      <p class="text-sm text-slate-500 mb-5">
+        Datos públicos complementarios (SIL · ArcGIS y datosabiertos.gob.ec ·
+        CKAN). No alteran el INGEL; sirven como contraste y transparencia.
+      </p>
+      <div class="grid md:grid-cols-2 gap-4">
+        ${g.fuentesExternas.map(f => /*html*/`
+          <div class="rounded-xl border border-slate-200 p-5">
+            <div class="font-display font-semibold">${escapeHtml(f.label || f.source)}</div>
+            <dl class="mt-3 space-y-1.5 text-sm">
+              ${Object.entries(f.metrics || {}).map(([k, v]) => /*html*/`
+                <div class="flex justify-between gap-3 border-b border-slate-100 pb-1">
+                  <dt class="text-slate-500">${escapeHtml(k)}</dt>
+                  <dd class="font-medium tabular-nums">${escapeHtml(v)}</dd>
+                </div>`).join('') || '<div class="text-slate-400">Sin métricas mapeadas.</div>'}
+            </dl>
+          </div>`).join('')}
+      </div>
+    </section>`;
 }
 
 function renderIndicadoresInec(ind) {

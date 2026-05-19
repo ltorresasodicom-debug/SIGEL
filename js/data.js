@@ -12,6 +12,7 @@
 import { calcularIngel, calcularIri, clasificarNivel, semaforizar, DIMENSIONES } from './ingel.js';
 import { normalize } from './utils/normalize.js';
 import { resolveCantonName } from './utils/canton-aliases.js';
+import { enrichExternalSourcesInBackground } from './data/sources/index.js';
 
 let _data = null;
 let _geojson = null;
@@ -42,6 +43,9 @@ export async function loadData() {
   _data = enrichWithSyntheticScores(raw);
   attachGeoToGads(_data, geo);
   attachIndicadores(_data, indic);
+  // Fuentes externas (SIL/ArcGIS, datosabiertos/CKAN): segundo plano, NO se
+  // espera (no bloquea el primer render). Sin fuentes activas es un no-op.
+  enrichExternalSourcesInBackground(_data);
   return _data;
 }
 
