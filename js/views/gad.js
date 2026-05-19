@@ -85,9 +85,76 @@ export function viewGad(state, gadId) {
       </div>
     </section>
 
+    ${g.indicadores ? renderIndicadoresInec(g.indicadores) : ''}
+
     <section class="mt-6 text-center">
       <a href="#/evaluar?gad=${g.id}" class="btn-accent inline-block">📋 Crear mi evaluación de ${g.nombre.replace(/^GAD .* de /, '')}</a>
     </section>
   </div>
   `;
+}
+
+// ── Indicadores oficiales INEC 2024 (capa aditiva; datos reales) ────────────
+function inecColor(v) {
+  if (v == null) return '#94A3B8';
+  return v >= 70 ? COLOR_SEMAFORO.VERDE : v >= 50 ? COLOR_SEMAFORO.AMARILLO : COLOR_SEMAFORO.ROJO;
+}
+
+function inecBar(label, v) {
+  if (v == null) return '';
+  const pct = Math.max(0, Math.min(100, v));
+  return /*html*/`
+    <div>
+      <div class="flex justify-between items-center text-sm mb-1">
+        <span class="text-slate-600">${label}</span>
+        <span class="font-display font-bold tabular-nums">${v.toFixed(1)}</span>
+      </div>
+      <div class="bg-slate-100 rounded-full h-2 overflow-hidden" role="progressbar"
+           aria-valuenow="${pct.toFixed(0)}" aria-valuemin="0" aria-valuemax="100" aria-label="${label}">
+        <div class="h-full rounded-full" style="width:${pct}%;background:${inecColor(v)}"></div>
+      </div>
+    </div>`;
+}
+
+function inecPanel(titulo, sigla, d) {
+  if (!d) return /*html*/`
+    <div class="rounded-xl border border-slate-200 p-5 bg-slate-50/50">
+      <div class="font-display font-semibold">${titulo}</div>
+      <p class="text-sm text-slate-500 mt-2">Sin reporte INEC para este cantón.</p>
+    </div>`;
+  return /*html*/`
+    <div class="rounded-xl border border-slate-200 p-5">
+      <div class="flex items-center justify-between gap-3">
+        <div>
+          <div class="font-display font-semibold">${titulo}</div>
+          <div class="text-xs text-slate-500">${sigla}</div>
+        </div>
+        <div class="text-right">
+          <div class="font-display font-extrabold text-3xl tabular-nums" style="color:${inecColor(d.indice)}">${d.indice != null ? d.indice.toFixed(1) : '—'}</div>
+          <div class="text-[10px] uppercase tracking-wider text-slate-400">índice 0–100</div>
+        </div>
+      </div>
+      <div class="space-y-3 mt-4">
+        ${inecBar('Capacidad institucional', d.institucional)}
+        ${inecBar('Operación del servicio', d.operacion)}
+      </div>
+    </div>`;
+}
+
+function renderIndicadoresInec(ind) {
+  return /*html*/`
+    <section class="card mt-5">
+      <div class="flex flex-wrap items-end justify-between gap-2 mb-1">
+        <h2 class="font-display font-bold text-xl">Indicadores oficiales INEC 2024</h2>
+        <span class="chip text-xs"><span class="dot" style="background:var(--c-verde)"></span>Datos reales</span>
+      </div>
+      <p class="text-sm text-slate-500 mb-5">
+        Gestión de servicios municipales según el Censo de Información Ambiental
+        Económica en GADM 2024 (INEC). Complementan el INGEL; no lo modifican.
+      </p>
+      <div class="grid md:grid-cols-2 gap-4">
+        ${inecPanel('Residuos sólidos', 'GIRS · gestión integral', ind.girs)}
+        ${inecPanel('Agua potable y alcantarillado', 'APA · cobertura y operación', ind.apa)}
+      </div>
+    </section>`;
 }

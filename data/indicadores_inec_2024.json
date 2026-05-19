@@ -1,0 +1,2932 @@
+{
+  "_meta": {
+    "fuente": "INEC — Estadística de Información Ambiental Económica en GADM 2024",
+    "datasets": [
+      "GIRS (residuos sólidos)",
+      "APA (agua potable y alcantarillado)"
+    ],
+    "anio": 2024,
+    "metodologia": "Índice 0–100 = media de variables binarias INEC (1=Sí→100, 2=No→0; vacío excluido). Selección curada en scripts/build_indicadores_inec.py.",
+    "clave": "canton_codigo del geojson (= g.feature_id en data.js)",
+    "variables": {
+      "GIRS": {
+        "operacion": [
+          "MR211",
+          "MR212",
+          "MR213",
+          "MR214",
+          "MR215",
+          "MR216",
+          "MR217",
+          "MR218",
+          "MR219",
+          "MR2110",
+          "MR21111"
+        ],
+        "institucional": [
+          "MR111",
+          "MR113",
+          "MR13",
+          "MR19",
+          "MR221",
+          "MR2210"
+        ]
+      },
+      "APA": {
+        "institucional": [
+          "MA121",
+          "MA1211",
+          "MA131",
+          "MA141",
+          "MA142",
+          "MA151",
+          "MA152",
+          "MA171",
+          "MA181",
+          "MA182",
+          "MA191",
+          "MA192",
+          "MA193",
+          "MA1101",
+          "MA112DPM"
+        ],
+        "operacion": [
+          "MA21111",
+          "MA21112",
+          "MA1612",
+          "MA1613",
+          "MA1614",
+          "MA1621",
+          "MA1622",
+          "MA1623",
+          "MA1624",
+          "MA1625",
+          "MA1631",
+          "MA1632"
+        ]
+      }
+    }
+  },
+  "byCode": {
+    "0101": {
+      "canton": "CUENCA",
+      "girs": {
+        "indice": 73.5,
+        "operacion": 63.6,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 100.0,
+        "institucional": 100.0,
+        "operacion": 100.0
+      }
+    },
+    "0102": {
+      "canton": "GIRÓN",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 61.3,
+        "institucional": 64.3,
+        "operacion": 58.3
+      }
+    },
+    "0103": {
+      "canton": "GUALACEO",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 52.4,
+        "institucional": 71.4,
+        "operacion": 33.3
+      }
+    },
+    "0104": {
+      "canton": "NABÓN",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 48.4,
+        "institucional": 80.0,
+        "operacion": 16.7
+      }
+    },
+    "0105": {
+      "canton": "PAUTE",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 58.4,
+        "institucional": 100.0,
+        "operacion": 16.7
+      }
+    },
+    "0106": {
+      "canton": "PUCARA",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 78.3,
+        "institucional": 73.3,
+        "operacion": 83.3
+      }
+    },
+    "0107": {
+      "canton": "SAN FERNANDO",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 29.8,
+        "institucional": 42.9,
+        "operacion": 16.7
+      }
+    },
+    "0108": {
+      "canton": "SANTA ISABEL",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 78.3,
+        "institucional": 73.3,
+        "operacion": 83.3
+      }
+    },
+    "0109": {
+      "canton": "SIGSIG",
+      "girs": {
+        "indice": 56.1,
+        "operacion": 45.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 96.7,
+        "institucional": 93.3,
+        "operacion": 100.0
+      }
+    },
+    "0110": {
+      "canton": "OÑA",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 36.9,
+        "institucional": 57.1,
+        "operacion": 16.7
+      }
+    },
+    "0111": {
+      "canton": "CHORDELEG",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 38.4,
+        "institucional": 60.0,
+        "operacion": 16.7
+      }
+    },
+    "0112": {
+      "canton": "EL PAN",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 81.7,
+        "institucional": 80.0,
+        "operacion": 83.3
+      }
+    },
+    "0113": {
+      "canton": "SEVILLA DE ORO",
+      "girs": {
+        "indice": 56.1,
+        "operacion": 45.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 100.0,
+        "institucional": 100.0,
+        "operacion": 100.0
+      }
+    },
+    "0114": {
+      "canton": "GUACHAPALA",
+      "girs": {
+        "indice": 52.2,
+        "operacion": 54.5,
+        "institucional": 50.0
+      },
+      "apa": {
+        "indice": 51.7,
+        "institucional": 86.7,
+        "operacion": 16.7
+      }
+    },
+    "0115": {
+      "canton": "CAMILO PONCE ENRÍQUEZ",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 91.7,
+        "institucional": 100.0,
+        "operacion": 83.3
+      }
+    },
+    "0201": {
+      "canton": "GUARANDA",
+      "girs": {
+        "indice": 78.0,
+        "operacion": 72.7,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 52.5,
+        "institucional": 80.0,
+        "operacion": 25.0
+      }
+    },
+    "0202": {
+      "canton": "CHILLANES",
+      "girs": {
+        "indice": 52.2,
+        "operacion": 54.5,
+        "institucional": 50.0
+      },
+      "apa": {
+        "indice": 29.8,
+        "institucional": 42.9,
+        "operacion": 16.7
+      }
+    },
+    "0203": {
+      "canton": "CHIMBO",
+      "girs": {
+        "indice": 47.8,
+        "operacion": 45.5,
+        "institucional": 50.0
+      },
+      "apa": {
+        "indice": 45.9,
+        "institucional": 66.7,
+        "operacion": 25.0
+      }
+    },
+    "0204": {
+      "canton": "ECHEANDÍA",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 38.4,
+        "institucional": 60.0,
+        "operacion": 16.7
+      }
+    },
+    "0205": {
+      "canton": "SAN MIGUEL",
+      "girs": {
+        "indice": 47.0,
+        "operacion": 27.3,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 35.0,
+        "institucional": 53.3,
+        "operacion": 16.7
+      }
+    },
+    "0206": {
+      "canton": "CALUMA",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 25.0,
+        "institucional": 33.3,
+        "operacion": 16.7
+      }
+    },
+    "0207": {
+      "canton": "LAS NAVES",
+      "girs": {
+        "indice": 51.5,
+        "operacion": 36.4,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 72.5,
+        "institucional": 86.7,
+        "operacion": 58.3
+      }
+    },
+    "0301": {
+      "canton": "AZOGUES",
+      "girs": {
+        "indice": 73.5,
+        "operacion": 63.6,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 51.7,
+        "institucional": 86.7,
+        "operacion": 16.7
+      }
+    },
+    "0302": {
+      "canton": "BIBLIÁN",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 77.5,
+        "institucional": 80.0,
+        "operacion": 75.0
+      }
+    },
+    "0303": {
+      "canton": "CAÑAR",
+      "girs": {
+        "indice": 73.5,
+        "operacion": 63.6,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 55.9,
+        "institucional": 86.7,
+        "operacion": 25.0
+      }
+    },
+    "0304": {
+      "canton": "LA TRONCAL",
+      "girs": {
+        "indice": 56.1,
+        "operacion": 45.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 88.7,
+        "institucional": 85.7,
+        "operacion": 91.7
+      }
+    },
+    "0305": {
+      "canton": "EL TAMBO",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 48.4,
+        "institucional": 80.0,
+        "operacion": 16.7
+      }
+    },
+    "0306": {
+      "canton": "DÉLEG",
+      "girs": {
+        "indice": 82.5,
+        "operacion": 81.8,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 78.3,
+        "institucional": 73.3,
+        "operacion": 83.3
+      }
+    },
+    "0307": {
+      "canton": "SUSCAL",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 80.8,
+        "institucional": 86.7,
+        "operacion": 75.0
+      }
+    },
+    "0401": {
+      "canton": "TULCÁN",
+      "girs": {
+        "indice": 69.7,
+        "operacion": 72.7,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 100.0,
+        "institucional": 100.0,
+        "operacion": 100.0
+      }
+    },
+    "0402": {
+      "canton": "BOLÍVAR",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 75.8,
+        "institucional": 93.3,
+        "operacion": 58.3
+      }
+    },
+    "0403": {
+      "canton": "ESPEJO",
+      "girs": {
+        "indice": 73.5,
+        "operacion": 63.6,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 40.5,
+        "institucional": 64.3,
+        "operacion": 16.7
+      }
+    },
+    "0404": {
+      "canton": "MIRA",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 41.7,
+        "institucional": 66.7,
+        "operacion": 16.7
+      }
+    },
+    "0405": {
+      "canton": "MONTÚFAR",
+      "girs": {
+        "indice": 78.0,
+        "operacion": 72.7,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 88.3,
+        "institucional": 93.3,
+        "operacion": 83.3
+      }
+    },
+    "0406": {
+      "canton": "SAN PEDRO DE HUACA",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 70.8,
+        "institucional": 66.7,
+        "operacion": 75.0
+      }
+    },
+    "0501": {
+      "canton": "LATACUNGA",
+      "girs": {
+        "indice": 73.5,
+        "operacion": 63.6,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 46.6,
+        "institucional": 60.0,
+        "operacion": 33.3
+      }
+    },
+    "0502": {
+      "canton": "LA MANÁ",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 60.9,
+        "institucional": 46.7,
+        "operacion": 75.0
+      }
+    },
+    "0503": {
+      "canton": "PANGUA",
+      "girs": {
+        "indice": 42.5,
+        "operacion": 18.2,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 100.0,
+        "institucional": 100.0,
+        "operacion": 100.0
+      }
+    },
+    "0504": {
+      "canton": "PUJILI",
+      "girs": {
+        "indice": 73.5,
+        "operacion": 63.6,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 90.0,
+        "institucional": 80.0,
+        "operacion": 100.0
+      }
+    },
+    "0505": {
+      "canton": "SALCEDO",
+      "girs": {
+        "indice": 82.5,
+        "operacion": 81.8,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 93.3,
+        "institucional": 86.7,
+        "operacion": 100.0
+      }
+    },
+    "0506": {
+      "canton": "SAQUISILÍ",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 41.6,
+        "institucional": 50.0,
+        "operacion": 33.3
+      }
+    },
+    "0507": {
+      "canton": "SIGCHOS",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 100.0,
+        "institucional": 100.0,
+        "operacion": 100.0
+      }
+    },
+    "0601": {
+      "canton": "RIOBAMBA",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 85.0,
+        "institucional": 86.7,
+        "operacion": 83.3
+      }
+    },
+    "0602": {
+      "canton": "ALAUSI",
+      "girs": {
+        "indice": 72.8,
+        "operacion": 45.5,
+        "institucional": 100.0
+      },
+      "apa": {
+        "indice": 41.7,
+        "institucional": 66.7,
+        "operacion": 16.7
+      }
+    },
+    "0603": {
+      "canton": "COLTA",
+      "girs": {
+        "indice": 72.8,
+        "operacion": 45.5,
+        "institucional": 100.0
+      },
+      "apa": {
+        "indice": 91.7,
+        "institucional": 100.0,
+        "operacion": 83.3
+      }
+    },
+    "0604": {
+      "canton": "CHAMBO",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 53.3,
+        "institucional": 73.3,
+        "operacion": 33.3
+      }
+    },
+    "0605": {
+      "canton": "CHUNCHI",
+      "girs": {
+        "indice": 56.1,
+        "operacion": 45.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 66.7,
+        "institucional": 66.7,
+        "operacion": 66.7
+      }
+    },
+    "0606": {
+      "canton": "GUAMOTE",
+      "girs": {
+        "indice": 52.2,
+        "operacion": 54.5,
+        "institucional": 50.0
+      },
+      "apa": {
+        "indice": 84.2,
+        "institucional": 93.3,
+        "operacion": 75.0
+      }
+    },
+    "0607": {
+      "canton": "GUANO",
+      "girs": {
+        "indice": 56.1,
+        "operacion": 45.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 88.3,
+        "institucional": 93.3,
+        "operacion": 83.3
+      }
+    },
+    "0608": {
+      "canton": "PALLATANGA",
+      "girs": {
+        "indice": 55.3,
+        "operacion": 27.3,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 45.0,
+        "institucional": 73.3,
+        "operacion": 16.7
+      }
+    },
+    "0609": {
+      "canton": "PENIPE",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 58.4,
+        "institucional": 66.7,
+        "operacion": 50.0
+      }
+    },
+    "0610": {
+      "canton": "CUMANDÁ",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 96.7,
+        "institucional": 93.3,
+        "operacion": 100.0
+      }
+    },
+    "0701": {
+      "canton": "MACHALA",
+      "girs": {
+        "indice": 56.1,
+        "operacion": 45.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 96.7,
+        "institucional": 93.3,
+        "operacion": 100.0
+      }
+    },
+    "0702": {
+      "canton": "ARENILLAS",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 84.2,
+        "institucional": 93.3,
+        "operacion": 75.0
+      }
+    },
+    "0703": {
+      "canton": "ATAHUALPA",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 53.3,
+        "institucional": 73.3,
+        "operacion": 33.3
+      }
+    },
+    "0704": {
+      "canton": "BALSAS",
+      "girs": {
+        "indice": 78.0,
+        "operacion": 72.7,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 70.8,
+        "institucional": 66.7,
+        "operacion": 75.0
+      }
+    },
+    "0705": {
+      "canton": "CHILLA",
+      "girs": {
+        "indice": 56.1,
+        "operacion": 45.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 35.0,
+        "institucional": 53.3,
+        "operacion": 16.7
+      }
+    },
+    "0706": {
+      "canton": "EL GUABO",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 65.8,
+        "institucional": 73.3,
+        "operacion": 58.3
+      }
+    },
+    "0707": {
+      "canton": "HUAQUILLAS",
+      "girs": {
+        "indice": 47.8,
+        "operacion": 45.5,
+        "institucional": 50.0
+      },
+      "apa": {
+        "indice": 70.8,
+        "institucional": 66.7,
+        "operacion": 75.0
+      }
+    },
+    "0708": {
+      "canton": "MARCABELÍ",
+      "girs": {
+        "indice": 78.0,
+        "operacion": 72.7,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 56.6,
+        "institucional": 80.0,
+        "operacion": 33.3
+      }
+    },
+    "0709": {
+      "canton": "PASAJE",
+      "girs": {
+        "indice": 73.5,
+        "operacion": 63.6,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 84.2,
+        "institucional": 93.3,
+        "operacion": 75.0
+      }
+    },
+    "0710": {
+      "canton": "PIÑAS",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 85.0,
+        "institucional": 86.7,
+        "operacion": 83.3
+      }
+    },
+    "0711": {
+      "canton": "PORTOVELO",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 48.4,
+        "institucional": 80.0,
+        "operacion": 16.7
+      }
+    },
+    "0712": {
+      "canton": "SANTA ROSA",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 96.7,
+        "institucional": 93.3,
+        "operacion": 100.0
+      }
+    },
+    "0713": {
+      "canton": "ZARUMA",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 26.2,
+        "institucional": 35.7,
+        "operacion": 16.7
+      }
+    },
+    "0714": {
+      "canton": "LAS LAJAS",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 83.3,
+        "institucional": 66.7,
+        "operacion": 100.0
+      }
+    },
+    "0801": {
+      "canton": "ESMERALDAS",
+      "girs": {
+        "indice": 47.8,
+        "operacion": 45.5,
+        "institucional": 50.0
+      },
+      "apa": {
+        "indice": 58.4,
+        "institucional": 66.7,
+        "operacion": 50.0
+      }
+    },
+    "0802": {
+      "canton": "ELOY ALFARO",
+      "girs": {
+        "indice": 56.8,
+        "operacion": 63.6,
+        "institucional": 50.0
+      },
+      "apa": {
+        "indice": 33.4,
+        "institucional": 50.0,
+        "operacion": 16.7
+      }
+    },
+    "0803": {
+      "canton": "MUISNE",
+      "girs": {
+        "indice": 39.4,
+        "operacion": 45.5,
+        "institucional": 33.3
+      },
+      "apa": {
+        "indice": 24.1,
+        "institucional": 40.0,
+        "operacion": 8.3
+      }
+    },
+    "0804": {
+      "canton": "QUININDÉ",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 51.7,
+        "institucional": 86.7,
+        "operacion": 16.7
+      }
+    },
+    "0805": {
+      "canton": "SAN LORENZO",
+      "girs": {
+        "indice": 47.8,
+        "operacion": 45.5,
+        "institucional": 50.0
+      },
+      "apa": {
+        "indice": 44.6,
+        "institucional": 64.3,
+        "operacion": 25.0
+      }
+    },
+    "0806": {
+      "canton": "ATACAMES",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 28.4,
+        "institucional": 40.0,
+        "operacion": 16.7
+      }
+    },
+    "0807": {
+      "canton": "RIOVERDE",
+      "girs": {
+        "indice": 47.8,
+        "operacion": 45.5,
+        "institucional": 50.0
+      },
+      "apa": {
+        "indice": 60.9,
+        "institucional": 46.7,
+        "operacion": 75.0
+      }
+    },
+    "0901": {
+      "canton": "GUAYAQUIL",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 100.0,
+        "institucional": 100.0,
+        "operacion": 100.0
+      }
+    },
+    "0902": {
+      "canton": "ALFREDO BAQUERIZO MORENO (JUJÁN)",
+      "girs": {
+        "indice": 26.5,
+        "operacion": 36.4,
+        "institucional": 16.7
+      },
+      "apa": {
+        "indice": 53.4,
+        "institucional": 40.0,
+        "operacion": 66.7
+      }
+    },
+    "0903": {
+      "canton": "BALAO",
+      "girs": {
+        "indice": 56.1,
+        "operacion": 45.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 45.0,
+        "institucional": 73.3,
+        "operacion": 16.7
+      }
+    },
+    "0904": {
+      "canton": "BALZAR",
+      "girs": {
+        "indice": 56.1,
+        "operacion": 45.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 42.5,
+        "institucional": 60.0,
+        "operacion": 25.0
+      }
+    },
+    "0905": {
+      "canton": "COLIMES",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 62.5,
+        "institucional": 100.0,
+        "operacion": 25.0
+      }
+    },
+    "0906": {
+      "canton": "DAULE",
+      "girs": {
+        "indice": 38.6,
+        "operacion": 27.3,
+        "institucional": 50.0
+      },
+      "apa": {
+        "indice": 86.7,
+        "institucional": 73.3,
+        "operacion": 100.0
+      }
+    },
+    "0907": {
+      "canton": "DURÁN",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 85.0,
+        "institucional": 86.7,
+        "operacion": 83.3
+      }
+    },
+    "0908": {
+      "canton": "EL EMPALME",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 20.8,
+        "institucional": 33.3,
+        "operacion": 8.3
+      }
+    },
+    "0909": {
+      "canton": "EL TRIUNFO",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 36.9,
+        "institucional": 57.1,
+        "operacion": 16.7
+      }
+    },
+    "0910": {
+      "canton": "MILAGRO",
+      "girs": {
+        "indice": 51.5,
+        "operacion": 36.4,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 55.0,
+        "institucional": 93.3,
+        "operacion": 16.7
+      }
+    },
+    "0911": {
+      "canton": "NARANJAL",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 88.3,
+        "institucional": 93.3,
+        "operacion": 83.3
+      }
+    },
+    "0912": {
+      "canton": "NARANJITO",
+      "girs": {
+        "indice": 43.2,
+        "operacion": 36.4,
+        "institucional": 50.0
+      },
+      "apa": {
+        "indice": 35.0,
+        "institucional": 53.3,
+        "operacion": 16.7
+      }
+    },
+    "0913": {
+      "canton": "PALESTINA",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 80.8,
+        "institucional": 86.7,
+        "operacion": 75.0
+      }
+    },
+    "0914": {
+      "canton": "PEDRO CARBO",
+      "girs": {
+        "indice": 69.7,
+        "operacion": 72.7,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 45.9,
+        "institucional": 66.7,
+        "operacion": 25.0
+      }
+    },
+    "0916": {
+      "canton": "SAMBORONDÓN",
+      "girs": {
+        "indice": 55.3,
+        "operacion": 27.3,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 75.8,
+        "institucional": 93.3,
+        "operacion": 58.3
+      }
+    },
+    "0918": {
+      "canton": "SANTA LUCÍA",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 53.3,
+        "institucional": 73.3,
+        "operacion": 33.3
+      }
+    },
+    "0919": {
+      "canton": "SALITRE (URBINA JADO)",
+      "girs": {
+        "indice": 51.5,
+        "operacion": 36.4,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 34.1,
+        "institucional": 60.0,
+        "operacion": 8.3
+      }
+    },
+    "0920": {
+      "canton": "SAN JACINTO DE YAGUACHI",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 38.4,
+        "institucional": 60.0,
+        "operacion": 16.7
+      }
+    },
+    "0921": {
+      "canton": "PLAYAS",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 100.0,
+        "institucional": 100.0,
+        "operacion": 100.0
+      }
+    },
+    "0922": {
+      "canton": "SIMÓN BOLÍVAR",
+      "girs": {
+        "indice": 42.5,
+        "operacion": 18.2,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 15.5,
+        "institucional": 14.3,
+        "operacion": 16.7
+      }
+    },
+    "0923": {
+      "canton": "CORONEL MARCELINO MARIDUEÑA",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 60.9,
+        "institucional": 80.0,
+        "operacion": 41.7
+      }
+    },
+    "0924": {
+      "canton": "LOMAS DE SARGENTILLO",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 68.3,
+        "institucional": 86.7,
+        "operacion": 50.0
+      }
+    },
+    "0925": {
+      "canton": "NOBOL",
+      "girs": {
+        "indice": 56.1,
+        "operacion": 45.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 24.1,
+        "institucional": 40.0,
+        "operacion": 8.3
+      }
+    },
+    "0927": {
+      "canton": "GENERAL ANTONIO ELIZALDE",
+      "girs": {
+        "indice": 51.5,
+        "operacion": 36.4,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 41.7,
+        "institucional": 66.7,
+        "operacion": 16.7
+      }
+    },
+    "0928": {
+      "canton": "ISIDRO AYORA",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 86.7,
+        "institucional": 73.3,
+        "operacion": 100.0
+      }
+    },
+    "1001": {
+      "canton": "IBARRA",
+      "girs": {
+        "indice": 65.2,
+        "operacion": 63.6,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 45.9,
+        "institucional": 66.7,
+        "operacion": 25.0
+      }
+    },
+    "1002": {
+      "canton": "ANTONIO ANTE",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 67.5,
+        "institucional": 93.3,
+        "operacion": 41.7
+      }
+    },
+    "1003": {
+      "canton": "COTACACHI",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 88.3,
+        "institucional": 93.3,
+        "operacion": 83.3
+      }
+    },
+    "1004": {
+      "canton": "OTAVALO",
+      "girs": {
+        "indice": 55.3,
+        "operacion": 27.3,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 80.0,
+        "institucional": 93.3,
+        "operacion": 66.7
+      }
+    },
+    "1005": {
+      "canton": "PIMAMPIRO",
+      "girs": {
+        "indice": 43.2,
+        "operacion": 36.4,
+        "institucional": 50.0
+      },
+      "apa": {
+        "indice": 68.3,
+        "institucional": 86.7,
+        "operacion": 50.0
+      }
+    },
+    "1006": {
+      "canton": "SAN MIGUEL DE URCUQUÍ",
+      "girs": {
+        "indice": 39.4,
+        "operacion": 45.5,
+        "institucional": 33.3
+      },
+      "apa": {
+        "indice": 92.5,
+        "institucional": 93.3,
+        "operacion": 91.7
+      }
+    },
+    "1101": {
+      "canton": "LOJA",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 45.0,
+        "institucional": 73.3,
+        "operacion": 16.7
+      }
+    },
+    "1102": {
+      "canton": "CALVAS",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 91.7,
+        "institucional": 100.0,
+        "operacion": 83.3
+      }
+    },
+    "1103": {
+      "canton": "CATAMAYO",
+      "girs": {
+        "indice": 56.8,
+        "operacion": 63.6,
+        "institucional": 50.0
+      },
+      "apa": {
+        "indice": 75.0,
+        "institucional": 100.0,
+        "operacion": 50.0
+      }
+    },
+    "1104": {
+      "canton": "CELICA",
+      "girs": {
+        "indice": 72.8,
+        "operacion": 45.5,
+        "institucional": 100.0
+      },
+      "apa": {
+        "indice": 35.0,
+        "institucional": 53.3,
+        "operacion": 16.7
+      }
+    },
+    "1105": {
+      "canton": "CHAGUARPAMBA",
+      "girs": {
+        "indice": 55.3,
+        "operacion": 27.3,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 66.7,
+        "institucional": 66.7,
+        "operacion": 66.7
+      }
+    },
+    "1106": {
+      "canton": "ESPÍNDOLA",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 100.0,
+        "institucional": 100.0,
+        "operacion": 100.0
+      }
+    },
+    "1107": {
+      "canton": "GONZANAMÁ",
+      "girs": {
+        "indice": 56.1,
+        "operacion": 45.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 63.4,
+        "institucional": 60.0,
+        "operacion": 66.7
+      }
+    },
+    "1108": {
+      "canton": "MACARÁ",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 48.4,
+        "institucional": 46.7,
+        "operacion": 50.0
+      }
+    },
+    "1109": {
+      "canton": "PALTAS",
+      "girs": {
+        "indice": 73.5,
+        "operacion": 63.6,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 50.0,
+        "institucional": 66.7,
+        "operacion": 33.3
+      }
+    },
+    "1110": {
+      "canton": "PUYANGO",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 41.7,
+        "institucional": 66.7,
+        "operacion": 16.7
+      }
+    },
+    "1111": {
+      "canton": "SARAGURO",
+      "girs": {
+        "indice": 82.5,
+        "operacion": 81.8,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 88.3,
+        "institucional": 93.3,
+        "operacion": 83.3
+      }
+    },
+    "1112": {
+      "canton": "SOZORANGA",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 33.4,
+        "institucional": 50.0,
+        "operacion": 16.7
+      }
+    },
+    "1113": {
+      "canton": "ZAPOTILLO",
+      "girs": {
+        "indice": 56.1,
+        "operacion": 45.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 25.0,
+        "institucional": 33.3,
+        "operacion": 16.7
+      }
+    },
+    "1114": {
+      "canton": "PINDAL",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 85.0,
+        "institucional": 86.7,
+        "operacion": 83.3
+      }
+    },
+    "1115": {
+      "canton": "QUILANGA",
+      "girs": {
+        "indice": 50.8,
+        "operacion": 18.2,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 100.0,
+        "institucional": 100.0,
+        "operacion": 100.0
+      }
+    },
+    "1116": {
+      "canton": "OLMEDO",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 85.8,
+        "institucional": 80.0,
+        "operacion": 91.7
+      }
+    },
+    "1201": {
+      "canton": "BABAHOYO",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 96.7,
+        "institucional": 93.3,
+        "operacion": 100.0
+      }
+    },
+    "1202": {
+      "canton": "BABA",
+      "girs": {
+        "indice": 43.9,
+        "operacion": 54.5,
+        "institucional": 33.3
+      },
+      "apa": {
+        "indice": 43.3,
+        "institucional": 53.3,
+        "operacion": 33.3
+      }
+    },
+    "1203": {
+      "canton": "MONTALVO",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 51.7,
+        "institucional": 86.7,
+        "operacion": 16.7
+      }
+    },
+    "1204": {
+      "canton": "PUEBLOVIEJO",
+      "girs": {
+        "indice": 56.1,
+        "operacion": 45.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 65.8,
+        "institucional": 73.3,
+        "operacion": 58.3
+      }
+    },
+    "1205": {
+      "canton": "QUEVEDO",
+      "girs": {
+        "indice": 42.5,
+        "operacion": 18.2,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 55.0,
+        "institucional": 93.3,
+        "operacion": 16.7
+      }
+    },
+    "1206": {
+      "canton": "URDANETA",
+      "girs": {
+        "indice": 51.5,
+        "operacion": 36.4,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 91.7,
+        "institucional": 100.0,
+        "operacion": 83.3
+      }
+    },
+    "1207": {
+      "canton": "VENTANAS",
+      "girs": {
+        "indice": 69.7,
+        "operacion": 72.7,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 44.1,
+        "institucional": 13.3,
+        "operacion": 75.0
+      }
+    },
+    "1208": {
+      "canton": "VÍNCES",
+      "girs": {
+        "indice": 55.3,
+        "operacion": 27.3,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 28.4,
+        "institucional": 40.0,
+        "operacion": 16.7
+      }
+    },
+    "1209": {
+      "canton": "PALENQUE",
+      "girs": {
+        "indice": 30.3,
+        "operacion": 27.3,
+        "institucional": 33.3
+      },
+      "apa": {
+        "indice": 31.7,
+        "institucional": 46.7,
+        "operacion": 16.7
+      }
+    },
+    "1210": {
+      "canton": "BUENA FÉ",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 100.0,
+        "institucional": 100.0,
+        "operacion": 100.0
+      }
+    },
+    "1211": {
+      "canton": "VALENCIA",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 31.7,
+        "institucional": 46.7,
+        "operacion": 16.7
+      }
+    },
+    "1212": {
+      "canton": "MOCACHE",
+      "girs": {
+        "indice": 60.6,
+        "operacion": 54.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 76.7,
+        "institucional": 86.7,
+        "operacion": 66.7
+      }
+    },
+    "1213": {
+      "canton": "QUINSALOMA",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 45.0,
+        "institucional": 73.3,
+        "operacion": 16.7
+      }
+    },
+    "1301": {
+      "canton": "PORTOVIEJO",
+      "girs": {
+        "indice": 47.0,
+        "operacion": 27.3,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 79.2,
+        "institucional": 100.0,
+        "operacion": 58.3
+      }
+    },
+    "1302": {
+      "canton": "BOLÍVAR",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 55.0,
+        "institucional": 60.0,
+        "operacion": 50.0
+      }
+    },
+    "1303": {
+      "canton": "CHONE",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 41.7,
+        "institucional": 66.7,
+        "operacion": 16.7
+      }
+    },
+    "1304": {
+      "canton": "EL CARMEN",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 50.0,
+        "institucional": 33.3,
+        "operacion": 66.7
+      }
+    },
+    "1305": {
+      "canton": "FLAVIO ALFARO",
+      "girs": {
+        "indice": 56.1,
+        "operacion": 45.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 49.1,
+        "institucional": 73.3,
+        "operacion": 25.0
+      }
+    },
+    "1306": {
+      "canton": "JIPIJAPA",
+      "girs": {
+        "indice": 55.3,
+        "operacion": 27.3,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 51.7,
+        "institucional": 86.7,
+        "operacion": 16.7
+      }
+    },
+    "1307": {
+      "canton": "JUNÍN",
+      "girs": {
+        "indice": 56.1,
+        "operacion": 45.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 55.0,
+        "institucional": 60.0,
+        "operacion": 50.0
+      }
+    },
+    "1308": {
+      "canton": "MANTA",
+      "girs": {
+        "indice": 73.5,
+        "operacion": 63.6,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 100.0,
+        "institucional": 100.0,
+        "operacion": 100.0
+      }
+    },
+    "1309": {
+      "canton": "MONTECRISTI",
+      "girs": {
+        "indice": 56.1,
+        "operacion": 45.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 48.2,
+        "institucional": 71.4,
+        "operacion": 25.0
+      }
+    },
+    "1310": {
+      "canton": "PAJÁN",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 58.4,
+        "institucional": 66.7,
+        "operacion": 50.0
+      }
+    },
+    "1311": {
+      "canton": "PICHINCHA",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 36.9,
+        "institucional": 57.1,
+        "operacion": 16.7
+      }
+    },
+    "1312": {
+      "canton": "ROCAFUERTE",
+      "girs": {
+        "indice": 60.6,
+        "operacion": 54.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 96.7,
+        "institucional": 93.3,
+        "operacion": 100.0
+      }
+    },
+    "1313": {
+      "canton": "SANTA ANA",
+      "girs": {
+        "indice": 51.5,
+        "operacion": 36.4,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 29.8,
+        "institucional": 42.9,
+        "operacion": 16.7
+      }
+    },
+    "1314": {
+      "canton": "SUCRE",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 75.8,
+        "institucional": 60.0,
+        "operacion": 91.7
+      }
+    },
+    "1315": {
+      "canton": "TOSAGUA",
+      "girs": {
+        "indice": 56.1,
+        "operacion": 45.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 65.8,
+        "institucional": 73.3,
+        "operacion": 58.3
+      }
+    },
+    "1316": {
+      "canton": "24 DE MAYO",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 22.6,
+        "institucional": 28.6,
+        "operacion": 16.7
+      }
+    },
+    "1317": {
+      "canton": "PEDERNALES",
+      "girs": {
+        "indice": 51.5,
+        "operacion": 36.4,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 67.5,
+        "institucional": 93.3,
+        "operacion": 41.7
+      }
+    },
+    "1318": {
+      "canton": "OLMEDO",
+      "girs": {
+        "indice": 47.0,
+        "operacion": 27.3,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 35.0,
+        "institucional": 53.3,
+        "operacion": 16.7
+      }
+    },
+    "1319": {
+      "canton": "PUERTO LÓPEZ",
+      "girs": {
+        "indice": 51.5,
+        "operacion": 36.4,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 50.0,
+        "institucional": 66.7,
+        "operacion": 33.3
+      }
+    },
+    "1320": {
+      "canton": "JAMA",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 47.5,
+        "institucional": 53.3,
+        "operacion": 41.7
+      }
+    },
+    "1321": {
+      "canton": "JARAMIJÓ",
+      "girs": {
+        "indice": 51.5,
+        "operacion": 36.4,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 76.7,
+        "institucional": 86.7,
+        "operacion": 66.7
+      }
+    },
+    "1322": {
+      "canton": "SAN VICENTE",
+      "girs": {
+        "indice": 51.5,
+        "operacion": 36.4,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 62.5,
+        "institucional": 66.7,
+        "operacion": 58.3
+      }
+    },
+    "1401": {
+      "canton": "MORONA",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 29.8,
+        "institucional": 42.9,
+        "operacion": 16.7
+      }
+    },
+    "1402": {
+      "canton": "GUALAQUIZA",
+      "girs": {
+        "indice": 51.5,
+        "operacion": 36.4,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 45.0,
+        "institucional": 73.3,
+        "operacion": 16.7
+      }
+    },
+    "1403": {
+      "canton": "LIMÓN INDANZA",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 47.6,
+        "institucional": 78.6,
+        "operacion": 16.7
+      }
+    },
+    "1404": {
+      "canton": "PALORA",
+      "girs": {
+        "indice": 60.6,
+        "operacion": 54.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 96.7,
+        "institucional": 93.3,
+        "operacion": 100.0
+      }
+    },
+    "1405": {
+      "canton": "SANTIAGO",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 51.7,
+        "institucional": 86.7,
+        "operacion": 16.7
+      }
+    },
+    "1406": {
+      "canton": "SUCÚA",
+      "girs": {
+        "indice": 60.6,
+        "operacion": 54.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 55.9,
+        "institucional": 86.7,
+        "operacion": 25.0
+      }
+    },
+    "1407": {
+      "canton": "HUAMBOYA",
+      "girs": {
+        "indice": 73.5,
+        "operacion": 63.6,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 96.7,
+        "institucional": 93.3,
+        "operacion": 100.0
+      }
+    },
+    "1408": {
+      "canton": "SAN JUAN BOSCO",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 96.7,
+        "institucional": 93.3,
+        "operacion": 100.0
+      }
+    },
+    "1409": {
+      "canton": "TAISHA",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 51.7,
+        "institucional": 86.7,
+        "operacion": 16.7
+      }
+    },
+    "1410": {
+      "canton": "LOGROÑO",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 75.0,
+        "institucional": 66.7,
+        "operacion": 83.3
+      }
+    },
+    "1411": {
+      "canton": "PABLO SEXTO",
+      "girs": {
+        "indice": 42.5,
+        "operacion": 18.2,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 64.2,
+        "institucional": 86.7,
+        "operacion": 41.7
+      }
+    },
+    "1412": {
+      "canton": "TIWINTZA",
+      "girs": {
+        "indice": 60.6,
+        "operacion": 54.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 90.0,
+        "institucional": 80.0,
+        "operacion": 100.0
+      }
+    },
+    "1501": {
+      "canton": "TENA",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 68.3,
+        "institucional": 86.7,
+        "operacion": 50.0
+      }
+    },
+    "1503": {
+      "canton": "ARCHIDONA",
+      "girs": {
+        "indice": 43.9,
+        "operacion": 54.5,
+        "institucional": 33.3
+      },
+      "apa": {
+        "indice": 85.8,
+        "institucional": 80.0,
+        "operacion": 91.7
+      }
+    },
+    "1504": {
+      "canton": "EL CHACO",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 45.0,
+        "institucional": 73.3,
+        "operacion": 16.7
+      }
+    },
+    "1507": {
+      "canton": "QUIJOS",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 80.0,
+        "institucional": 93.3,
+        "operacion": 66.7
+      }
+    },
+    "1509": {
+      "canton": "CARLOS JULIO AROSEMENA TOLA",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 100.0,
+        "institucional": 100.0,
+        "operacion": 100.0
+      }
+    },
+    "1601": {
+      "canton": "PASTAZA",
+      "girs": {
+        "indice": 73.5,
+        "operacion": 63.6,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 76.7,
+        "institucional": 86.7,
+        "operacion": 66.7
+      }
+    },
+    "1602": {
+      "canton": "MERA",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 80.8,
+        "institucional": 86.7,
+        "operacion": 75.0
+      }
+    },
+    "1603": {
+      "canton": "SANTA CLARA",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 77.5,
+        "institucional": 80.0,
+        "operacion": 75.0
+      }
+    },
+    "1604": {
+      "canton": "ARAJUNO",
+      "girs": {
+        "indice": 53.0,
+        "operacion": 72.7,
+        "institucional": 33.3
+      },
+      "apa": {
+        "indice": 29.8,
+        "institucional": 42.9,
+        "operacion": 16.7
+      }
+    },
+    "1701": {
+      "canton": "QUITO",
+      "girs": {
+        "indice": 78.0,
+        "operacion": 72.7,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 100.0,
+        "institucional": 100.0,
+        "operacion": 100.0
+      }
+    },
+    "1702": {
+      "canton": "CAYAMBE",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 100.0,
+        "institucional": 100.0,
+        "operacion": 100.0
+      }
+    },
+    "1703": {
+      "canton": "MEJIA",
+      "girs": {
+        "indice": 60.6,
+        "operacion": 54.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 52.5,
+        "institucional": 80.0,
+        "operacion": 25.0
+      }
+    },
+    "1704": {
+      "canton": "PEDRO MONCAYO",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 41.7,
+        "institucional": 66.7,
+        "operacion": 16.7
+      }
+    },
+    "1705": {
+      "canton": "RUMIÑAHUI",
+      "girs": {
+        "indice": 56.1,
+        "operacion": 45.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 45.0,
+        "institucional": 73.3,
+        "operacion": 16.7
+      }
+    },
+    "1707": {
+      "canton": "SAN MIGUEL DE LOS BANCOS",
+      "girs": {
+        "indice": 73.5,
+        "operacion": 63.6,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 41.7,
+        "institucional": 66.7,
+        "operacion": 16.7
+      }
+    },
+    "1708": {
+      "canton": "PEDRO VICENTE MALDONADO",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 38.4,
+        "institucional": 60.0,
+        "operacion": 16.7
+      }
+    },
+    "1709": {
+      "canton": "PUERTO QUITO",
+      "girs": {
+        "indice": 65.2,
+        "operacion": 63.6,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 96.7,
+        "institucional": 93.3,
+        "operacion": 100.0
+      }
+    },
+    "1801": {
+      "canton": "AMBATO",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 90.0,
+        "institucional": 80.0,
+        "operacion": 100.0
+      }
+    },
+    "1802": {
+      "canton": "BAÑOS DE AGUA SANTA",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 58.4,
+        "institucional": 100.0,
+        "operacion": 16.7
+      }
+    },
+    "1803": {
+      "canton": "CEVALLOS",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 93.3,
+        "institucional": 86.7,
+        "operacion": 100.0
+      }
+    },
+    "1804": {
+      "canton": "MOCHA",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 91.7,
+        "institucional": 100.0,
+        "operacion": 83.3
+      }
+    },
+    "1805": {
+      "canton": "PATATE",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 29.8,
+        "institucional": 42.9,
+        "operacion": 16.7
+      }
+    },
+    "1806": {
+      "canton": "QUERO",
+      "girs": {
+        "indice": 43.9,
+        "operacion": 54.5,
+        "institucional": 33.3
+      },
+      "apa": {
+        "indice": 87.5,
+        "institucional": 100.0,
+        "operacion": 75.0
+      }
+    },
+    "1807": {
+      "canton": "SAN PEDRO DE PELILEO",
+      "girs": {
+        "indice": 60.6,
+        "operacion": 54.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 35.0,
+        "institucional": 53.3,
+        "operacion": 16.7
+      }
+    },
+    "1808": {
+      "canton": "SANTIAGO DE PÍLLARO",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 76.7,
+        "institucional": 53.3,
+        "operacion": 100.0
+      }
+    },
+    "1809": {
+      "canton": "TISALEO",
+      "girs": {
+        "indice": 51.5,
+        "operacion": 36.4,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 80.3,
+        "institucional": 85.7,
+        "operacion": 75.0
+      }
+    },
+    "1901": {
+      "canton": "ZAMORA",
+      "girs": {
+        "indice": 73.5,
+        "operacion": 63.6,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 75.0,
+        "institucional": 66.7,
+        "operacion": 83.3
+      }
+    },
+    "1902": {
+      "canton": "CHINCHIPE",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 73.3,
+        "institucional": 80.0,
+        "operacion": 66.7
+      }
+    },
+    "1903": {
+      "canton": "NANGARITZA",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 33.4,
+        "institucional": 50.0,
+        "operacion": 16.7
+      }
+    },
+    "1904": {
+      "canton": "YACUAMBI",
+      "girs": {
+        "indice": 60.6,
+        "operacion": 54.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 85.8,
+        "institucional": 80.0,
+        "operacion": 91.7
+      }
+    },
+    "1905": {
+      "canton": "YANTZAZA (YANZATZA)",
+      "girs": {
+        "indice": 73.5,
+        "operacion": 63.6,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 41.7,
+        "institucional": 66.7,
+        "operacion": 16.7
+      }
+    },
+    "1906": {
+      "canton": "EL PANGUI",
+      "girs": {
+        "indice": 59.8,
+        "operacion": 36.4,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 63.3,
+        "institucional": 93.3,
+        "operacion": 33.3
+      }
+    },
+    "1907": {
+      "canton": "CENTINELA DEL CÓNDOR",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 61.6,
+        "institucional": 40.0,
+        "operacion": 83.3
+      }
+    },
+    "1908": {
+      "canton": "PALANDA",
+      "girs": {
+        "indice": 73.5,
+        "operacion": 63.6,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 51.7,
+        "institucional": 86.7,
+        "operacion": 16.7
+      }
+    },
+    "1909": {
+      "canton": "PAQUISHA",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 41.7,
+        "institucional": 66.7,
+        "operacion": 16.7
+      }
+    },
+    "2001": {
+      "canton": "SAN CRISTÓBAL",
+      "girs": {
+        "indice": 56.1,
+        "operacion": 45.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 55.9,
+        "institucional": 86.7,
+        "operacion": 25.0
+      }
+    },
+    "2002": {
+      "canton": "ISABELA",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 33.4,
+        "institucional": 50.0,
+        "operacion": 16.7
+      }
+    },
+    "2003": {
+      "canton": "SANTA CRUZ",
+      "girs": {
+        "indice": 78.0,
+        "operacion": 72.7,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 31.7,
+        "institucional": 46.7,
+        "operacion": 16.7
+      }
+    },
+    "2101": {
+      "canton": "LAGO AGRIO",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 35.0,
+        "institucional": 53.3,
+        "operacion": 16.7
+      }
+    },
+    "2102": {
+      "canton": "GONZALO PIZARRO",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 80.3,
+        "institucional": 85.7,
+        "operacion": 75.0
+      }
+    },
+    "2103": {
+      "canton": "PUTUMAYO",
+      "girs": {
+        "indice": 73.5,
+        "operacion": 63.6,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 58.4,
+        "institucional": 50.0,
+        "operacion": 66.7
+      }
+    },
+    "2104": {
+      "canton": "SHUSHUFINDI",
+      "girs": {
+        "indice": 51.5,
+        "operacion": 36.4,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 63.3,
+        "institucional": 93.3,
+        "operacion": 33.3
+      }
+    },
+    "2105": {
+      "canton": "SUCUMBÍOS",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 86.7,
+        "institucional": 73.3,
+        "operacion": 100.0
+      }
+    },
+    "2106": {
+      "canton": "CASCALES",
+      "girs": {
+        "indice": 73.5,
+        "operacion": 63.6,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 96.7,
+        "institucional": 93.3,
+        "operacion": 100.0
+      }
+    },
+    "2107": {
+      "canton": "CUYABENO",
+      "girs": {
+        "indice": 82.5,
+        "operacion": 81.8,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 82.2,
+        "institucional": 64.3,
+        "operacion": 100.0
+      }
+    },
+    "2201": {
+      "canton": "ORELLANA",
+      "girs": {
+        "indice": 60.6,
+        "operacion": 54.5,
+        "institucional": 66.7
+      },
+      "apa": {
+        "indice": 35.0,
+        "institucional": 53.3,
+        "operacion": 16.7
+      }
+    },
+    "2202": {
+      "canton": "AGUARICO",
+      "girs": {
+        "indice": 78.0,
+        "operacion": 72.7,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 40.5,
+        "institucional": 64.3,
+        "operacion": 16.7
+      }
+    },
+    "2203": {
+      "canton": "LA JOYA DE LOS SACHAS",
+      "girs": {
+        "indice": 39.4,
+        "operacion": 45.5,
+        "institucional": 33.3
+      },
+      "apa": {
+        "indice": 95.8,
+        "institucional": 100.0,
+        "operacion": 91.7
+      }
+    },
+    "2204": {
+      "canton": "LORETO",
+      "girs": {
+        "indice": 52.2,
+        "operacion": 54.5,
+        "institucional": 50.0
+      },
+      "apa": {
+        "indice": 27.5,
+        "institucional": 46.7,
+        "operacion": 8.3
+      }
+    },
+    "2301": {
+      "canton": "SANTO DOMINGO",
+      "girs": {
+        "indice": 55.3,
+        "operacion": 27.3,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 96.7,
+        "institucional": 93.3,
+        "operacion": 100.0
+      }
+    },
+    "2401": {
+      "canton": "SANTA ELENA",
+      "girs": {
+        "indice": 55.3,
+        "operacion": 27.3,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 100.0,
+        "institucional": 100.0,
+        "operacion": 100.0
+      }
+    },
+    "2402": {
+      "canton": "LA LIBERTAD",
+      "girs": {
+        "indice": 64.4,
+        "operacion": 45.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 100.0,
+        "institucional": 100.0,
+        "operacion": 100.0
+      }
+    },
+    "2403": {
+      "canton": "SALINAS",
+      "girs": {
+        "indice": 68.9,
+        "operacion": 54.5,
+        "institucional": 83.3
+      },
+      "apa": {
+        "indice": 100.0,
+        "institucional": 100.0,
+        "operacion": 100.0
+      }
+    }
+  }
+}

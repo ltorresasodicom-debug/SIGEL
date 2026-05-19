@@ -23,7 +23,7 @@ let _geojson = null;
  */
 export async function loadData() {
   if (_data) return _data;
-  const [raw, geo] = await Promise.all([
+  const [raw, geo, indic] = await Promise.all([
     fetch('./data/electoral.json').then(r => r.json()),
     fetch('./data/cantones-ec.geojson')
       .then(r => r.json())
@@ -31,11 +31,35 @@ export async function loadData() {
         console.warn('GeoJSON no disponible — mapa usará marcadores simples', err);
         return null;
       }),
+    fetch('./data/indicadores_inec_2024.json')
+      .then(r => r.json())
+      .catch(err => {
+        console.warn('Indicadores INEC no disponibles — ficha sin datos oficiales', err);
+        return null;
+      }),
   ]);
   _geojson = geo;
   _data = enrichWithSyntheticScores(raw);
   attachGeoToGads(_data, geo);
+  attachIndicadores(_data, indic);
   return _data;
+}
+
+/**
+ * Capa ADITIVA: adjunta los índices oficiales INEC 2024 (GIRS + APA) a cada
+ * cantón. No altera dims/ingel/orden/IDs ni el ranking; solo agrega
+ * `g.indicadores` cuando hay match por `feature_id` (= canton_codigo del
+ * geojson, asignado en attachGeoToGads). Match O(1), sin ambigüedad de
+ * homónimos. Si el JSON no cargó, no hace nada.
+ */
+function attachIndicadores(data, indic) {
+  if (!indic || !indic.byCode) return;
+  let n = 0;
+  for (const g of data.cantones) {
+    const rec = g.feature_id && indic.byCode[g.feature_id];
+    if (rec) { g.indicadores = rec; n++; }
+  }
+  console.log(`Indicadores INEC: ${n}/${data.cantones.length} cantones enriquecidos`);
 }
 
 /**
