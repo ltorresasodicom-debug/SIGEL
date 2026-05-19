@@ -65,10 +65,10 @@ export function viewEvaluar(state) {
   const totalGadsFiltrados = prefecturas.length + cantones.length;
 
   return /*html*/`
-  <div class="max-w-5xl mx-auto px-4 py-8 fade-in">
-    <header class="mb-6">
-      <h1 class="font-display font-bold text-3xl">📋 Crea tu evaluación</h1>
-      <p class="text-slate-600 mt-2 max-w-2xl">
+  <div class="max-w-5xl mx-auto px-4 py-10 fade-in">
+    <header class="mb-7">
+      <h1 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight">📋 Crea tu evaluación</h1>
+      <p class="text-slate-600 mt-2 text-lg max-w-2xl leading-relaxed">
         Califica del 1 al 5 cada una de las 8 dimensiones SIGEL. El INGEL se
         calcula al instante. Tu evaluación se guarda <strong>solo en tu
         navegador</strong> — es privada y puedes descargarla como PDF
@@ -184,11 +184,11 @@ export function viewEvaluar(state) {
       <!-- ── Preview INGEL en vivo ── -->
       <aside class="lg:col-span-1">
         <div class="card lg:sticky lg:top-24">
-          <h2 class="font-display font-semibold text-lg mb-3">Tu INGEL en vivo</h2>
+          <h2 class="font-display font-bold text-lg mb-3">Tu INGEL en vivo</h2>
 
-          <div class="text-center bg-slate-50 rounded-lg p-5 mb-4">
-            <div class="text-xs uppercase tracking-widest text-slate-500">Puntaje INGEL</div>
-            <div class="font-display font-extrabold text-5xl mt-1 ${ingelPreview == null ? 'text-slate-300' : 'text-sigel-primary'}"
+          <div class="text-center bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200 rounded-xl p-6 mb-4">
+            <div class="text-xs uppercase tracking-widest text-slate-500 font-semibold">Puntaje INGEL</div>
+            <div class="font-display font-extrabold text-6xl mt-1 tabular-nums ${ingelPreview == null ? 'text-slate-300' : 'text-sigel-primary'}"
                  aria-live="polite">
               ${ingelPreview != null ? ingelPreview.toFixed(1) : '—'}
             </div>
@@ -239,17 +239,17 @@ export function viewEvaluar(state) {
           ${evaluaciones.slice().reverse().map(e => {
             const gad = state.data.gads.find(g => g.id === e.gadId);
             return /*html*/`
-              <div class="card flex flex-wrap items-center gap-3">
+              <div class="card card--interactive flex flex-wrap items-center gap-3">
                 <div class="flex-1 min-w-[240px]">
                   <div class="font-semibold">${gad ? gad.nombre : 'GAD desconocido'}</div>
-                  <div class="text-xs text-slate-500">
+                  <div class="text-xs text-slate-500 mt-0.5">
                     ${new Date(e.fecha).toLocaleString('es-EC')} · INGEL ciudadano:
-                    <strong>${e.ingel != null ? e.ingel.toFixed(1) : '—'}</strong>
+                    <strong class="text-sigel-primary">${e.ingel != null ? e.ingel.toFixed(1) : '—'}</strong>
                   </div>
-                  ${e.comentario ? /*html*/`<p class="text-xs text-slate-600 mt-1 italic">"${escapeHtml(e.comentario)}"</p>` : ''}
+                  ${e.comentario ? /*html*/`<p class="text-xs text-slate-600 mt-1.5 italic border-l-2 border-slate-200 pl-2">"${escapeHtml(e.comentario)}"</p>` : ''}
                 </div>
                 <span class="badge badge-${e.nivel}">${e.nivel}</span>
-                <span class="semaforo-dot semaforo-${e.semaforo}"></span>
+                <span class="semaforo-label"><span class="semaforo-dot semaforo-${e.semaforo}"></span>${e.semaforo}</span>
                 <button onclick="window.SIGEL.exportarPdf('${e.id}')"
                         aria-label="Exportar evaluación a PDF"
                         class="text-sm px-3 py-1.5 bg-sigel-primary hover:bg-blue-900 text-white rounded font-semibold inline-flex items-center gap-1">

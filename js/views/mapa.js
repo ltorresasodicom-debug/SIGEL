@@ -31,28 +31,28 @@ function loadLeaflet() {
 
 export function viewMapa(state) {
   return /*html*/`
-  <div class="max-w-7xl mx-auto px-4 py-8 fade-in">
-    <header class="mb-6">
-      <h1 class="font-display font-bold text-3xl">Mapa Nacional de Desempeño</h1>
-      <p class="text-slate-600 mt-2">
+  <div class="max-w-7xl mx-auto px-4 py-10 fade-in">
+    <header class="mb-7">
+      <h1 class="font-display font-bold text-3xl md:text-4xl tracking-tight">Mapa Nacional de Desempeño</h1>
+      <p class="text-slate-600 mt-2 text-lg max-w-3xl">
         Coropleta del INGEL en los <strong>224 cantones</strong> del Ecuador,
         coloreada por nivel de desempeño. Pasa el cursor sobre un cantón para
         resaltarlo, haz clic para ver el perfil del GAD.
       </p>
     </header>
 
-    <div class="card p-0 overflow-hidden">
-      <div id="map" role="application" aria-label="Mapa de cantones del Ecuador"></div>
+    <div class="map-frame">
+      <div id="map" role="application" aria-label="Mapa interactivo de cantones del Ecuador"></div>
     </div>
 
-    <div class="mt-4 flex flex-wrap gap-x-6 gap-y-2 justify-center text-sm">
-      <div class="flex items-center gap-2"><span class="inline-block w-4 h-4 rounded" style="background:#16A34A"></span> Alto desempeño (INGEL ≥ 70)</div>
-      <div class="flex items-center gap-2"><span class="inline-block w-4 h-4 rounded" style="background:#F59E0B"></span> Medio (50–69)</div>
-      <div class="flex items-center gap-2"><span class="inline-block w-4 h-4 rounded" style="background:#DC2626"></span> Crítico (&lt; 50)</div>
-      <div class="flex items-center gap-2"><span class="inline-block w-4 h-4 rounded border" style="background:#E2E8F0"></span> Sin datos</div>
+    <div class="mt-5 flex flex-wrap gap-2.5 justify-center">
+      <span class="chip"><span class="dot" style="background:#16A34A"></span>Alto (INGEL ≥ 70)</span>
+      <span class="chip"><span class="dot" style="background:#F59E0B"></span>Medio (50–69)</span>
+      <span class="chip"><span class="dot" style="background:#DC2626"></span>Crítico (&lt; 50)</span>
+      <span class="chip"><span class="dot" style="background:#E2E8F0;box-shadow:0 0 0 1px #CBD5E1"></span>Sin datos</span>
     </div>
 
-    <p class="text-xs text-slate-400 text-center mt-3">
+    <p class="text-xs text-slate-500 text-center mt-4">
       Geometrías: shapefile oficial INEC (DPA 2012, reproyectado UTM 17S → WGS84).
     </p>
   </div>

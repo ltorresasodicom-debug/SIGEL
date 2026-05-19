@@ -47,14 +47,14 @@ export function searchInput({
         placeholder="${escapeAttr(placeholder)}"
         aria-label="${escapeAttr(ariaLabel || placeholder)}"
         oninput="${onInput}(this.value)"
-        class="w-full pl-10 pr-10 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sigel-primary focus:outline-none focus:border-sigel-primary transition"
+        class="w-full pl-10 pr-10 py-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-sigel-primary/40 focus:outline-none focus:border-sigel-primary hover:border-slate-400 transition shadow-sm"
       />
       ${value ? /*html*/`
         <button
           type="button"
           onclick="document.getElementById('${id}').value=''; ${clear}('')"
           aria-label="Limpiar búsqueda"
-          class="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-700 transition">
+          class="absolute inset-y-0 right-0 flex items-center pr-3 pl-2 text-slate-400 hover:text-sigel-primary transition rounded-r-lg">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 18 6M6 6l12 12"/>
           </svg>

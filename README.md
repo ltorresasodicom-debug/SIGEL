@@ -11,7 +11,7 @@ Es la **versión pública** de SIGEL — un sitio 100 % estático (HTML + JS mod
 
 Cargado:
 - **23 prefectos** de las elecciones seccionales 2023
-- **218 alcaldes** con sus % de votación
+- **221 alcaldes** (incluye los 3 cantones de Galápagos)
 - **18 asambleístas** electos 2024
 - **8 dimensiones SIGEL** con sus ponderaciones canónicas
 - **Fórmula INGEL** (port a JS del backend Python)
@@ -19,7 +19,7 @@ Cargado:
 ## Características
 
 - 🏠 **Home** con stats nacionales y Top 5
-- 📊 **Ranking** filtrable de los 241 GADs
+- 📊 **Ranking** filtrable de los 244 GADs
 - 🗺️ **Mapa Leaflet** con coropletas por desempeño
 - 📋 **Crear evaluación** ciudadana (Likert 1-5 en las 8 dimensiones) con
   cálculo INGEL en vivo

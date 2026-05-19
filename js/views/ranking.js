@@ -40,10 +40,10 @@ export function viewRanking(state) {
   const provincias = [...new Set(state.data.gads.map(g => g.provincia))].sort();
 
   return /*html*/`
-  <div class="max-w-7xl mx-auto px-4 py-8 fade-in">
-    <header class="mb-6">
-      <h1 class="font-display font-bold text-3xl">Ranking Nacional INGEL</h1>
-      <p class="text-slate-600 mt-2">
+  <div class="max-w-7xl mx-auto px-4 py-10 fade-in">
+    <header class="mb-7">
+      <h1 class="font-display font-bold text-3xl md:text-4xl tracking-tight">Ranking Nacional INGEL</h1>
+      <p class="text-slate-600 mt-2 text-lg">
         Los <strong>${state.data.gads.length} GADs</strong> del Ecuador
         ordenados por el Índice Nacional de Gestión Local.
       </p>
@@ -89,39 +89,41 @@ export function viewRanking(state) {
 function renderTable(lista, withRank) {
   return /*html*/`
   <div class="card p-0 overflow-x-auto">
-    <table class="min-w-full text-sm">
-      <thead class="bg-slate-100 text-slate-700 sticky top-0">
+    <table class="data-table">
+      <thead>
         <tr>
-          <th class="px-4 py-3 text-left">#</th>
-          <th class="px-4 py-3 text-left">GAD</th>
-          <th class="px-4 py-3 text-left">Autoridad</th>
-          <th class="px-4 py-3 text-left hidden md:table-cell">Provincia</th>
-          <th class="px-4 py-3 text-right">INGEL</th>
-          <th class="px-4 py-3 text-center hidden sm:table-cell">Nivel</th>
-          <th class="px-4 py-3 text-center">Estado</th>
+          <th scope="col" style="width:3.5rem">#</th>
+          <th scope="col">GAD</th>
+          <th scope="col">Autoridad</th>
+          <th scope="col" class="hidden md:table-cell">Provincia</th>
+          <th scope="col" class="num">INGEL</th>
+          <th scope="col" class="hidden sm:table-cell">Nivel</th>
+          <th scope="col">Estado</th>
         </tr>
       </thead>
       <tbody>
         ${lista.map((g, i) => /*html*/`
-          <tr class="border-t border-slate-100 hover:bg-slate-50 cursor-pointer focus-within:bg-slate-50"
-              tabindex="0"
-              role="button"
-              aria-label="Ver perfil de ${g.nombre}"
+          <tr tabindex="0"
+              role="link"
+              aria-label="Ver perfil de ${g.nombre}, INGEL ${g.ingel.toFixed(1)}, ${g.nivel}"
               onclick="location.hash='#/gad/${g.id}'"
-              onkeypress="if(event.key==='Enter')location.hash='#/gad/${g.id}'">
-            <td class="px-4 py-3 font-mono text-slate-500">${withRank ? i + 1 : '·'}</td>
-            <td class="px-4 py-3 font-medium">
+              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();location.hash='#/gad/${g.id}'}">
+            <td data-label="#" class="rank">${withRank ? i + 1 : '·'}</td>
+            <td data-label="GAD" class="font-medium">
               <div>${g.nombre}</div>
-              <div class="text-xs text-slate-400 md:hidden">${g.provincia}</div>
+              <div class="text-xs text-slate-500 md:hidden">${g.provincia}</div>
             </td>
-            <td class="px-4 py-3 text-slate-600">${g.autoridad || '—'}</td>
-            <td class="px-4 py-3 text-slate-600 hidden md:table-cell">${g.provincia}</td>
-            <td class="px-4 py-3 text-right font-mono font-bold">${g.ingel.toFixed(1)}</td>
-            <td class="px-4 py-3 text-center hidden sm:table-cell">
+            <td data-label="Autoridad" class="text-slate-600">${g.autoridad || '—'}</td>
+            <td data-label="Provincia" class="text-slate-600 hidden md:table-cell">${g.provincia}</td>
+            <td data-label="INGEL" class="num">
+              <span class="font-display font-extrabold text-base text-sigel-primary">${g.ingel.toFixed(1)}</span>
+              <span class="ingel-meter" aria-hidden="true"><i class="semaforo-${g.semaforo}" style="width:${Math.max(0, Math.min(100, g.ingel))}%"></i></span>
+            </td>
+            <td data-label="Nivel" class="hidden sm:table-cell">
               <span class="badge badge-${g.nivel}">${g.nivel}</span>
             </td>
-            <td class="px-4 py-3 text-center">
-              <span class="semaforo-dot semaforo-${g.semaforo}" title="${g.semaforo}"></span>
+            <td data-label="Estado">
+              <span class="semaforo-label"><span class="semaforo-dot semaforo-${g.semaforo}"></span>${g.semaforo}</span>
             </td>
           </tr>
         `).join('')}

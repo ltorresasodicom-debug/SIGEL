@@ -143,7 +143,7 @@
     {
       "provincia": "Azuay",
       "canton": "Camilo Ponce Enriquez",
-      "alcalde": "Jose Sanchez",
+      "alcalde": "Magali Sánchez",
       "partido": "Democracia Si, Unidad Popular, APP",
       "alianza": true,
       "porcentaje": 0.5913
@@ -151,7 +151,7 @@
     {
       "provincia": "Azuay",
       "canton": "Chordeleg",
-      "alcalde": "Deifilio Arevalo",
+      "alcalde": "Deifilio Reinaldo Arevalo Vasquez",
       "partido": "Suma, Construye",
       "alianza": true,
       "porcentaje": 0.4635
@@ -183,7 +183,7 @@
     {
       "provincia": "Azuay",
       "canton": "Guachapala",
-      "alcalde": "Paul Cantos Cañizares",
+      "alcalde": "Paulo Cantos",
       "partido": "Revolucion Ciudadana , Guachapala Gane",
       "alianza": true,
       "porcentaje": 0.5605
@@ -215,7 +215,7 @@
     {
       "provincia": "Azuay",
       "canton": "Paute",
-      "alcalde": "Raul Delgado",
+      "alcalde": "Raul Delgado Orellana",
       "partido": "Movimiento Igualdad, Participa, Construye",
       "alianza": true,
       "porcentaje": 0.5007
@@ -263,7 +263,7 @@
     {
       "provincia": "Bolivar",
       "canton": "Caluma",
-      "alcalde": "Jerson Jherson Narvaez",
+      "alcalde": "Jherson Iván Narváez Moya",
       "partido": "Pachakutik",
       "alianza": false,
       "porcentaje": 0.4507
@@ -271,7 +271,7 @@
     {
       "provincia": "Bolivar",
       "canton": "Chillanes",
-      "alcalde": "Maria Galarza",
+      "alcalde": "Mirian Isabel Galarza Yépez",
       "partido": "Suma, Partido Social Cristiano",
       "alianza": true,
       "porcentaje": 0.399
@@ -279,7 +279,7 @@
     {
       "provincia": "Bolivar",
       "canton": "Chimbo",
-      "alcalde": "Jose Luis Arteaga",
+      "alcalde": "José Luis Arteaga León",
       "partido": "Integracion Nueva Gente en Accion Minga",
       "alianza": false,
       "porcentaje": 0.2732
@@ -287,7 +287,7 @@
     {
       "provincia": "Bolivar",
       "canton": "Echeandia",
-      "alcalde": "Marco Vizcarra vega",
+      "alcalde": "Carlos Marco Viscarra Vega",
       "partido": "Avanza, Partido Social Cristiano",
       "alianza": true,
       "porcentaje": 0.4769
@@ -311,7 +311,7 @@
     {
       "provincia": "Bolivar",
       "canton": "San Miguel",
-      "alcalde": "Vinicio Coloma",
+      "alcalde": "Vinivio Coloma Romero",
       "partido": "Suma, Partido Social Cristiano",
       "alianza": true,
       "porcentaje": 0.4256
@@ -327,7 +327,7 @@
     {
       "provincia": "Cañar",
       "canton": "Biblian",
-      "alcalde": "Soyla Amelia Idrovo Martinez",
+      "alcalde": "Amelia Idrovo",
       "partido": "Pachakutik",
       "alianza": false,
       "porcentaje": 0.3513
@@ -343,7 +343,7 @@
     {
       "provincia": "Cañar",
       "canton": "Deleg",
-      "alcalde": "Hendry Tito",
+      "alcalde": "Hendri Tito",
       "partido": "Revolucion Ciudadanoa, Partido Socialista Ecuatoriano",
       "alianza": true,
       "porcentaje": 0.4552
@@ -351,7 +351,7 @@
     {
       "provincia": "Cañar",
       "canton": "El Tambo",
-      "alcalde": "Manuel Jesus Balboa Angamarca",
+      "alcalde": "René Castillo",
       "partido": "Pachakutik",
       "alianza": false,
       "porcentaje": 0.3229
@@ -359,7 +359,7 @@
     {
       "provincia": "Cañar",
       "canton": "La Troncal",
-      "alcalde": "Mirian Castro",
+      "alcalde": "Miriam Castro",
       "partido": "Revolucion Ciudadana, Partido Socialista Ecuatoriano",
       "alianza": true,
       "porcentaje": 0.3032
@@ -367,7 +367,7 @@
     {
       "provincia": "Cañar",
       "canton": "Suscal",
-      "alcalde": "Luis Antonio Pomaquza Castro",
+      "alcalde": "Luis Pomaquiza Castro",
       "partido": "Movimieno Alli Kawsay",
       "alianza": false,
       "porcentaje": 0.5105
@@ -375,7 +375,7 @@
     {
       "provincia": "Carchi",
       "canton": "Bolivar",
-      "alcalde": "Livardo Benalcazar Guerron",
+      "alcalde": "Livardo Benalcazar",
       "partido": "Movimiento Social Conservador del Carcho, Centro Democratico",
       "alianza": true,
       "porcentaje": 0.348
@@ -383,7 +383,7 @@
     {
       "provincia": "Carchi",
       "canton": "Espejo",
-      "alcalde": "Arnaldo Causes",
+      "alcalde": "Arnaldo Cuacés",
       "partido": "Creo",
       "alianza": false,
       "porcentaje": 0.2755
@@ -391,7 +391,7 @@
     {
       "provincia": "Carchi",
       "canton": "Mira",
-      "alcalde": "Fausto Ruiz Quintero",
+      "alcalde": "Fausto Ruiz Quinteros",
       "partido": "Movimiento Social Conservador del Carcho, Movimiento Democracia Si",
       "alianza": true,
       "porcentaje": 0.395
@@ -407,7 +407,7 @@
     {
       "provincia": "Carchi",
       "canton": "San Pedro de Huaca",
-      "alcalde": "Jairo Huerta",
+      "alcalde": "Jairo Huera",
       "partido": "Democracia Si",
       "alianza": false,
       "porcentaje": 0.3048
@@ -423,7 +423,7 @@
     {
       "provincia": "Cotopaxi",
       "canton": "La Mana",
-      "alcalde": "Ipolito Carrera",
+      "alcalde": "Hipólito Ivan Carrera Benites",
       "partido": "Creo",
       "alianza": false,
       "porcentaje": 0.3332
@@ -431,7 +431,7 @@
     {
       "provincia": "Cotopaxi",
       "canton": "Latacunga",
-      "alcalde": "Fabricio Tinajero",
+      "alcalde": "Cristian Fabricio Tinajero Jiménez",
       "partido": "Unidad Popular, PID, Partido Socialista Ecuatoriano",
       "alianza": true,
       "porcentaje": 0.2615
@@ -447,7 +447,7 @@
     {
       "provincia": "Cotopaxi",
       "canton": "Pujili",
-      "alcalde": "Jose Arroyo Cabrera",
+      "alcalde": "José Alcides Arroyo Cabrera",
       "partido": "Revolucion Ciudadanoa, Izquierda Democratica, Partido Socialista Ecuatoriano",
       "alianza": true,
       "porcentaje": 0.6371
@@ -455,7 +455,7 @@
     {
       "provincia": "Cotopaxi",
       "canton": "Salcedo",
-      "alcalde": "Juan Paul Pachecho Velasquez",
+      "alcalde": "Juan Paúl Pacheco Velásquez",
       "partido": "Suma",
       "alianza": false,
       "porcentaje": 0.4241
@@ -463,7 +463,7 @@
     {
       "provincia": "Cotopaxi",
       "canton": "Saquisili",
-      "alcalde": "Javier Velasquez",
+      "alcalde": "Edison Javier Velásquez Martínez",
       "partido": "Centro Democratico, PSP, Partido Socialista Ecuatoriano, Incluyente",
       "alianza": true,
       "porcentaje": 0.3123
@@ -471,7 +471,7 @@
     {
       "provincia": "Cotopaxi",
       "canton": "Sigchos",
-      "alcalde": "Oscar Monge",
+      "alcalde": "Oscar Monge Tipán",
       "partido": "Suma",
       "alianza": false,
       "porcentaje": 0.4527
@@ -503,7 +503,7 @@
     {
       "provincia": "Chimborazo",
       "canton": "Colta",
-      "alcalde": "Julio Guaminga",
+      "alcalde": "Julio Manuel Guaminga Anilema",
       "partido": "Minga, Avanza",
       "alianza": true,
       "porcentaje": 0.2834
@@ -511,7 +511,7 @@
     {
       "provincia": "Chimborazo",
       "canton": "Cumanda",
-      "alcalde": "Oswaldo Bonifaz",
+      "alcalde": "Oswaldo Santiago Bonifaz Vicuña",
       "partido": "Revolucion Ciudadana, Amigo",
       "alianza": true,
       "porcentaje": 0.4692
@@ -519,7 +519,7 @@
     {
       "provincia": "Chimborazo",
       "canton": "Guamote",
-      "alcalde": "Miguel Marcatoma",
+      "alcalde": "Segundo Miguel Marcatoma Lema",
       "partido": "Revolucion Ciudadana, Amigo",
       "alianza": true,
       "porcentaje": 0.2625
@@ -527,7 +527,7 @@
     {
       "provincia": "Chimborazo",
       "canton": "Guano",
-      "alcalde": "Oswaldo Estrada",
+      "alcalde": "Oswaldo Vinicio Estrada Avilés",
       "partido": "Minga, Avanza",
       "alianza": true,
       "porcentaje": 0.3322
@@ -535,7 +535,7 @@
     {
       "provincia": "Chimborazo",
       "canton": "Pallatanga",
-      "alcalde": "David Leon Gonzales",
+      "alcalde": "Jorge David León González",
       "partido": "Creo",
       "alianza": false,
       "porcentaje": 0.2517
@@ -543,7 +543,7 @@
     {
       "provincia": "Chimborazo",
       "canton": "Penipe",
-      "alcalde": "Fabian Aldaz",
+      "alcalde": "Fabián Marcelo Aldaz Viscaino",
       "partido": "Pachakutik",
       "alianza": false,
       "porcentaje": 0.369
@@ -551,7 +551,7 @@
     {
       "provincia": "Chimborazo",
       "canton": "Riobamba",
-      "alcalde": "Jhon Vinueza",
+      "alcalde": "John Henry Vinueza Salinas",
       "partido": "Centro, Reto",
       "alianza": true,
       "porcentaje": 0.2199
@@ -559,7 +559,7 @@
     {
       "provincia": "El Oro",
       "canton": "Arenillas",
-      "alcalde": "Ever Ponce Rosero",
+      "alcalde": "Teresa de Jesús Solís Culcay",
       "partido": "Movimiento Sur Unido Regional",
       "alianza": false,
       "porcentaje": 0.3798
@@ -567,7 +567,7 @@
     {
       "provincia": "El Oro",
       "canton": "Atahualpa",
-      "alcalde": "Exar Quezada Perez",
+      "alcalde": "Exar Valeriano Quezada Perez",
       "partido": "Movimiento Igualdad, Impulso e Integracion Siii",
       "alianza": false,
       "porcentaje": 0.5468
@@ -591,7 +591,7 @@
     {
       "provincia": "El Oro",
       "canton": "El Guabo",
-      "alcalde": "Hitler Alvarez Bejarano",
+      "alcalde": "Hitler Alonso Alvarez Bejarano",
       "partido": "Sur",
       "alianza": false,
       "porcentaje": 0.3753
@@ -599,7 +599,7 @@
     {
       "provincia": "El Oro",
       "canton": "Huaquillas",
-      "alcalde": "Florencio Fares",
+      "alcalde": "Luis Florencio Farez Reinoso",
       "partido": "Partido Social Cristiano, Decide Huaquillence",
       "alianza": true,
       "porcentaje": 0.2551
@@ -607,7 +607,7 @@
     {
       "provincia": "El Oro",
       "canton": "Las Lajas",
-      "alcalde": "Jimmy Serfin Castillo Abad",
+      "alcalde": "Jimmy Serafín Castillo Abad",
       "partido": "Revolucuion Ciudadanoa, Mar, Plan",
       "alianza": true,
       "porcentaje": 0.5153
@@ -615,7 +615,7 @@
     {
       "provincia": "El Oro",
       "canton": "Machala",
-      "alcalde": "Dario Macas",
+      "alcalde": "Darío Xavier Macas Salvatierra",
       "partido": "Revolucion Ciudadana, Plan",
       "alianza": true,
       "porcentaje": 0.4086
@@ -623,7 +623,7 @@
     {
       "provincia": "El Oro",
       "canton": "Marcabeli",
-      "alcalde": "Jonny Cueva",
+      "alcalde": "Jonny Estuardo Cueva Ramirez",
       "partido": "Centro, Siii, Unidad Popular, PID, Avanza, Izquierda Democratica, Construye, Reto, Mar",
       "alianza": true,
       "porcentaje": 0.4198
@@ -631,7 +631,7 @@
     {
       "provincia": "El Oro",
       "canton": "Pasaje",
-      "alcalde": "Jovanny Coronel",
+      "alcalde": "Jerry Jovanny Coronel Castillo",
       "partido": "Movimiento Sur Unido Regional",
       "alianza": false,
       "porcentaje": 0.3277
@@ -639,7 +639,7 @@
     {
       "provincia": "El Oro",
       "canton": "Piñas",
-      "alcalde": "Teresa Feijoo",
+      "alcalde": "Juana Teresa Feijoo Jaramillo",
       "partido": "Movimiento Somos Igualdad, Impulso e Integracion Siii",
       "alianza": false,
       "porcentaje": 0.2618
@@ -647,7 +647,7 @@
     {
       "provincia": "El Oro",
       "canton": "Portovelo",
-      "alcalde": "Jorge Maldonado",
+      "alcalde": "Yulissa Aguilar",
       "partido": "Creo",
       "alianza": false,
       "porcentaje": 0.3749
@@ -655,7 +655,7 @@
     {
       "provincia": "El Oro",
       "canton": "Santa Rosa",
-      "alcalde": "Larry Vite Cevallos",
+      "alcalde": "Larry Ronald Vite Cevallos",
       "partido": "Movimiento Sur Unido Regional",
       "alianza": false,
       "porcentaje": 0.3002
@@ -663,7 +663,7 @@
     {
       "provincia": "El Oro",
       "canton": "Zaruma",
-      "alcalde": "Carlos Aguilar Peñalosa",
+      "alcalde": "Carlos Alberto Aguilar Peñaloza",
       "partido": "Movimiento Sur Unido Regional",
       "alianza": false,
       "porcentaje": 0.3466
@@ -671,7 +671,7 @@
     {
       "provincia": "Esmeraldas",
       "canton": "Atacames",
-      "alcalde": "Willians Mendoza Vidal",
+      "alcalde": "Angel Willians Mendoza",
       "partido": "Partido Social Cristiano",
       "alianza": false,
       "porcentaje": 0.3772
@@ -679,7 +679,7 @@
     {
       "provincia": "Esmeraldas",
       "canton": "Eloy Alfaro",
-      "alcalde": "Ali Corozo",
+      "alcalde": "Ali Corozo Mosquera",
       "partido": "Partido Social Cristiano",
       "alianza": false,
       "porcentaje": 0.441
@@ -687,7 +687,7 @@
     {
       "provincia": "Esmeraldas",
       "canton": "Esmeraldas",
-      "alcalde": "Vicko Villacis",
+      "alcalde": "Viko Villacis",
       "partido": "Revolucion Ciudadana",
       "alianza": false,
       "porcentaje": 0.2956
@@ -695,7 +695,7 @@
     {
       "provincia": "Esmeraldas",
       "canton": "Muisne",
-      "alcalde": "Yuri Colorado Marquez",
+      "alcalde": "Yuri Colorado",
       "partido": "Partido Social Cristiano",
       "alianza": false,
       "porcentaje": 0.2676
@@ -719,7 +719,7 @@
     {
       "provincia": "Esmeraldas",
       "canton": "San Lorenzo",
-      "alcalde": "Adis Solis",
+      "alcalde": "Gustavo Samaniego",
       "partido": "Revolucion Ciudadana, Amigo",
       "alianza": true,
       "porcentaje": 0.3433
@@ -727,7 +727,7 @@
     {
       "provincia": "Guayas",
       "canton": "A Baquerizo Moreno",
-      "alcalde": "Angela Herrera Mendez",
+      "alcalde": "Ángela Francisca Herrera Méndez",
       "partido": "PID, Amigo",
       "alianza": true,
       "porcentaje": 0.4191
@@ -759,7 +759,7 @@
     {
       "provincia": "Guayas",
       "canton": "CRNL Marcelino Maridueñas",
-      "alcalde": "Pedro Orellana",
+      "alcalde": "Pedro Antonio Orellana Ortiz",
       "partido": "Partido Social Cristiano, Madera de Guerrero",
       "alianza": true,
       "porcentaje": 0.5882
@@ -767,7 +767,7 @@
     {
       "provincia": "Guayas",
       "canton": "Daule",
-      "alcalde": "Wilson Cañizares",
+      "alcalde": "Wilson Fidel Cañizares Villamar",
       "partido": "Partido Social Cristiano, Madera de Guerrero",
       "alianza": true,
       "porcentaje": 0.4286
@@ -775,7 +775,7 @@
     {
       "provincia": "Guayas",
       "canton": "Duran",
-      "alcalde": "Luis Chonillo",
+      "alcalde": "Luis Chonillo Breilh",
       "partido": "Chonillo Ahora Si",
       "alianza": false,
       "porcentaje": 0.3608
@@ -783,7 +783,7 @@
     {
       "provincia": "Guayas",
       "canton": "El Empalme",
-      "alcalde": "Rodolfo Cantos Acosta",
+      "alcalde": "Rodolfo Sebastián Cantos Acosta",
       "partido": "Partido Social Cristiano, Madera de Guerrero, El Empalme Renace",
       "alianza": true,
       "porcentaje": 0.5158
@@ -807,7 +807,7 @@
     {
       "provincia": "Guayas",
       "canton": "Guayaquil",
-      "alcalde": "Aquiles Alvarez",
+      "alcalde": "Aquiles Álvarez // (Tania Coronel) Sub.",
       "partido": "Revolucion Ciudadana",
       "alianza": false,
       "porcentaje": 0.3987
@@ -847,7 +847,7 @@
     {
       "provincia": "Guayas",
       "canton": "Naranjito",
-      "alcalde": "Cristian Suarez",
+      "alcalde": "Cristian Suárez Peñafiel",
       "partido": "Pachakutik",
       "alianza": false,
       "porcentaje": 0.3355
@@ -855,7 +855,7 @@
     {
       "provincia": "Guayas",
       "canton": "Nobol/Piedrahita",
-      "alcalde": "Marvin Salas Cercado",
+      "alcalde": "Marvin Santiago Salas Cercado",
       "partido": "Revolucion Ciudadana",
       "alianza": false,
       "porcentaje": 0.6005
@@ -863,7 +863,7 @@
     {
       "provincia": "Guayas",
       "canton": "Palestina",
-      "alcalde": "Luis Suarez",
+      "alcalde": "Luis Suárez Bedor",
       "partido": "Revolucion Ciudadana",
       "alianza": false,
       "porcentaje": 0.3409
@@ -887,7 +887,7 @@
     {
       "provincia": "Guayas",
       "canton": "Salitre",
-      "alcalde": "Milton Moreno",
+      "alcalde": "Milton Moreno Pérez",
       "partido": "Partido Social Cristiano, Madera de Guerrero",
       "alianza": true,
       "porcentaje": 0.3397
@@ -903,7 +903,7 @@
     {
       "provincia": "Guayas",
       "canton": "Santa Lucia",
-      "alcalde": "Uvaldo Urquizo",
+      "alcalde": "Ubaldo Urquizo",
       "partido": "Partido Social Cristiano, Madera de Guerrero",
       "alianza": true,
       "porcentaje": 0.2487
@@ -927,7 +927,7 @@
     {
       "provincia": "Imbabura",
       "canton": "Antonio Ante",
-      "alcalde": "Rolando Lopez",
+      "alcalde": "César Javier Escobar Vallejos",
       "partido": "Amigo, Accion Movilizadora Independiente Generando Oportunidades",
       "alianza": true,
       "porcentaje": 0.2214
@@ -975,7 +975,7 @@
     {
       "provincia": "Loja",
       "canton": "Calvas",
-      "alcalde": "Jorge Montero Rodriguez",
+      "alcalde": "Jorge Cristobal Montero Rodriguez",
       "partido": "Partido Social Cristiano, CFPC",
       "alianza": true,
       "porcentaje": 0.27
@@ -983,7 +983,7 @@
     {
       "provincia": "Loja",
       "canton": "Catamayo",
-      "alcalde": "Janeth Guerrero Luzuriaga",
+      "alcalde": "Janet del Cisne Luzuriaga",
       "partido": "Suma, Creo, Movimiento Catamayo Unido",
       "alianza": true,
       "porcentaje": 0.43090000000000006
@@ -991,7 +991,7 @@
     {
       "provincia": "Loja",
       "canton": "Celica",
-      "alcalde": "Julio Gustavo Bustamante",
+      "alcalde": "Julio Gustavo Bustamante Jaramillo",
       "partido": "Centro Democratico",
       "alianza": false,
       "porcentaje": 0.5379
@@ -999,7 +999,7 @@
     {
       "provincia": "Loja",
       "canton": "Chaguarpamba",
-      "alcalde": "Victor Largo Machuca",
+      "alcalde": "Victor Hugo Largo Machuca",
       "partido": "Suma, Alianza Popular",
       "alianza": true,
       "porcentaje": 0.2611
@@ -1007,7 +1007,7 @@
     {
       "provincia": "Loja",
       "canton": "Espindola",
-      "alcalde": "Bolivar Jimbo Granda",
+      "alcalde": "Alvaro Antonio García Ontaneda",
       "partido": "Suma, Alianza Popular",
       "alianza": true,
       "porcentaje": 0.3239
@@ -1015,7 +1015,7 @@
     {
       "provincia": "Loja",
       "canton": "Gonzanama",
-      "alcalde": "Paulo Herrera",
+      "alcalde": "Paulo Patricio Herrera Rojas",
       "partido": "Suma, Creo",
       "alianza": true,
       "porcentaje": 0.3309
@@ -1023,7 +1023,7 @@
     {
       "provincia": "Loja",
       "canton": "Loja",
-      "alcalde": "Franco Quezada",
+      "alcalde": "Diana Carolina Guayanay Llanes",
       "partido": "Movimiento Solidez Esperanza y Respeto",
       "alianza": false,
       "porcentaje": 0.2925
@@ -1031,7 +1031,7 @@
     {
       "provincia": "Loja",
       "canton": "Macara",
-      "alcalde": "Francisco Azuero",
+      "alcalde": "Francisco Arcesio Azuero Astudillo",
       "partido": "Movimiento Accion Regional por la Equidad",
       "alianza": false,
       "porcentaje": 0.4359
@@ -1039,7 +1039,7 @@
     {
       "provincia": "Loja",
       "canton": "Olmedo",
-      "alcalde": "Jonathan Carrion Guarderas",
+      "alcalde": "Jonathan Tito Carrión Guarderas",
       "partido": "Izquierda Democratica",
       "alianza": false,
       "porcentaje": 0.4631
@@ -1047,7 +1047,7 @@
     {
       "provincia": "Loja",
       "canton": "Paltas",
-      "alcalde": "Manrique Darguin Diaz Moreno",
+      "alcalde": "Manrique Darwin Diaz Moreno",
       "partido": "Partido Social Cristiano, Convocatoria por la Unidad Provincial",
       "alianza": true,
       "porcentaje": 0.3375
@@ -1055,7 +1055,7 @@
     {
       "provincia": "Loja",
       "canton": "Pindal",
-      "alcalde": "Yofre Edilberto Ortega",
+      "alcalde": "Julio Vismar Guerrero Vera",
       "partido": "Movimiento Accion Regional por la Equidad",
       "alianza": false,
       "porcentaje": 0.34979999999999994
@@ -1063,7 +1063,7 @@
     {
       "provincia": "Loja",
       "canton": "Puyango",
-      "alcalde": "Ignacio Vivar Jara",
+      "alcalde": "José Ignacio Vivar",
       "partido": "Movimiento Centro Democrático",
       "alianza": false,
       "porcentaje": 0.4629
@@ -1071,7 +1071,7 @@
     {
       "provincia": "Loja",
       "canton": "Quilanga",
-      "alcalde": "Juan Carlos Santin Calva",
+      "alcalde": "Juan Carlos Santín",
       "partido": "Movimiento Politico Quilanguense",
       "alianza": false,
       "porcentaje": 0.42479999999999996
@@ -1079,7 +1079,7 @@
     {
       "provincia": "Loja",
       "canton": "Saraguro",
-      "alcalde": "Abel Sarango",
+      "alcalde": "Abel Sarango Quizhpe",
       "partido": "Unidad Popular, Pachakutik",
       "alianza": true,
       "porcentaje": 0.4683
@@ -1087,7 +1087,7 @@
     {
       "provincia": "Loja",
       "canton": "Sozoranga",
-      "alcalde": "Orli Renan Flores Guerrero",
+      "alcalde": "Orly Flores",
       "partido": "Moviento Accion Regional por la Equidad",
       "alianza": false,
       "porcentaje": 0.3829
@@ -1127,7 +1127,7 @@
     {
       "provincia": "Los Rios",
       "canton": "Mocache",
-      "alcalde": "Yenny Dominguez",
+      "alcalde": "Yenny Domínguez Saltos",
       "partido": "Revolucion Ciudadana, Reto",
       "alianza": true,
       "porcentaje": 0.43450000000000005
@@ -1143,7 +1143,7 @@
     {
       "provincia": "Los Rios",
       "canton": "Palenque",
-      "alcalde": "Jordy Carriel",
+      "alcalde": "Jordy Carriel Navarrete",
       "partido": "Revolucion Ciudadana, Reto",
       "alianza": true,
       "porcentaje": 0.35810000000000003
@@ -1151,7 +1151,7 @@
     {
       "provincia": "Los Rios",
       "canton": "Pueblo Viejo",
-      "alcalde": "Elsy Ospina",
+      "alcalde": "Elsy Ospina Garcés",
       "partido": "Revolucuion Ciudadana, Reto",
       "alianza": true,
       "porcentaje": 0.35810000000000003
@@ -1159,7 +1159,7 @@
     {
       "provincia": "Los Rios",
       "canton": "Quevedo",
-      "alcalde": "Alexis Matute",
+      "alcalde": "Alexis Fernando Matute",
       "partido": "Revolucion Ciudadana, Reto",
       "alianza": true,
       "porcentaje": 0.4185
@@ -1167,7 +1167,7 @@
     {
       "provincia": "Los Rios",
       "canton": "Quinsaloma",
-      "alcalde": "Cristian Aldaz",
+      "alcalde": "Cristhian Aldaz González",
       "partido": "Partido Social Cristiano, Partido Socialista del Ecuador",
       "alianza": true,
       "porcentaje": 0.46259999999999996
@@ -1175,7 +1175,7 @@
     {
       "provincia": "Los Rios",
       "canton": "Urdaneta",
-      "alcalde": "Amada Zambrano",
+      "alcalde": "Amada Argentina Zambrano Rodríguez",
       "partido": "Partido Social Cristiano, Crecer",
       "alianza": true,
       "porcentaje": 0.3713
@@ -1183,7 +1183,7 @@
     {
       "provincia": "Los Rios",
       "canton": "Valencia",
-      "alcalde": "Daniel Macias",
+      "alcalde": "Daniel Macías López",
       "partido": "Revolucion Ciudadana, Reto",
       "alianza": true,
       "porcentaje": 0.5671
@@ -1199,7 +1199,7 @@
     {
       "provincia": "Los Rios",
       "canton": "Vinces",
-      "alcalde": "Alfonso Montalvan Cerezo",
+      "alcalde": "Juan Alfonso Montalván Cerezo",
       "partido": "Centro Democratico, Partido Sociedad Patriotica, PID, Partido Socialista Ecuatoriano, Democracia Si, Creo, Suma, Construye",
       "alianza": true,
       "porcentaje": 0.581
@@ -1215,7 +1215,7 @@
     {
       "provincia": "Manabi",
       "canton": "Bolivar",
-      "alcalde": "Ledy Laura Muñoz",
+      "alcalde": "Ledy Laura Muñoz Peñarrieta",
       "partido": "Caminantes, Unidad Primero, Partido Social Cristiano, Suma, Renovacion",
       "alianza": true,
       "porcentaje": 0.4838
@@ -1223,7 +1223,7 @@
     {
       "provincia": "Manabi",
       "canton": "Chone",
-      "alcalde": "Leonardo Rodriguez",
+      "alcalde": "Leonardo Rodríguez Zambrano",
       "partido": "Unidad Primero, Partido Social Cristiano, Suma",
       "alianza": true,
       "porcentaje": 0.43
@@ -1231,7 +1231,7 @@
     {
       "provincia": "Manabi",
       "canton": "El Carmen",
-      "alcalde": "Mayra Cruz",
+      "alcalde": "Mayra Alejandra Cruz García",
       "partido": "Manabitamente",
       "alianza": false,
       "porcentaje": 0.4742
@@ -1239,7 +1239,7 @@
     {
       "provincia": "Manabi",
       "canton": "Flavio Alfaro",
-      "alcalde": "Humberto Barreiro",
+      "alcalde": "Humberto Barreiro Alcívar",
       "partido": "Manabitamente",
       "alianza": false,
       "porcentaje": 0.425
@@ -1255,7 +1255,7 @@
     {
       "provincia": "Manabi",
       "canton": "Jaramijo",
-      "alcalde": "Simetrio Calderon Alava",
+      "alcalde": "Simetrio Armengol Calderón Álava",
       "partido": "Revolucion Ciudadana",
       "alianza": false,
       "porcentaje": 0.358
@@ -1263,7 +1263,7 @@
     {
       "provincia": "Manabi",
       "canton": "Jipijapa",
-      "alcalde": "Angela Plua",
+      "alcalde": "Ángela Esperanza Plúa Santillán",
       "partido": "Pachakutik",
       "alianza": false,
       "porcentaje": 0.2593
@@ -1271,7 +1271,7 @@
     {
       "provincia": "Manabi",
       "canton": "Junin",
-      "alcalde": "Jose Intriago Ganchozo",
+      "alcalde": "José Eustorgio Intriago Ganchozo",
       "partido": "Revolucion Ciudadana, Si podemos",
       "alianza": true,
       "porcentaje": 0.34600000000000003
@@ -1279,7 +1279,7 @@
     {
       "provincia": "Manabi",
       "canton": "Manta",
-      "alcalde": "Agustin Intriago Quijano + (Marciana Valdivieso)",
+      "alcalde": "Marciana Valdiviezo Zamora",
       "partido": "Movimiento Mejor Ciudadano",
       "alianza": false,
       "porcentaje": 0.6125
@@ -1287,7 +1287,7 @@
     {
       "provincia": "Manabi",
       "canton": "Montecristi",
-      "alcalde": "Jonathan Toro",
+      "alcalde": "Luis Jonathan Toro Largacha",
       "partido": "Avanza, Bienestar de los Manabitas",
       "alianza": true,
       "porcentaje": 0.2352
@@ -1295,7 +1295,7 @@
     {
       "provincia": "Manabi",
       "canton": "Olmedo",
-      "alcalde": "Lurdez Guerrero",
+      "alcalde": "Lourdes María Guerrero Giler",
       "partido": "Unidead Primero, Partido Social Cristiano, Suma",
       "alianza": true,
       "porcentaje": 0.4211
@@ -1303,7 +1303,7 @@
     {
       "provincia": "Manabi",
       "canton": "Pajan",
-      "alcalde": "Karen Marcillo",
+      "alcalde": "Karen Lisbeth Marcillo Vera",
       "partido": "Revolucion Ciudadana, Si podemos",
       "alianza": true,
       "porcentaje": 0.2655
@@ -1311,7 +1311,7 @@
     {
       "provincia": "Manabi",
       "canton": "Pedernales",
-      "alcalde": "Manuel Panezo",
+      "alcalde": "Manuel Isidro Panezo Rojas",
       "partido": "Revolucion Ciudadana, Si podemos",
       "alianza": true,
       "porcentaje": 0.3431
@@ -1319,7 +1319,7 @@
     {
       "provincia": "Manabi",
       "canton": "Pichincha",
-      "alcalde": "Leodan Intriago",
+      "alcalde": "Isaac Leodan Intriago Sánchez",
       "partido": "Revolucion Ciudadana, Si podemos",
       "alianza": true,
       "porcentaje": 0.4359
@@ -1327,7 +1327,7 @@
     {
       "provincia": "Manabi",
       "canton": "Portoviejo",
-      "alcalde": "Javier Pincay",
+      "alcalde": "Javier Humberto Pincay Salvatierra",
       "partido": "Avanza, Bienestar de los Manabitas",
       "alianza": true,
       "porcentaje": 0.2823
@@ -1335,7 +1335,7 @@
     {
       "provincia": "Manabi",
       "canton": "Puerto Lopez",
-      "alcalde": "Omar Menendez",
+      "alcalde": "Verónica Isabel Lucas Marcillo",
       "partido": "Revolucion Ciudadana",
       "alianza": false,
       "porcentaje": 0.4598
@@ -1343,7 +1343,7 @@
     {
       "provincia": "Manabi",
       "canton": "Rocafuerte",
-      "alcalde": "Norberto Velez",
+      "alcalde": "Norberto Sebastián Vélez Basurto",
       "partido": "Caminantes, Unidad Primero, Partido Social Cristiano, Suma, Nueva Vision",
       "alianza": true,
       "porcentaje": 0.4025
@@ -1351,7 +1351,7 @@
     {
       "provincia": "Manabi",
       "canton": "San Vicente",
-      "alcalde": "Brigitte Garcia",
+      "alcalde": "Rober Fabricio Lara Loor",
       "partido": "Revolucion Ciudadana, Si podemos",
       "alianza": true,
       "porcentaje": 0.3448
@@ -1359,7 +1359,7 @@
     {
       "provincia": "Manabi",
       "canton": "Santa Ana",
-      "alcalde": "Gregorio Macias Ruperti",
+      "alcalde": "José Gregorio Macías Ruperty",
       "partido": "Caminantes, Unidad Primero, Partido Social Cristiano, Suma",
       "alianza": true,
       "porcentaje": 0.3556
@@ -1367,7 +1367,7 @@
     {
       "provincia": "Manabi",
       "canton": "Sucre",
-      "alcalde": "Carlos Mendoza Rodriguez",
+      "alcalde": "Carlos Gustavo Mendoza Rodríguez",
       "partido": "Caminantes, Unidad Primero, Partido Social Cristiano, Suma",
       "alianza": true,
       "porcentaje": 0.42950000000000005
@@ -1375,7 +1375,7 @@
     {
       "provincia": "Manabi",
       "canton": "Tosagua",
-      "alcalde": "Romel Cedeño",
+      "alcalde": "Romel Enrique Cedeño Rodríguez",
       "partido": "Revolucion Ciudadana, Si podemos",
       "alianza": true,
       "porcentaje": 0.2907
@@ -1383,7 +1383,7 @@
     {
       "provincia": "Morona Santiago",
       "canton": "Gualaquiza",
-      "alcalde": "Fancis Pavon",
+      "alcalde": "Francis Pavón Sanmartin",
       "partido": "Pachakutik",
       "alianza": false,
       "porcentaje": 0.44329999999999997
@@ -1391,7 +1391,7 @@
     {
       "provincia": "Morona Santiago",
       "canton": "Huamboya",
-      "alcalde": "Miguel Zambrano",
+      "alcalde": "Miguel Zambrano Escobar",
       "partido": "Partido Sociedad Patriotica, Creo, Fuerza Amazonica",
       "alianza": true,
       "porcentaje": 0.46619999999999995
@@ -1399,7 +1399,7 @@
     {
       "provincia": "Morona Santiago",
       "canton": "Limon Indanza",
-      "alcalde": "Antonio Castillo",
+      "alcalde": "Antonio Castillo Orellana",
       "partido": "Izquierda Democratica",
       "alianza": false,
       "porcentaje": 0.35009999999999997
@@ -1407,7 +1407,7 @@
     {
       "provincia": "Morona Santiago",
       "canton": "Logroño",
-      "alcalde": "Melina Baraona",
+      "alcalde": "Melina Barahona Rojas",
       "partido": "Pachakutik",
       "alianza": false,
       "porcentaje": 0.35359999999999997
@@ -1415,7 +1415,7 @@
     {
       "provincia": "Morona Santiago",
       "canton": "Morona",
-      "alcalde": "Francisco Andramuño",
+      "alcalde": "Francisco Andramuño Rodriguez",
       "partido": "Pachakutik",
       "alianza": false,
       "porcentaje": 0.47950000000000004
@@ -1431,7 +1431,7 @@
     {
       "provincia": "Morona Santiago",
       "canton": "Palora",
-      "alcalde": "Estalin Tzamarenda",
+      "alcalde": "Estalin Tzamarenda Naychapi",
       "partido": "Pachakutik",
       "alianza": false,
       "porcentaje": 0.4203
@@ -1447,7 +1447,7 @@
     {
       "provincia": "Morona Santiago",
       "canton": "Santiago",
-      "alcalde": "Fredy Cabrera",
+      "alcalde": "Freddy Cabrera",
       "partido": "Partido Sociedad Patriotica, Creo",
       "alianza": true,
       "porcentaje": 0.5754
@@ -1455,7 +1455,7 @@
     {
       "provincia": "Morona Santiago",
       "canton": "Sucua",
-      "alcalde": "Sebastian Rodriguez",
+      "alcalde": "Sebastián Rodríguez Pacheco",
       "partido": "Partido Sociedad Patriotica, Creo",
       "alianza": true,
       "porcentaje": 0.2982
@@ -1471,7 +1471,7 @@
     {
       "provincia": "Morona Santiago",
       "canton": "Tiwintza",
-      "alcalde": "Kleber Antich",
+      "alcalde": "Kleber Antich Chumbia",
       "partido": "Pachakutik",
       "alianza": false,
       "porcentaje": 0.6153
@@ -1527,7 +1527,7 @@
     {
       "provincia": "Pastaza",
       "canton": "Mera",
-      "alcalde": "Gustavo Silva",
+      "alcalde": "Gustavo Silva Vilcacundo",
       "partido": "Yo Apoyo la Experiencia, Progreso y Cambio, MCR",
       "alianza": true,
       "porcentaje": 0.3483
@@ -1535,7 +1535,7 @@
     {
       "provincia": "Pastaza",
       "canton": "Pastaza",
-      "alcalde": "German Flores Mesa",
+      "alcalde": "German Flores Meza",
       "partido": "Pachakutik",
       "alianza": false,
       "porcentaje": 0.2805
@@ -1543,7 +1543,7 @@
     {
       "provincia": "Pastaza",
       "canton": "Santa Clara",
-      "alcalde": "Cesar Castro",
+      "alcalde": "Rómulo César Castro Wilcapi",
       "partido": "Movimiento Politico Integracion Progreso Cambio",
       "alianza": false,
       "porcentaje": 0.4542
@@ -1567,7 +1567,7 @@
     {
       "provincia": "Pichincha",
       "canton": "Pedro Moncayo",
-      "alcalde": "Virgilio Andrango",
+      "alcalde": "Veronica Sanchez",
       "partido": "Partido Bandola Vive, Miras, Amigo",
       "alianza": true,
       "porcentaje": 0.2713
@@ -1583,7 +1583,7 @@
     {
       "provincia": "Pichincha",
       "canton": "Puerto Quito",
-      "alcalde": "Victor Mieles Paladinez",
+      "alcalde": "Victor Mieles",
       "partido": "Partido Socialista Ecuatoriano",
       "alianza": false,
       "porcentaje": 0.2498
@@ -1615,7 +1615,7 @@
     {
       "provincia": "Tungurahua",
       "canton": "Ambato",
-      "alcalde": "Diana Caiza",
+      "alcalde": "Diana Guadalupe Caiza Telenchana",
       "partido": "Pachakutik",
       "alianza": false,
       "porcentaje": 0.3215
@@ -1623,7 +1623,7 @@
     {
       "provincia": "Tungurahua",
       "canton": "Baños",
-      "alcalde": "Marlon Guevara",
+      "alcalde": "Marlon Fabricio Guevara Silva",
       "partido": "Centro Democratico",
       "alianza": false,
       "porcentaje": 0.2987
@@ -1631,7 +1631,7 @@
     {
       "provincia": "Tungurahua",
       "canton": "Cevallos",
-      "alcalde": "Carlos Soria",
+      "alcalde": "Carlos Alonso Soria Ramírez",
       "partido": "Creo, Suma, Construye",
       "alianza": true,
       "porcentaje": 0.2527
@@ -1639,7 +1639,7 @@
     {
       "provincia": "Tungurahua",
       "canton": "Mocha",
-      "alcalde": "Danilo Ortiz",
+      "alcalde": "Danilo Patricio Ortiz Ortiz",
       "partido": "Centro Democratico",
       "alianza": false,
       "porcentaje": 0.8023
@@ -1647,7 +1647,7 @@
     {
       "provincia": "Tungurahua",
       "canton": "Patate",
-      "alcalde": "Hernan Medina",
+      "alcalde": "Emerson Hernán Medina Castro",
       "partido": "Centro Democratico",
       "alianza": false,
       "porcentaje": 0.31670000000000004
@@ -1671,7 +1671,7 @@
     {
       "provincia": "Tungurahua",
       "canton": "Quero",
-      "alcalde": "Pablo Velasco Garces",
+      "alcalde": "Pablo David Velasco Garcés",
       "partido": "Partido Sociedad Patriotica",
       "alianza": false,
       "porcentaje": 0.2891
@@ -1687,7 +1687,7 @@
     {
       "provincia": "Zamora Chinchipe",
       "canton": "Centinela Del Condor",
-      "alcalde": "Segundo Sarango",
+      "alcalde": "Segundo Pascual Sarango Masache",
       "partido": "Pachakutik",
       "alianza": false,
       "porcentaje": 0.365
@@ -1695,7 +1695,7 @@
     {
       "provincia": "Zamora Chinchipe",
       "canton": "Chinchipe",
-      "alcalde": "Henry Ordoñez",
+      "alcalde": "Henry Alexander Ordoñez Jaramillo",
       "partido": "Pachakutik, Unidad Popular",
       "alianza": true,
       "porcentaje": 0.4771
@@ -1703,7 +1703,7 @@
     {
       "provincia": "Zamora Chinchipe",
       "canton": "El Pangui",
-      "alcalde": "Jairo Herrera",
+      "alcalde": "Jairo Bladimir Herrera González",
       "partido": "Movimiento Renovacion Total",
       "alianza": false,
       "porcentaje": 0.4396
@@ -1711,7 +1711,7 @@
     {
       "provincia": "Zamora Chinchipe",
       "canton": "Nangaritza",
-      "alcalde": "Francisco Cordero",
+      "alcalde": "Francisco Efrén Cordero Carrión",
       "partido": "Pachakutik, Unidad Popular",
       "alianza": true,
       "porcentaje": 0.431
@@ -1719,7 +1719,7 @@
     {
       "provincia": "Zamora Chinchipe",
       "canton": "Palanda",
-      "alcalde": "Segundo Jaramillo",
+      "alcalde": "Segundo Misael Jaramillo Quezada",
       "partido": "Pachakutik, Unidad Popular",
       "alianza": true,
       "porcentaje": 0.4487
@@ -1727,7 +1727,7 @@
     {
       "provincia": "Zamora Chinchipe",
       "canton": "Paquisha",
-      "alcalde": "Paul Rodriguez",
+      "alcalde": "Paul Fernando Rodriguez Narvaez",
       "partido": "Centro Democratico, Partido Socialista del Ecuador",
       "alianza": true,
       "porcentaje": 0.47759999999999997
@@ -1735,7 +1735,7 @@
     {
       "provincia": "Zamora Chinchipe",
       "canton": "Yacuambi",
-      "alcalde": "Luis Seas",
+      "alcalde": "Luis Alfonso Seas Quezada",
       "partido": "Centro Democratico, Partido Socialista del Ecuador, Mas",
       "alianza": true,
       "porcentaje": 0.574
@@ -1743,7 +1743,7 @@
     {
       "provincia": "Zamora Chinchipe",
       "canton": "Yanzatza",
-      "alcalde": "Maria Lalangui",
+      "alcalde": "María Elizabeth Lalangui Cabrera",
       "partido": "Reto Renovacion Total",
       "alianza": false,
       "porcentaje": 0.2998
@@ -1751,7 +1751,7 @@
     {
       "provincia": "Zamora Chinchipe",
       "canton": "Zamora",
-      "alcalde": "Manuel Gonzales Salinas",
+      "alcalde": "Victor Manuel Gonzalez Salinas",
       "partido": "Partido Sociedad Patriotica, Creo",
       "alianza": true,
       "porcentaje": 0.3202
@@ -1759,7 +1759,7 @@
     {
       "provincia": "Sucumbios",
       "canton": "Cascales",
-      "alcalde": "Wilson Sanmartin",
+      "alcalde": "Wilson Javier Sanmartín",
       "partido": "Pachakutik, Izquierda Democratica, Suma, Reto, Construye",
       "alianza": true,
       "porcentaje": 0.519
@@ -1767,7 +1767,7 @@
     {
       "provincia": "Sucumbios",
       "canton": "Cuyabeno",
-      "alcalde": "Nelson Yaguachi Capa",
+      "alcalde": "Nelson Yaguachi",
       "partido": "Partido Sociedad Patriorica, MIRAD",
       "alianza": true,
       "porcentaje": 0.3907
@@ -1775,7 +1775,7 @@
     {
       "provincia": "Sucumbios",
       "canton": "Gonzalo Pizarro",
-      "alcalde": "Darwin Azes",
+      "alcalde": "Darwin Azes Llumitax",
       "partido": "Izquierda Democratica",
       "alianza": false,
       "porcentaje": 0.3685
@@ -1791,7 +1791,7 @@
     {
       "provincia": "Sucumbios",
       "canton": "Putumayo",
-      "alcalde": "Armando Rea",
+      "alcalde": "Ángel Armando Rea Gualoto",
       "partido": "Centro Democrativo, Unidad Popular, Democracia Si",
       "alianza": true,
       "porcentaje": 0.45159999999999995
@@ -1807,7 +1807,7 @@
     {
       "provincia": "Sucumbios",
       "canton": "Sucumbios",
-      "alcalde": "Hernesto Buitron",
+      "alcalde": "Ernesto Buitrón",
       "partido": "Revolucion Ciudadana",
       "alianza": false,
       "porcentaje": 0.5602
@@ -1823,7 +1823,7 @@
     {
       "provincia": "Orellana",
       "canton": "Fco. De Orellana",
-      "alcalde": "Ricardo Ramirez",
+      "alcalde": "Shirma Cortes",
       "partido": "Alianza de la Renovacion",
       "alianza": false,
       "porcentaje": 0.3996
@@ -1839,7 +1839,7 @@
     {
       "provincia": "Orellana",
       "canton": "Loreto",
-      "alcalde": "Wilson Landa",
+      "alcalde": "Kleber Olalla",
       "partido": "Pachakutik, Creo",
       "alianza": true,
       "porcentaje": 0.2444
@@ -1847,7 +1847,7 @@
     {
       "provincia": "Sto Dgo De los Tsachilas",
       "canton": "La Concordia",
-      "alcalde": "Sandra Ocampo",
+      "alcalde": "Sandra Ocampo Heras",
       "partido": "Revolucion Ciudadana",
       "alianza": false,
       "porcentaje": 0.5640999999999999
@@ -1855,7 +1855,7 @@
     {
       "provincia": "Sto Dgo De los Tsachilas",
       "canton": "Santo Domingo",
-      "alcalde": "Wilson Erazo",
+      "alcalde": "Wilson Armando Erazo Argoti",
       "partido": "Revolucion Ciudadana, Construimos",
       "alianza": true,
       "porcentaje": 0.6069
@@ -1863,7 +1863,7 @@
     {
       "provincia": "Santa Elena",
       "canton": "La Libertad",
-      "alcalde": "Fancisco Tamariz",
+      "alcalde": "Francisco Tamariz",
       "partido": "Alianza Unete",
       "alianza": false,
       "porcentaje": 0.3329
@@ -1871,7 +1871,7 @@
     {
       "provincia": "Santa Elena",
       "canton": "Salinas",
-      "alcalde": "Dennis Crodova Secaira",
+      "alcalde": "Dennis Córdova Secaira",
       "partido": "Suma",
       "alianza": false,
       "porcentaje": 0.579
@@ -1883,6 +1883,30 @@
       "partido": "Revolucion Ciudadana, Reto, MPCG",
       "alianza": true,
       "porcentaje": 0.3258
+    },
+    {
+      "provincia": "Galapagos",
+      "canton": "Isabela",
+      "alcalde": "Victor Alfredo Morocho Caraguay",
+      "partido": "Sin dato",
+      "alianza": false,
+      "porcentaje": null
+    },
+    {
+      "provincia": "Galapagos",
+      "canton": "San Cristóbal",
+      "alcalde": "Hugo Rolando Caiza Carrillo",
+      "partido": "Sin dato",
+      "alianza": false,
+      "porcentaje": null
+    },
+    {
+      "provincia": "Galapagos",
+      "canton": "Santa Cruz",
+      "alcalde": "Fanny Esther Uribe López",
+      "partido": "Sin dato",
+      "alianza": false,
+      "porcentaje": null
     }
   ],
   "asambleistas": [
