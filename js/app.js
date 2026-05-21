@@ -10,20 +10,15 @@
 //   - setEvalFiltro (filtro fuzzy del selector de GAD en /evaluar)
 //   - resetFilters (botón de empty-state en ranking)
 // =============================================================================
-import { loadData, obtenerEvaluaciones, borrarEvaluacion as _borrar, guardarEvaluacion as _guardar } from './data.js';
-import {
-  DIMENSIONES, calcularIngel, likertA100,
-  clasificarNivel, semaforizar, calcularIri,
-} from './ingel.js';
+import { loadData } from './data.js';
 import { debounce } from './utils/fuzzy.js';
 import { viewHome } from './views/home.js';
 import { viewRanking } from './views/ranking.js';
 import { viewMapa, mountMapa } from './views/mapa.js';
 import { viewGad } from './views/gad.js';
-import { viewEvaluar } from './views/evaluar.js';
+import { viewEvaluar, mountEvaluar } from './views/evaluar.js';
 import { viewMetodologia } from './views/metodologia.js';
 import { viewCalculadora, mountCalculadora } from './views/calculadora.js';
-import { exportarEvaluacionPdf } from './features/pdf/index.js';
 
 const state = {
   data: null,
@@ -31,7 +26,6 @@ const state = {
   routeParams: null,
   routeQuery: '',
   filters: { q: '', tipoGad: 'TODOS', provincia: 'TODAS' },
-  evaluacion: null,
 };
 
 // ─── Inicialización ─────────────────────────────────────────────────────────
@@ -105,12 +99,7 @@ function router() {
     mountCalculadora();
   }
   if (state.route === 'evaluar') {
-    // Reposicionar foco en el filtro si el usuario estaba escribiendo
-    if (state.evaluacion?.filtroGad && document.getElementById('filter-gad')) {
-      const el = document.getElementById('filter-gad');
-      el.focus();
-      el.setSelectionRange(el.value.length, el.value.length);
-    }
+    mountEvaluar(state);
   }
 }
 
@@ -119,12 +108,6 @@ const _setSearchDebounced = debounce((value) => {
   state.filters.q = value;
   if (state.route === 'ranking') router();
 }, 180);
-
-const _setEvalFiltroDebounced = debounce((value) => {
-  state.evaluacion = state.evaluacion || { gadId: '', likert: {}, comentario: '', filtroGad: '' };
-  state.evaluacion.filtroGad = value;
-  if (state.route === 'evaluar') router();
-}, 150);
 
 // ─── API global para handlers inline ───────────────────────────────────────
 window.SIGEL = {
@@ -136,90 +119,6 @@ window.SIGEL = {
   resetFilters() {
     state.filters = { q: '', tipoGad: 'TODOS', provincia: 'TODAS' };
     if (state.route === 'ranking') router();
-  },
-
-  setEvalGad(gadId) {
-    state.evaluacion.gadId = gadId;
-    router();
-  },
-  setEvalFiltro(value) { _setEvalFiltroDebounced(value); },
-  setLikert(codigo, valor) {
-    state.evaluacion.likert[codigo] = valor;
-    router();
-  },
-  setEvalComentario(texto) {
-    state.evaluacion.comentario = texto;
-    // No re-render para preservar foco del textarea
-  },
-
-  guardarEvaluacion() {
-    const ev = state.evaluacion;
-    if (!ev.gadId) { alert('Selecciona un GAD primero.'); return; }
-    const dims100 = Object.fromEntries(
-      DIMENSIONES.map(d => [d.codigo, likertA100(ev.likert[d.codigo])])
-    );
-    const ingel = calcularIngel(dims100);
-    const nivel = clasificarNivel(ingel);
-    const semaforo = semaforizar(ingel);
-    const iri = calcularIri({
-      transparencia: dims100.transparencia,
-      finanzas: dims100.finanzas,
-      endeudamiento: 100 - dims100.finanzas,
-      corrupcion: 100 - dims100.legitimidad,
-      participacion: dims100.participacion,
-    });
-    _guardar({
-      gadId: ev.gadId,
-      likert: { ...ev.likert },
-      dims100,
-      comentario: ev.comentario || '',
-      ingel, nivel, semaforo, iri,
-    });
-    // Reset
-    state.evaluacion = {
-      gadId: '',
-      likert: Object.fromEntries(DIMENSIONES.map(d => [d.codigo, null])),
-      comentario: '',
-      filtroGad: '',
-    };
-    router();
-    setTimeout(() => alert('✅ Evaluación guardada en tu navegador.'), 50);
-  },
-
-  borrarEvaluacion(id) {
-    if (!confirm('¿Eliminar esta evaluación?')) return;
-    _borrar(id);
-    router();
-  },
-
-  /**
-   * Exporta una evaluación a PDF institucional. Muestra overlay con spinner,
-   * mensaje de progreso y manejo de errores.
-   */
-  async exportarPdf(evalId) {
-    const overlay = document.getElementById('pdf-overlay');
-    const msg = document.getElementById('pdf-overlay-msg');
-    const showOverlay = () => overlay?.classList.replace('hidden', 'flex');
-    const hideOverlay = () => overlay?.classList.replace('flex', 'hidden');
-    const updateMsg = (m) => { if (msg) msg.textContent = m; };
-
-    const evaluacion = obtenerEvaluaciones().find(e => e.id === evalId);
-    if (!evaluacion) { alert('Evaluación no encontrada.'); return; }
-    const gad = state.data.gads.find(g => g.id === evaluacion.gadId);
-
-    showOverlay();
-    try {
-      const filename = await exportarEvaluacionPdf(evaluacion, gad, (m) => updateMsg(m));
-      updateMsg(`✅ ${filename}`);
-      setTimeout(hideOverlay, 800);
-    } catch (err) {
-      console.error('Error generando PDF:', err);
-      updateMsg('❌ Error al generar el PDF');
-      setTimeout(() => {
-        hideOverlay();
-        alert(`No fue posible generar el PDF.\n\nDetalle: ${err.message || err}`);
-      }, 1500);
-    }
   },
 
   imprimir() { window.print(); },
