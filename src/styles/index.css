@@ -1,0 +1,62 @@
+@import 'tailwindcss';
+@import './tokens.css';
+
+/* Paleta de marca SIGEL → utilidades Tailwind (bg-sigel-primary, text-..., etc.) */
+@theme {
+  --color-sigel-primary: #1e3a8a;
+  --color-sigel-primary-700: #1e40af;
+  --color-sigel-secondary: #0f766e;
+  --color-sigel-accent: #d97706;
+  --color-sigel-danger: #dc2626;
+
+  --color-semaforo-verde: #16a34a;
+  --color-semaforo-amarillo: #f59e0b;
+  --color-semaforo-rojo: #dc2626;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Manrope', system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  background: #f8fafc;
+  color: #0f172a;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Accesibilidad: foco visible y respeto a movimiento reducido */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-sigel-primary);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: -120px;
+  z-index: 100;
+  background: var(--color-sigel-primary);
+  color: #fff;
+  padding: 0.7rem 1.1rem;
+  border-radius: var(--r-md);
+  font-weight: 600;
+  transition: top 0.2s ease;
+}
+.skip-link:focus-visible {
+  top: 0.75rem;
+}
