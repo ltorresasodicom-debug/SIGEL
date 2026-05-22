@@ -1,177 +1,23 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SIGEL Ecuador — Sistema Integral de Gestión y Evaluación Local</title>
-<meta name="description" content="Evalúa la gestión de los 23 prefectos y 221 alcaldes del Ecuador. Plataforma ciudadana de transparencia y rendición de cuentas." />
-<meta name="theme-color" content="#1E3A8A" />
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
-
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js" defer></script>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<link rel="stylesheet" href="./assets/sigel.css" />
-
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          sigel: {
-            primary:  '#1E3A8A',
-            secondary:'#0F766E',
-            accent:   '#D97706',
-            danger:   '#DC2626',
-          },
-          semaforo: { verde: '#16A34A', amarillo: '#F59E0B', rojo: '#DC2626' },
-          ecuador:  { amarillo: '#FCD116', azul: '#003893', rojo: '#CE1126' },
-        },
-        fontFamily: {
-          sans:    ['Inter', 'system-ui', 'sans-serif'],
-          display: ['Manrope', 'system-ui', 'sans-serif'],
-        },
-        borderRadius: { xl: '1rem', '2xl': '1.25rem' },
-        boxShadow: {
-          card:  '0 1px 3px rgba(15,23,42,0.06), 0 1px 2px rgba(15,23,42,0.04)',
-          soft:  '0 4px 12px rgba(15,23,42,0.07), 0 2px 4px rgba(15,23,42,0.04)',
-          lift:  '0 12px 28px rgba(15,23,42,0.10), 0 4px 8px rgba(15,23,42,0.05)',
-        },
-        letterSpacing: { widest: '0.18em' },
-      },
-    },
-  };
-</script>
-</head>
-
-<body class="bg-slate-50 text-slate-900 antialiased">
-
-<a href="#app" class="skip-link">Saltar al contenido principal</a>
-
-<!-- ╔══════ HEADER ══════╗ -->
-<header class="bg-sigel-primary/95 backdrop-blur text-white sticky top-0 z-50 shadow-lg border-b border-white/10">
-  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-    <a href="#/" data-route="home" class="flex items-center gap-3 group rounded-lg" aria-label="SIGEL Ecuador — inicio">
-      <span class="grid place-items-center w-9 h-9 rounded-lg bg-white/10 group-hover:bg-white/15 transition">
-        <svg class="w-6 h-6 text-sigel-accent" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1l9 4v6c0 5.5-3.8 10.7-9 12-5.2-1.3-9-6.5-9-12V5l9-4z"/></svg>
-      </span>
-      <div>
-        <div class="font-display font-extrabold text-xl tracking-tight leading-none">SIGEL</div>
-        <div class="text-[10px] uppercase tracking-widest opacity-80 mt-0.5">Ecuador Evalúa</div>
-      </div>
-    </a>
-    <nav class="hidden md:flex items-center gap-1 text-sm font-medium" aria-label="Navegación principal">
-      <a href="#/" data-route="home"        class="nav-link">Inicio</a>
-      <a href="#/ranking" data-route="ranking" class="nav-link">Ranking</a>
-      <a href="#/mapa"    data-route="mapa"    class="nav-link">Mapa</a>
-      <a href="#/evaluar" data-route="evaluar" class="nav-link bg-sigel-accent hover:bg-sigel-accent/85 font-semibold shadow-sm">📋 Evaluar</a>
-      <a href="#/calculadora" data-route="calculadora" class="nav-link">🗳️ Calculadora</a>
-      <a href="#/metodologia" data-route="metodologia" class="nav-link">Metodología</a>
-    </nav>
-    <button id="menu-mobile-btn" class="md:hidden p-2.5 rounded-lg hover:bg-white/10 transition" aria-label="Abrir menú de navegación">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-    </button>
-  </div>
-  <nav id="menu-mobile" class="md:hidden hidden border-t border-white/10 bg-sigel-primary px-4 py-3 space-y-1 text-sm" aria-label="Navegación móvil">
-    <a href="#/" data-route="home" class="block py-2.5 px-3 rounded-lg hover:bg-white/10 transition">Inicio</a>
-    <a href="#/ranking" data-route="ranking" class="block py-2.5 px-3 rounded-lg hover:bg-white/10 transition">Ranking</a>
-    <a href="#/mapa" data-route="mapa" class="block py-2.5 px-3 rounded-lg hover:bg-white/10 transition">Mapa</a>
-    <a href="#/evaluar" data-route="evaluar" class="block py-2.5 px-3 rounded-lg bg-sigel-accent font-semibold">📋 Crear evaluación</a>
-    <a href="#/calculadora" data-route="calculadora" class="block py-2.5 px-3 rounded-lg hover:bg-white/10 transition">🗳️ Calculadora de voto</a>
-    <a href="#/metodologia" data-route="metodologia" class="block py-2.5 px-3 rounded-lg hover:bg-white/10 transition">Metodología</a>
-  </nav>
-</header>
-
-<!-- ╔══════ APP CONTAINER (routes mount here) ══════╗ -->
-<main id="app" class="min-h-screen" tabindex="-1">
-  <div class="max-w-7xl mx-auto px-4 py-12" role="status" aria-label="Cargando SIGEL">
-    <div class="skeleton skeleton-block" style="height:180px"></div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
-      <div class="skeleton skeleton-block" style="height:96px"></div>
-      <div class="skeleton skeleton-block" style="height:96px"></div>
-      <div class="skeleton skeleton-block" style="height:96px"></div>
-      <div class="skeleton skeleton-block" style="height:96px"></div>
-    </div>
-    <div class="skeleton skeleton-text mt-8" style="width:40%;height:1.4rem"></div>
-    <div class="grid md:grid-cols-3 gap-4 mt-4">
-      <div class="skeleton skeleton-block"></div>
-      <div class="skeleton skeleton-block"></div>
-      <div class="skeleton skeleton-block"></div>
-    </div>
-    <span class="sr-only">Cargando SIGEL…</span>
-  </div>
-</main>
-
-<!-- ╔══════ FOOTER ══════╗ -->
-<footer class="bg-slate-900 text-slate-300 mt-16">
-  <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-4 gap-8 text-sm">
-    <div>
-      <div class="font-display font-bold text-white text-lg mb-3">SIGEL Ecuador</div>
-      <p class="opacity-80">Sistema Integral de Gestión y Evaluación Local. Plataforma ciudadana de transparencia.</p>
-    </div>
-    <div>
-      <div class="font-semibold text-white mb-3">Plataforma</div>
-      <ul class="space-y-1.5 opacity-80">
-        <li><a href="#/ranking" class="hover:text-sigel-accent transition">Ranking nacional</a></li>
-        <li><a href="#/mapa" class="hover:text-sigel-accent transition">Mapa interactivo</a></li>
-        <li><a href="#/evaluar" class="hover:text-sigel-accent transition">Crear evaluación</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="font-semibold text-white mb-3">Metodología</div>
-      <ul class="space-y-1.5 opacity-80">
-        <li>ISO 18091 — Gobiernos locales</li>
-        <li>Modelo Infoparticipa</li>
-        <li>LOTAIP & Gobierno Abierto</li>
-        <li>PHVA — Mejora continua</li>
-      </ul>
-    </div>
-    <div>
-      <div class="font-semibold text-white mb-3">Open Source</div>
-      <ul class="space-y-1.5 opacity-80">
-        <li>Licencia AGPL-3.0</li>
-        <li>Datos abiertos CC-BY 4.0</li>
-        <li><a href="https://github.com/ltorresasodicom-debug/ASODICOM" target="_blank" rel="noopener noreferrer" class="hover:text-sigel-accent transition">Código fuente ↗</a></li>
-      </ul>
-    </div>
-  </div>
-  <!-- Franja institucional -->
-  <div class="border-t border-slate-700/70">
-    <div class="max-w-7xl mx-auto px-4 py-7 flex flex-col sm:flex-row items-center justify-between gap-6">
-      <div class="flex items-center gap-6">
-        <span class="text-[11px] uppercase tracking-widest text-slate-500">Con el apoyo de</span>
-        <a href="https://github.com/ltorresasodicom-debug/ASODICOM" target="_blank" rel="noopener noreferrer" class="brand-logo" aria-label="ASODICOM">
-          <img src="./assets/brand/asodicom.png" alt="ASODICOM" loading="lazy"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <span class="brand-mono" style="display:none">ASODICOM</span>
-        </a>
-        <span class="brand-logo" aria-label="Latam Cifras">
-          <img src="./assets/brand/latam-cifras.png" alt="Latam Cifras" loading="lazy"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <span class="brand-mono" style="display:none">latam·cifras</span>
-        </span>
-      </div>
-      <div class="flex items-center gap-3 text-sm">
-        <span class="text-slate-500">Creador</span>
-        <span class="text-white font-medium">Soc. Luis Adrián Torres E.</span>
-        <a href="mailto:ltorres.asodicom@gmail.com" class="text-slate-400 hover:text-sigel-accent transition" aria-label="Correo del creador" title="ltorres.asodicom@gmail.com">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/luis-adri%C3%A1n-torres-enr%C3%ADquez/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-sigel-accent transition" aria-label="LinkedIn del creador" title="LinkedIn">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8.34 17V9.74H5.67V17h2.67zM7 8.57a1.55 1.55 0 100-3.1 1.55 1.55 0 000 3.1zM18.34 17v-3.98c0-2.13-.46-3.77-2.95-3.77-1.2 0-2 .66-2.33 1.28h-.04V9.74h-2.56V17h2.67v-3.6c0-.95.18-1.86 1.35-1.86 1.16 0 1.17 1.08 1.17 1.92V17h2.69z"/></svg>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="border-t border-slate-700 py-4 text-center text-xs opacity-70">
-    © 2025 SIGEL Ecuador — Evaluación pública para la mejora continua.
-  </div>
-</footer>
-
-<script type="module" src="./js/app.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIGEL Ecuador — Sistema Integral de Gestión y Evaluación Local</title>
+    <meta
+      name="description"
+      content="Plataforma ciudadana de evaluación de gobiernos locales del Ecuador: rankings, scoring institucional y evaluación participativa."
+    />
+    <meta name="theme-color" content="#1E3A8A" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

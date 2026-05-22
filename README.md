@@ -1,79 +1,76 @@
-# SIGEL — Demo Público (Netlify)
+# SIGEL Ecuador
 
-Sitio estático ciudadano que expone la metodología SIGEL y permite a cualquier
-persona **crear sus propias evaluaciones** del Índice Nacional de Gestión Local
-(INGEL) directamente en el navegador.
+Plataforma ciudadana de evaluación de gobiernos locales del Ecuador: rankings,
+scoring institucional (INGEL) y evaluación participativa.
 
-## ¿Qué es esto?
+> **Migración en curso.** Esta rama contiene la nueva arquitectura
+> **React + TypeScript + Vite + Supabase** (cimientos). El sitio estático
+> anterior sigue disponible en la rama `main` (GitHub Pages) hasta el corte a
+> producción en Vercel.
 
-Es la **versión pública** de SIGEL — un sitio 100 % estático (HTML + JS modular
-+ Tailwind CDN + Leaflet) que se despliega en Netlify. No requiere backend.
+## Stack
 
-Cargado:
-- **23 prefectos** de las elecciones seccionales 2023
-- **221 alcaldes** (incluye los 3 cantones de Galápagos)
-- **18 asambleístas** electos 2024
-- **8 dimensiones SIGEL** con sus ponderaciones canónicas
-- **Fórmula INGEL** (port a JS del backend Python)
+- **React 18 + TypeScript 5 + Vite 5** — SPA con TypeScript estricto.
+- **TailwindCSS v4** — estilos y design tokens.
+- **React Router** — enrutamiento.
+- **TanStack Query** — fetching, caché y sincronización.
+- **Zustand** — estado global ligero.
+- **Framer Motion** + **Lucide React** — animación e iconografía.
+- **Supabase** — autenticación y persistencia (PostgreSQL).
 
-## Características
-
-- 🏠 **Home** con stats nacionales y Top 5
-- 📊 **Ranking** filtrable de los 244 GADs
-- 🗺️ **Mapa Leaflet** con coropletas por desempeño
-- 📋 **Crear evaluación** ciudadana (Likert 1-5 en las 8 dimensiones) con
-  cálculo INGEL en vivo
-- 💾 **Guardado en localStorage** (privado, sin servidor)
-- 📤 **Exportación a JSON**
-- 📚 Página de **metodología** completa
-
-## Estructura
-
-```
-sigel-public/
-├── index.html              # Punto de entrada
-├── netlify.toml            # Config Netlify (headers, cache)
-├── assets/sigel.css        # Estilos complementarios
-├── js/
-│   ├── app.js              # Bootstrap + router por hash
-│   ├── ingel.js            # Motor de scoring (port del backend Python)
-│   ├── data.js             # Carga de electoral.json + scores sintéticos
-│   └── views/
-│       ├── home.js
-│       ├── ranking.js
-│       ├── mapa.js
-│       ├── gad.js
-│       ├── evaluar.js
-│       └── metodologia.js
-└── data/electoral.json     # 23 prefectos + 218 alcaldes (extraído del Excel)
-```
-
-## Probar localmente
+## Puesta en marcha
 
 ```bash
-cd sigel-public
-python3 -m http.server 8080
-# → http://localhost:8080
+npm install
+cp .env.example .env      # completar con las credenciales de Supabase
+npm run dev               # servidor de desarrollo
+npm run build             # build de producción (tsc + vite)
+npm run lint              # ESLint
 ```
 
-O con Netlify CLI:
+## Arquitectura por capas
 
-```bash
-npx netlify-cli dev
+```
+src/
+  app/                Raíz, proveedores y rutas
+  pages/              Componentes de ruta
+  layouts/            Marcos de página (MainLayout)
+  features/           Módulos de negocio (ranking, evaluation, dashboard, ...)
+  components/         UI compartida
+  evaluation-engine/  Motor de scoring INGEL — PURO (sin React ni Supabase)
+  services/           Persistencia (Supabase) y APIs externas
+  analytics/          Analítica territorial y longitudinal
+  maps/               Componentes de mapa
+  stores/             Estado global (Zustand)
+  hooks/              Hooks reutilizables
+  lib/                Cliente Supabase, query client, utilidades
+  types/              Tipos compartidos y de base de datos
+  styles/             Entrada Tailwind y design tokens
 ```
 
-## Desplegar a Netlify
+**Regla de dependencias:** UI → lógica de negocio (`features/*/hooks`, `stores`,
+`hooks`) → `services` / `evaluation-engine` → `lib`. El `evaluation-engine` no
+importa React ni Supabase: es puro y testeable. No se permiten imports "hacia
+arriba" de capa.
 
-```bash
-npx netlify-cli deploy --prod --dir=. --site=<SITE_ID>
-```
+Capas: **UI** (`pages`, `components`, `layouts`, `styles`) · **lógica de
+negocio** (`features/*/hooks`, `stores`) · **motor de scoring**
+(`evaluation-engine`) · **persistencia** (`services/supabase`, `lib/supabase`) ·
+**analítica** (`analytics`).
 
-## ⚠️ Aviso
+## Base de datos
 
-Los puntajes mostrados son **sintéticos** (generados deterministicamente a
-partir de los datos electorales) para fines de demostración. La versión
-completa de SIGEL alimenta el INGEL con datos reales del scraper LOTAIP,
-API SERCOP, Ministerio de Finanzas y encuestas ciudadanas verificadas.
+El esquema vive en `supabase/migrations/`. Aplicarlo con la CLI de Supabase
+(`supabase db push`) o desde el SQL Editor del dashboard. Las credenciales se
+configuran vía variables de entorno (`.env` local; Vercel en producción).
 
-Las **evaluaciones ciudadanas** que el usuario hace en este demo **sí usan
-exactamente la misma fórmula INGEL** del backend de producción.
+## Datos
+
+Los datasets de referencia (electoral, indicadores INEC, geometrías) están en
+`public/data/`. Los scripts ETL (Python) y sus fuentes están en `scripts/`.
+
+## Despliegue
+
+Vercel detecta Vite automáticamente (`vercel.json` incluido). Cargar
+`VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY` en las variables de entorno del
+proyecto.
