@@ -1,6 +1,11 @@
-import { Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { Spinner } from '@/components/ui';
+
+// Lazy: el cliente Supabase no entra al bundle inicial.
+const SupabaseStatusBadge = lazy(() =>
+  import('@/components/SupabaseStatusBadge').then((m) => ({ default: m.SupabaseStatusBadge })),
+);
 
 const NAV = [
   { to: '/', label: 'Inicio', end: true },
@@ -57,9 +62,14 @@ export function MainLayout() {
             Plataforma ciudadana de evaluación de gobiernos locales. Con el apoyo de ASODICOM y
             Latam Cifras.
           </p>
-          <p className="mt-4 text-xs opacity-60">
-            © {new Date().getFullYear()} SIGEL Ecuador — Evaluación pública para la mejora continua.
-          </p>
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs">
+            <p className="opacity-60">
+              © {new Date().getFullYear()} SIGEL Ecuador — Evaluación pública para la mejora continua.
+            </p>
+            <Suspense fallback={null}>
+              <SupabaseStatusBadge />
+            </Suspense>
+          </div>
         </div>
       </footer>
     </div>
