@@ -1,4 +1,6 @@
+import { Suspense } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
+import { Spinner } from '@/components/ui';
 
 const NAV = [
   { to: '/', label: 'Inicio', end: true },
@@ -43,7 +45,9 @@ export function MainLayout() {
       </header>
 
       <main id="contenido" tabIndex={-1} className="flex-1">
-        <Outlet />
+        <Suspense fallback={<Spinner label="Cargando…" />}>
+          <Outlet />
+        </Suspense>
       </main>
 
       <footer className="mt-16 bg-slate-900 text-slate-300">
