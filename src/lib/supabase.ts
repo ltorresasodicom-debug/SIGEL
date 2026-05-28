@@ -2,8 +2,10 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from '@/types/database';
 
-const url = import.meta.env.VITE_SUPABASE_URL;
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// Saneamos los valores: el error de pegado más común en Vercel es un espacio
+// sobrante o un slash final en la URL, que rompe la conexión con `Failed to fetch`.
+const url = import.meta.env.VITE_SUPABASE_URL?.trim().replace(/\/+$/, '');
+const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY?.trim();
 
 /** `true` si las variables de entorno de Supabase están presentes. */
 export const isSupabaseConfigured = Boolean(url && anonKey);

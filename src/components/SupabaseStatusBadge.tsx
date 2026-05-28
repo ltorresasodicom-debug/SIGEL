@@ -9,12 +9,13 @@ const ESTILOS: Record<SupabaseStatus, { color: string; text: string }> = {
 };
 
 export function SupabaseStatusBadge() {
-  const estado = useSupabaseStatus();
-  const { color, text } = ESTILOS[estado];
+  const { status, detail } = useSupabaseStatus();
+  const { color, text } = ESTILOS[status];
+  const title = status === 'error' && detail ? `${text} — ${detail}` : text;
   return (
     <span
       className="inline-flex items-center gap-1.5 text-xs text-slate-400"
-      title={text}
+      title={title}
       aria-live="polite"
     >
       <span className="h-2 w-2 rounded-full" style={{ background: color }} aria-hidden="true" />

@@ -7,8 +7,14 @@ import { isSupabaseConfigured, supabase } from '@/lib/supabase';
 
 export type SupabaseStatus = 'no-config' | 'checking' | 'ok' | 'error';
 
-export function useSupabaseStatus(): SupabaseStatus {
-  const { isLoading, isError } = useQuery({
+export interface SupabaseStatusInfo {
+  status: SupabaseStatus;
+  /** Mensaje del error real cuando `status === 'error'` (p. ej. "Failed to fetch"). */
+  detail?: string;
+}
+
+export function useSupabaseStatus(): SupabaseStatusInfo {
+  const { isLoading, isError, error } = useQuery({
     queryKey: ['supabase-status'],
     queryFn: async () => {
       const { error } = await supabase.from('gads').select('id').limit(1);
@@ -20,8 +26,10 @@ export function useSupabaseStatus(): SupabaseStatus {
     retry: false,
   });
 
-  if (!isSupabaseConfigured) return 'no-config';
-  if (isLoading) return 'checking';
-  if (isError) return 'error';
-  return 'ok';
+  if (!isSupabaseConfigured) return { status: 'no-config' };
+  if (isLoading) return { status: 'checking' };
+  if (isError) {
+    return { status: 'error', detail: error instanceof Error ? error.message : String(error) };
+  }
+  return { status: 'ok' };
 }
