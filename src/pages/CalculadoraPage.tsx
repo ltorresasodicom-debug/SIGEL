@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Badge, Card, ProgressBar } from '@/components/ui';
+import { Button } from '@/components/Button';
 import { LikertScale } from '@/components/LikertScale';
 import type { Nivel } from '@/evaluation-engine/types';
 
@@ -181,13 +182,15 @@ export function CalculadoraPage() {
               ))}
             </ol>
           </Card>
-          <button
-            type="button"
+          <Button
+            variant="accent"
+            size="lg"
+            fullWidth
+            className="mt-4"
             onClick={() => setPaso(1)}
-            className="mt-4 w-full rounded-lg bg-sigel-accent py-3 font-semibold text-white transition hover:opacity-90"
           >
             Iniciar evaluación →
-          </button>
+          </Button>
         </>
       )}
 
@@ -389,13 +392,15 @@ export function CalculadoraPage() {
             </p>
           </Card>
 
-          <button
-            type="button"
+          <Button
+            variant="secondary"
+            size="lg"
+            fullWidth
+            className="mt-4"
             onClick={reiniciar}
-            className="mt-4 w-full rounded-lg border border-slate-300 bg-white py-3 font-semibold text-slate-600"
           >
             Evaluar a otro candidato/a →
-          </button>
+          </Button>
         </>
       )}
     </div>
@@ -413,20 +418,12 @@ function Navegacion({
 }) {
   return (
     <div className="mt-4 flex gap-2">
-      <button
-        type="button"
-        onClick={onAtras}
-        className="rounded-lg border border-slate-300 bg-white px-4 py-2.5 font-semibold text-slate-600"
-      >
+      <Button variant="secondary" onClick={onAtras}>
         ← Atrás
-      </button>
-      <button
-        type="button"
-        onClick={onSiguiente}
-        className="flex-1 rounded-lg bg-sigel-primary px-4 py-2.5 font-semibold text-white transition hover:opacity-90"
-      >
+      </Button>
+      <Button variant="primary" className="flex-1" onClick={onSiguiente}>
         {textoSiguiente}
-      </button>
+      </Button>
     </div>
   );
 }

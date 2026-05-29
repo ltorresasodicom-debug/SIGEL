@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useSigelData } from '@/hooks/useSigelData';
 import { DIMENSIONES } from '@/evaluation-engine';
 import { Badge, Card, DataBoundary, SemaforoDot, Stat } from '@/components/ui';
+import { Button } from '@/components/Button';
 
 const FEATURES = [
   ['📋', 'Crea tu evaluación', 'Califica a tu gobierno local en 8 dimensiones y obtén su INGEL.', '/evaluar'],
@@ -30,18 +31,12 @@ export function HomePage() {
               autónomos descentralizados del Ecuador.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                to="/evaluar"
-                className="rounded-lg bg-sigel-accent px-6 py-3 font-semibold text-white transition hover:opacity-90"
-              >
+              <Button to="/evaluar" variant="accent" size="lg">
                 Crear mi evaluación
-              </Link>
-              <Link
-                to="/ranking"
-                className="rounded-lg border border-white/30 bg-white/10 px-6 py-3 font-semibold transition hover:bg-white/20"
-              >
+              </Button>
+              <Button to="/ranking" variant="inverse" size="lg">
                 Ver ranking nacional
-              </Link>
+              </Button>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 self-center">

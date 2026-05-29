@@ -19,6 +19,7 @@ import {
 } from '@/services/evaluaciones-local';
 import type { DimScoreMap } from '@/types/sigel';
 import { Badge, Card, DataBoundary, ProgressBar, SemaforoDot } from '@/components/ui';
+import { Button } from '@/components/Button';
 import { LikertScale } from '@/components/LikertScale';
 
 const NDIM = DIMENSIONES_CIUDADANAS.length;
@@ -151,8 +152,11 @@ export function EvaluarPage() {
               </select>
               {errMsg && paso === 0 && <p className="mt-2 text-sm text-red-700">{errMsg}</p>}
             </Card>
-            <button
-              type="button"
+            <Button
+              variant="accent"
+              size="lg"
+              fullWidth
+              className="mt-4"
               onClick={() => {
                 if (!gadId) {
                   setErrMsg('Elige un gobierno local para comenzar.');
@@ -161,10 +165,9 @@ export function EvaluarPage() {
                 setErrMsg('');
                 setPaso(1);
               }}
-              className="mt-4 w-full rounded-lg bg-sigel-accent py-3 font-semibold text-white transition hover:opacity-90"
             >
               Comenzar evaluación →
-            </button>
+            </Button>
 
             <section className="mt-10">
               <h2 className="mb-3 font-display text-xl font-bold">Mis evaluaciones guardadas</h2>
@@ -280,29 +283,23 @@ export function EvaluarPage() {
                 ✓ Evaluación guardada en tu navegador.
               </div>
             ) : (
-              <button
-                type="button"
+              <Button
+                variant="primary"
+                size="lg"
+                fullWidth
+                className="mt-4 text-lg"
                 onClick={guardar}
-                className="mt-4 w-full rounded-lg bg-sigel-primary py-3 text-lg font-semibold text-white transition hover:opacity-90"
               >
                 💾 Guardar mi evaluación
-              </button>
+              </Button>
             )}
             <div className="mt-2 flex gap-2">
-              <button
-                type="button"
-                onClick={() => setPaso(NDIM)}
-                className="rounded-lg border border-slate-300 bg-white px-4 py-2 font-semibold text-slate-600"
-              >
+              <Button variant="secondary" onClick={() => setPaso(NDIM)}>
                 ← Atrás
-              </button>
-              <button
-                type="button"
-                onClick={reiniciar}
-                className="flex-1 rounded-lg border border-slate-300 bg-white px-4 py-2 font-semibold text-slate-600"
-              >
+              </Button>
+              <Button variant="secondary" className="flex-1" onClick={reiniciar}>
                 Evaluar otro GAD
-              </button>
+              </Button>
             </div>
           </>
         )}
@@ -377,20 +374,12 @@ function PasoDimension({
         )}
       </Card>
       <div className="mt-4 flex gap-2">
-        <button
-          type="button"
-          onClick={onAtras}
-          className="rounded-lg border border-slate-300 bg-white px-4 py-2.5 font-semibold text-slate-600"
-        >
+        <Button variant="secondary" onClick={onAtras}>
           ← Atrás
-        </button>
-        <button
-          type="button"
-          onClick={onSiguiente}
-          className="flex-1 rounded-lg bg-sigel-primary px-4 py-2.5 font-semibold text-white transition hover:opacity-90"
-        >
+        </Button>
+        <Button variant="primary" className="flex-1" onClick={onSiguiente}>
           {indice === NDIM ? 'Ver resultados →' : 'Siguiente →'}
-        </button>
+        </Button>
       </div>
     </>
   );
