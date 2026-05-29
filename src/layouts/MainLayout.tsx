@@ -6,6 +6,9 @@ import { Spinner } from '@/components/ui';
 const SupabaseStatusBadge = lazy(() =>
   import('@/components/SupabaseStatusBadge').then((m) => ({ default: m.SupabaseStatusBadge })),
 );
+const SponsorSection = lazy(() =>
+  import('@/components/SponsorSection').then((m) => ({ default: m.SponsorSection })),
+);
 
 const NAV = [
   { to: '/', label: 'Inicio', end: true },
@@ -59,10 +62,14 @@ export function MainLayout() {
         <div className="mx-auto max-w-7xl px-4 py-8 text-sm">
           <div className="font-display text-lg font-bold text-white">SIGEL Ecuador</div>
           <p className="mt-2 opacity-80">
-            Plataforma ciudadana de evaluación de gobiernos locales. Con el apoyo de ASODICOM y
-            Latam Cifras.
+            Plataforma ciudadana de evaluación de gobiernos locales.
           </p>
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs">
+
+          <Suspense fallback={null}>
+            <SponsorSection />
+          </Suspense>
+
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-2 border-t border-white/10 pt-4 text-xs">
             <p className="opacity-60">
               © {new Date().getFullYear()} SIGEL Ecuador — Evaluación pública para la mejora continua.
             </p>
