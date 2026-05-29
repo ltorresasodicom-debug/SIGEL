@@ -1,21 +1,6 @@
 @import 'tailwindcss';
+/* Sistema de tokens visuales SIGEL (@theme → utilidades Tailwind). */
 @import './tokens.css';
-
-/* Paleta de marca SIGEL → utilidades Tailwind (bg-sigel-primary, text-..., etc.) */
-@theme {
-  --color-sigel-primary: #1e3a8a;
-  --color-sigel-primary-700: #1e40af;
-  --color-sigel-secondary: #0f766e;
-  --color-sigel-accent: #d97706;
-  --color-sigel-danger: #dc2626;
-
-  --color-semaforo-verde: #16a34a;
-  --color-semaforo-amarillo: #f59e0b;
-  --color-semaforo-rojo: #dc2626;
-
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-display: 'Manrope', system-ui, sans-serif;
-}
 
 :root {
   color-scheme: light;
@@ -23,8 +8,8 @@
 
 body {
   margin: 0;
-  background: #f8fafc;
-  color: #0f172a;
+  background: var(--color-bg);
+  color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
@@ -51,9 +36,9 @@ body {
   top: -120px;
   z-index: 100;
   background: var(--color-sigel-primary);
-  color: #fff;
+  color: var(--color-ink-inverse);
   padding: 0.7rem 1.1rem;
-  border-radius: var(--r-md);
+  border-radius: var(--radius-lg);
   font-weight: 600;
   transition: top 0.2s ease;
 }

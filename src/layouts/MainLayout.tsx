@@ -27,7 +27,7 @@ export function MainLayout() {
         Saltar al contenido principal
       </a>
 
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-sigel-primary text-white shadow-lg">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-sigel-primary text-ink-inverse shadow-lg">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
           <NavLink to="/" className="flex items-center gap-2" aria-label="SIGEL Ecuador — inicio">
             <span className="font-display text-xl font-extrabold tracking-tight">SIGEL</span>
