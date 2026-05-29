@@ -1,2 +1,2 @@
-// Feature: dashboards comparativos. Preparada para analítica territorial.
-export const DASHBOARD_FEATURE = 'dashboard' as const;
+// Feature: dashboard principal de SIGEL (panorama nacional).
+export { Dashboard } from './Dashboard';
