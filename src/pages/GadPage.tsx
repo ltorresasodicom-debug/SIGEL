@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useSigelData } from '@/hooks/useSigelData';
 import { DIMENSIONES } from '@/evaluation-engine';
 import { Badge, Card, DataBoundary, ProgressBar, SemaforoDot } from '@/components/ui';
+import { Button } from '@/components/Button';
 import { colorPorIngel } from '@/lib/colores';
 import type { IndicadorDataset } from '@/types/sigel';
 
@@ -183,12 +184,9 @@ export function GadPage() {
             )}
 
             <div className="mt-6 text-center">
-              <Link
-                to="/evaluar"
-                className="inline-block rounded-lg bg-sigel-accent px-6 py-3 font-semibold text-white transition hover:opacity-90"
-              >
+              <Button to="/evaluar" variant="accent" size="lg">
                 📋 Crear mi evaluación ciudadana
-              </Link>
+              </Button>
             </div>
           </>
         )}

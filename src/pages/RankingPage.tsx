@@ -82,7 +82,7 @@ export function RankingPage() {
               ))}
             </select>
           </div>
-          <p className="mt-3 text-xs text-slate-500" aria-live="polite">
+          <p className="mt-3 text-xs text-muted" aria-live="polite">
             Mostrando <strong>{lista.length}</strong> de {gads.length} GADs.
           </p>
         </Card>
@@ -92,7 +92,7 @@ export function RankingPage() {
             No se encontraron resultados. Ajusta la búsqueda o los filtros.
           </Card>
         ) : (
-          <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+          <div className="overflow-x-auto rounded-xl border border-line bg-surface shadow-sm">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-slate-100 text-xs uppercase tracking-wider text-slate-600">
@@ -125,7 +125,7 @@ export function RankingPage() {
                     </td>
                     <td className="px-4 py-3 font-medium">
                       {g.nombre}
-                      <div className="text-xs text-slate-500 sm:hidden">{g.provincia}</div>
+                      <div className="text-xs text-muted sm:hidden">{g.provincia}</div>
                     </td>
                     <td className="hidden px-4 py-3 text-slate-600 md:table-cell">{g.autoridad}</td>
                     <td className="hidden px-4 py-3 text-slate-600 sm:table-cell">{g.provincia}</td>

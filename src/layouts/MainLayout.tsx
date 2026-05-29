@@ -27,20 +27,26 @@ export function MainLayout() {
         Saltar al contenido principal
       </a>
 
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-sigel-primary text-white shadow-lg">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+      <header
+        role="banner"
+        className="sticky top-0 z-50 border-b border-white/10 bg-sigel-primary text-ink-inverse shadow-lg"
+      >
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-3 md:flex-row md:items-center md:justify-between">
           <NavLink to="/" className="flex items-center gap-2" aria-label="SIGEL Ecuador — inicio">
             <span className="font-display text-xl font-extrabold tracking-tight">SIGEL</span>
             <span className="text-[10px] uppercase tracking-widest opacity-80">Ecuador</span>
           </NavLink>
-          <nav className="flex flex-wrap items-center gap-1 text-sm" aria-label="Navegación principal">
+          <nav
+            aria-label="Navegación principal"
+            className="-mx-4 flex items-center gap-1 overflow-x-auto px-4 text-sm md:mx-0 md:flex-wrap md:overflow-visible md:px-0"
+          >
             {NAV.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
                 end={item.end}
                 className={({ isActive }) =>
-                  `rounded-lg px-3 py-2 transition hover:bg-white/10 ${
+                  `whitespace-nowrap rounded-lg px-3 py-2 transition hover:bg-white/10 ${
                     isActive ? 'bg-white/15 font-semibold' : ''
                   }`
                 }
@@ -58,7 +64,7 @@ export function MainLayout() {
         </Suspense>
       </main>
 
-      <footer className="mt-16 bg-slate-900 text-slate-300">
+      <footer role="contentinfo" className="mt-16 bg-slate-900 text-slate-300">
         <div className="mx-auto max-w-7xl px-4 py-8 text-sm">
           <div className="font-display text-lg font-bold text-white">SIGEL Ecuador</div>
           <p className="mt-2 opacity-80">

@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { useSigelData } from '@/hooks/useSigelData';
 import { DIMENSIONES } from '@/evaluation-engine';
-import { Badge, Card, DataBoundary, SemaforoDot, Stat } from '@/components/ui';
+import { Card } from '@/components/ui';
+import { Button } from '@/components/Button';
+import { Dashboard } from '@/features/dashboard';
 
 const FEATURES = [
   ['📋', 'Crea tu evaluación', 'Califica a tu gobierno local en 8 dimensiones y obtén su INGEL.', '/evaluar'],
@@ -11,14 +12,11 @@ const FEATURES = [
 ] as const;
 
 export function HomePage() {
-  const { data, isLoading, error } = useSigelData();
-  const top5 = data ? [...data.gads].sort((a, b) => b.ingel - a.ingel).slice(0, 5) : [];
-
   return (
     <>
       <section className="bg-gradient-to-br from-sigel-primary via-blue-900 to-sigel-secondary text-white">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 md:grid-cols-2 md:py-28">
-          <div>
+        <div className="mx-auto max-w-7xl px-4 py-20 md:py-28">
+          <div className="max-w-3xl">
             <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-widest">
               Plataforma ciudadana de evaluación pública
             </span>
@@ -30,28 +28,18 @@ export function HomePage() {
               autónomos descentralizados del Ecuador.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                to="/evaluar"
-                className="rounded-lg bg-sigel-accent px-6 py-3 font-semibold text-white transition hover:opacity-90"
-              >
+              <Button to="/evaluar" variant="accent" size="lg">
                 Crear mi evaluación
-              </Link>
-              <Link
-                to="/ranking"
-                className="rounded-lg border border-white/30 bg-white/10 px-6 py-3 font-semibold transition hover:bg-white/20"
-              >
+              </Button>
+              <Button to="/ranking" variant="inverse" size="lg">
                 Ver ranking nacional
-              </Link>
+              </Button>
             </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4 self-center">
-            <Stat invert value={data?.stats.municipales ?? '—'} label="Alcaldías" />
-            <Stat invert value={data?.stats.provinciales ?? '—'} label="Prefecturas" />
-            <Stat invert value={data ? data.stats.promedio.toFixed(1) : '—'} label="INGEL promedio" />
-            <Stat invert value={8} label="Dimensiones" />
           </div>
         </div>
       </section>
+
+      <Dashboard />
 
       <section className="mx-auto max-w-7xl px-4 py-16">
         <h2 className="text-center font-display text-3xl font-bold tracking-tight">
@@ -67,52 +55,6 @@ export function HomePage() {
               </Card>
             </Link>
           ))}
-        </div>
-      </section>
-
-      <section className="border-y border-slate-200 bg-white py-14">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
-            <h2 className="font-display text-3xl font-bold tracking-tight">Top 5 nacional</h2>
-            <Link to="/ranking" className="font-semibold text-sigel-primary hover:underline">
-              Ver ranking completo →
-            </Link>
-          </div>
-          <DataBoundary loading={isLoading} error={error}>
-            <ol className="space-y-2.5">
-              {top5.map((g, i) => (
-                <li key={g.id}>
-                  <Link
-                    to={`/gad/${g.id}`}
-                    className="flex items-center gap-4 rounded-xl border border-transparent bg-slate-50 p-4 transition hover:border-slate-200 hover:bg-white hover:shadow-md"
-                  >
-                    <span
-                      className={`grid h-10 w-10 place-items-center rounded-lg font-display text-lg font-extrabold ${
-                        i === 0
-                          ? 'bg-sigel-accent text-white'
-                          : 'border border-slate-200 bg-white text-sigel-primary'
-                      }`}
-                    >
-                      {i + 1}
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <div className="truncate font-semibold">{g.nombre}</div>
-                      <div className="truncate text-xs text-slate-500">
-                        {g.provincia} · {g.autoridad}
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="font-display text-2xl font-extrabold tabular-nums text-sigel-primary">
-                        {g.ingel.toFixed(1)}
-                      </div>
-                      <Badge nivel={g.nivel} />
-                    </div>
-                    <SemaforoDot semaforo={g.semaforo} />
-                  </Link>
-                </li>
-              ))}
-            </ol>
-          </DataBoundary>
         </div>
       </section>
 

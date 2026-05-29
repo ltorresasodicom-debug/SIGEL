@@ -1,19 +1,45 @@
-/* SIGEL — design tokens (variables CSS para componentes propios).
-   La paleta de marca para utilidades Tailwind se define con @theme en
-   index.css. Aquí van tokens de espaciado, radios y sombras reutilizables. */
-:root {
-  --sp-1: 0.25rem;
-  --sp-2: 0.5rem;
-  --sp-3: 0.75rem;
-  --sp-4: 1rem;
-  --sp-6: 1.5rem;
-  --sp-8: 2rem;
+/* SIGEL — Sistema de tokens visuales (fuente única de verdad).
+   Definidos como tokens de Tailwind v4 (@theme): cada token genera utilidades
+   (bg-sigel-primary, text-muted, border-line, rounded-lg, p-4 …) que consumen
+   los componentes. `index.css` importa Tailwind y luego este archivo, por lo que
+   el @theme se procesa después del framework. */
 
-  --r-md: 0.5rem;
-  --r-lg: 0.75rem;
-  --r-xl: 1rem;
+@theme {
+  /* ── Color · marca institucional ─────────────────────────────── */
+  --color-sigel-primary: #1e3a8a; /* azul institucional (acciones, énfasis) */
+  --color-sigel-primary-700: #1e40af; /* hover / realce del primario */
+  --color-sigel-secondary: #0f766e; /* verde azulado de apoyo */
+  --color-sigel-accent: #d97706; /* ámbar de llamada a la acción */
+  --color-sigel-danger: #dc2626; /* error / riesgo */
 
-  --sh-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
-  --sh-md: 0 4px 12px rgba(15, 23, 42, 0.07), 0 2px 4px rgba(15, 23, 42, 0.04);
-  --sh-lg: 0 12px 28px rgba(15, 23, 42, 0.1), 0 4px 8px rgba(15, 23, 42, 0.05);
+  /* ── Color · semáforo de desempeño ───────────────────────────── */
+  --color-semaforo-verde: #16a34a;
+  --color-semaforo-amarillo: #f59e0b;
+  --color-semaforo-rojo: #dc2626;
+
+  /* ── Color · neutros semánticos (superficies y texto) ────────── */
+  --color-bg: #f8fafc; /* fondo de página */
+  --color-surface: #ffffff; /* superficie de tarjetas / paneles */
+  --color-line: #e2e8f0; /* borde / divisor estándar */
+  --color-ink: #0f172a; /* texto principal */
+  --color-ink-inverse: #ffffff; /* texto sobre superficie de marca / oscura */
+  --color-muted: #64748b; /* texto secundario */
+
+  /* ── Tipografía ──────────────────────────────────────────────── */
+  /* Familias institucionales. La escala de tamaños (text-xs … text-6xl) y de
+     pesos (font-medium / semibold / bold / extrabold) usa la escala de Tailwind.
+     Convención SIGEL: títulos con `font-display`; cuerpo con `font-sans`. */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Manrope', system-ui, sans-serif;
+
+  /* ── Espaciado · base 4px ────────────────────────────────────── */
+  /* Token base de Tailwind v4: p-1 = 4px, p-2 = 8px, p-4 = 16px … (múltiplos de 4). */
+  --spacing: 0.25rem;
+
+  /* ── Radios · escala estándar ────────────────────────────────── */
+  --radius-sm: 0.25rem; /* detalles pequeños (chips, código) */
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem; /* controles: botones, inputs, enlaces de navegación */
+  --radius-xl: 0.75rem; /* superficie estándar: cards, paneles, tablas */
+  --radius-2xl: 1rem; /* contenedores destacados */
 }
