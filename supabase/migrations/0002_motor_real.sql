@@ -1,7 +1,8 @@
 -- =============================================================================
 -- SIGEL — Motor real: mediciones objetivas + ranking dinámico (migración 0002)
--- Aditiva sobre 0001_init.sql. NO destructiva.
--- Aplicar con: supabase db push   (paso manual, posterior a la aprobación).
+-- Aditiva sobre 0001_init.sql. NO destructiva. Re-ejecutable (idempotente).
+-- Aplicar con: supabase db push   (o pegar en el SQL Editor del dashboard).
+-- Requiere que 0001_init.sql ya esté aplicada (tablas base + políticas).
 -- =============================================================================
 
 -- ── 1. Extender el catálogo territorial (gads) ───────────────────────────────
@@ -59,6 +60,7 @@ create index if not exists idx_rankings_periodo_pos on public.rankings (periodo,
 -- ── 4. Vínculo territorial del usuario (profiles ≈ usuarios) ──────────────────
 alter table public.profiles add column if not exists gad_id text
   references public.gads (id) on delete set null;            -- canton_id si aplica
+alter table public.profiles drop constraint if exists chk_profiles_rol;
 alter table public.profiles add constraint chk_profiles_rol
   check (rol in ('ciudadano','analista','gad_admin','admin'));
 
@@ -73,14 +75,18 @@ alter table public.mediciones enable row level security;
 alter table public.rankings   enable row level security;
 
 -- Lectura pública (datos de referencia agregados)
+drop policy if exists "mediciones lectura pública" on public.mediciones;
 create policy "mediciones lectura pública" on public.mediciones for select using (true);
+drop policy if exists "rankings lectura pública" on public.rankings;
 create policy "rankings lectura pública"   on public.rankings   for select using (true);
 
 -- Escritura solo para staff (analista/admin). El ETL server-side usa service_role
 -- (bypassa RLS), por lo que estas políticas cubren edición desde la app autenticada.
+drop policy if exists "mediciones escritura staff" on public.mediciones;
 create policy "mediciones escritura staff" on public.mediciones for all to authenticated
   using (public.current_rol() in ('analista','admin'))
   with check (public.current_rol() in ('analista','admin'));
+drop policy if exists "rankings escritura staff" on public.rankings;
 create policy "rankings escritura staff" on public.rankings for all to authenticated
   using (public.current_rol() in ('analista','admin'))
   with check (public.current_rol() in ('analista','admin'));
