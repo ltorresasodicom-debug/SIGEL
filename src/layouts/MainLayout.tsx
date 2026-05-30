@@ -9,6 +9,9 @@ const SupabaseStatusBadge = lazy(() =>
 const SponsorSection = lazy(() =>
   import('@/components/SponsorSection').then((m) => ({ default: m.SponsorSection })),
 );
+const AuthMenu = lazy(() =>
+  import('@/components/AuthMenu').then((m) => ({ default: m.AuthMenu })),
+);
 
 const NAV = [
   { to: '/', label: 'Inicio', end: true },
@@ -56,6 +59,9 @@ export function MainLayout() {
               </NavLink>
             ))}
           </nav>
+          <Suspense fallback={null}>
+            <AuthMenu />
+          </Suspense>
         </div>
       </header>
 
