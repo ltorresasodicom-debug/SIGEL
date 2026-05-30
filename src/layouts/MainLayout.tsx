@@ -14,6 +14,7 @@ const NAV = [
   { to: '/', label: 'Inicio', end: true },
   { to: '/ranking', label: 'Ranking', end: false },
   { to: '/mapa', label: 'Mapa', end: false },
+  { to: '/comparar', label: 'Comparar', end: false },
   { to: '/evaluar', label: 'Evaluar', end: false },
   { to: '/calculadora', label: 'Calculadora', end: false },
   { to: '/metodologia', label: 'Metodología', end: false },

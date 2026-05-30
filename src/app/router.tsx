@@ -15,6 +15,9 @@ const EvaluarPage = lazy(() =>
 const CalculadoraPage = lazy(() =>
   import('@/pages/CalculadoraPage').then((m) => ({ default: m.CalculadoraPage })),
 );
+const CompararPage = lazy(() =>
+  import('@/pages/CompararPage').then((m) => ({ default: m.CompararPage })),
+);
 const MetodologiaPage = lazy(() =>
   import('@/pages/MetodologiaPage').then((m) => ({ default: m.MetodologiaPage })),
 );
@@ -33,6 +36,7 @@ export function AppRoutes() {
         <Route path="gad/:id" element={<GadPage />} />
         <Route path="evaluar" element={<EvaluarPage />} />
         <Route path="calculadora" element={<CalculadoraPage />} />
+        <Route path="comparar" element={<CompararPage />} />
         <Route path="metodologia" element={<MetodologiaPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
