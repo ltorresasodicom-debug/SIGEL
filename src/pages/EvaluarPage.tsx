@@ -21,6 +21,8 @@ import type { DimScoreMap } from '@/types/sigel';
 import { Badge, Card, DataBoundary, ProgressBar, SemaforoDot } from '@/components/ui';
 import { Button } from '@/components/Button';
 import { LikertScale } from '@/components/LikertScale';
+import { useGuardarEvaluacion } from '@/features/evaluation';
+import { isSupabaseConfigured } from '@/lib/supabase';
 
 const NDIM = DIMENSIONES_CIUDADANAS.length;
 const LAST = NDIM + 1;
@@ -35,6 +37,8 @@ export function EvaluarPage() {
   const [errMsg, setErrMsg] = useState('');
   const [guardadas, setGuardadas] = useState<EvaluacionGuardada[]>(() => obtenerEvaluaciones());
   const [guardada, setGuardada] = useState(false);
+  const [guardadaEnNube, setGuardadaEnNube] = useState(false);
+  const guardarRemote = useGuardarEvaluacion();
 
   const gads = useMemo(() => data?.gads ?? [], [data]);
   const gad = gads.find((g) => g.id === gadId);
@@ -75,7 +79,8 @@ export function EvaluarPage() {
     setPaso(n === NDIM ? LAST : n + 1);
   }
 
-  function guardar() {
+  async function guardar() {
+    // Local siempre: red de seguridad para "Mis evaluaciones" y modo offline.
     guardarEvaluacionLocal({
       gadId,
       respuestas: { ...respuestas },
@@ -87,6 +92,28 @@ export function EvaluarPage() {
       comentario,
     });
     setGuardadas(obtenerEvaluaciones());
+
+    // Nube si Supabase está configurado; si falla, el local ya cubrió.
+    let enNube = false;
+    if (isSupabaseConfigured) {
+      try {
+        await guardarRemote.mutateAsync({
+          gad_id: gadId,
+          user_id: null,
+          respuestas: { ...respuestas },
+          dims: resultado.dims,
+          ingel: resultado.ingel,
+          nivel: resultado.nivel,
+          semaforo: resultado.semaforo,
+          iri: resultado.iri,
+          comentario: comentario || null,
+        });
+        enNube = true;
+      } catch {
+        // Silencioso: el guardado local es la red de seguridad.
+      }
+    }
+    setGuardadaEnNube(enNube);
     setGuardada(true);
   }
 
@@ -97,6 +124,7 @@ export function EvaluarPage() {
     setRespuestas({});
     setComentario('');
     setGuardada(false);
+    setGuardadaEnNube(false);
     setErrMsg('');
   }
 
@@ -280,7 +308,9 @@ export function EvaluarPage() {
 
             {guardada ? (
               <div className="mt-4 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-center text-sm font-medium text-green-800">
-                ✓ Evaluación guardada en tu navegador.
+                {guardadaEnNube
+                  ? '✓ Evaluación guardada en la nube y en este navegador.'
+                  : '✓ Evaluación guardada en tu navegador.'}
               </div>
             ) : (
               <Button
@@ -289,8 +319,9 @@ export function EvaluarPage() {
                 fullWidth
                 className="mt-4 text-lg"
                 onClick={guardar}
+                disabled={guardarRemote.isPending}
               >
-                💾 Guardar mi evaluación
+                {guardarRemote.isPending ? 'Guardando…' : '💾 Guardar mi evaluación'}
               </Button>
             )}
             <div className="mt-2 flex gap-2">
