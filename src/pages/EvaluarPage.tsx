@@ -23,6 +23,7 @@ import { Button } from '@/components/Button';
 import { LikertScale } from '@/components/LikertScale';
 import { useGuardarEvaluacion } from '@/features/evaluation';
 import { isSupabaseConfigured } from '@/lib/supabase';
+import { useAuth } from '@/hooks/useAuth';
 
 const NDIM = DIMENSIONES_CIUDADANAS.length;
 const LAST = NDIM + 1;
@@ -39,6 +40,7 @@ export function EvaluarPage() {
   const [guardada, setGuardada] = useState(false);
   const [guardadaEnNube, setGuardadaEnNube] = useState(false);
   const guardarRemote = useGuardarEvaluacion();
+  const { user } = useAuth();
 
   const gads = useMemo(() => data?.gads ?? [], [data]);
   const gad = gads.find((g) => g.id === gadId);
@@ -99,7 +101,7 @@ export function EvaluarPage() {
       try {
         await guardarRemote.mutateAsync({
           gad_id: gadId,
-          user_id: null,
+          user_id: user?.id ?? null,
           respuestas: { ...respuestas },
           dims: resultado.dims,
           ingel: resultado.ingel,

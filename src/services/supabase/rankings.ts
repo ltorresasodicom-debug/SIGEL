@@ -37,6 +37,17 @@ export async function obtenerRankingDinamico(periodo: string): Promise<RankingRo
   return data ?? [];
 }
 
+/** Histórico de un GAD a través de todos los períodos (más reciente primero). */
+export async function obtenerRankingsPorGad(gadId: string): Promise<RankingRow[]> {
+  const { data, error } = await supabase
+    .from('rankings')
+    .select('*')
+    .eq('gad_id', gadId)
+    .order('periodo', { ascending: false });
+  if (error) throw error;
+  return data ?? [];
+}
+
 /**
  * Recalcula el ranking dinámico para un período a partir de las mediciones:
  *   1) Lee mediciones (opcionalmente filtradas por fuente / rango de fechas).

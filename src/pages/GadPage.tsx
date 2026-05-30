@@ -1,9 +1,11 @@
 import { Link, useParams } from 'react-router-dom';
 import { useSigelData } from '@/hooks/useSigelData';
 import { DIMENSIONES } from '@/evaluation-engine';
+import type { Nivel } from '@/evaluation-engine/types';
 import { Badge, Card, DataBoundary, ProgressBar, SemaforoDot } from '@/components/ui';
 import { Button } from '@/components/Button';
 import { colorPorIngel } from '@/lib/colores';
+import { useRankingsPorGad } from '@/features/ranking';
 import type { IndicadorDataset } from '@/types/sigel';
 
 function PanelInec({ titulo, sigla, d }: { titulo: string; sigla: string; d: IndicadorDataset | null }) {
@@ -183,6 +185,8 @@ export function GadPage() {
               </Card>
             )}
 
+            <HistoricoRanking gadId={gad.id} />
+
             <div className="mt-6 text-center">
               <Button to="/evaluar" variant="accent" size="lg">
                 📋 Crear mi evaluación ciudadana
@@ -192,5 +196,52 @@ export function GadPage() {
         )}
       </DataBoundary>
     </div>
+  );
+}
+
+/**
+ * Histórico de ranking del GAD a lo largo de los períodos almacenados en
+ * `public.rankings`. Se oculta si Supabase no está configurado o si no hay
+ * datos longitudinales para este GAD aún.
+ */
+function HistoricoRanking({ gadId }: { gadId: string }) {
+  const { data, isLoading } = useRankingsPorGad(gadId);
+  if (isLoading) return null;
+  if (!data || data.length === 0) return null;
+  return (
+    <Card className="mt-5">
+      <h2 className="mb-3 font-display text-xl font-bold">📈 Histórico de ranking</h2>
+      <p className="mb-4 text-sm text-slate-500">
+        Evolución del puntaje INGEL en los períodos evaluados (lectura del backend).
+      </p>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-slate-100 text-left text-xs uppercase tracking-wider text-slate-600">
+              <th className="px-3 py-2 font-semibold">Período</th>
+              <th className="px-3 py-2 text-right font-semibold">INGEL</th>
+              <th className="px-3 py-2 text-center font-semibold">Nivel</th>
+              <th className="px-3 py-2 text-right font-semibold">Posición</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((r) => (
+              <tr key={r.id} className="border-t border-line">
+                <td className="px-3 py-2 font-medium">{r.periodo}</td>
+                <td className="px-3 py-2 text-right font-display font-bold tabular-nums text-sigel-primary">
+                  {Number(r.score_total).toFixed(1)}
+                </td>
+                <td className="px-3 py-2 text-center">
+                  <Badge nivel={r.nivel as Nivel} />
+                </td>
+                <td className="px-3 py-2 text-right tabular-nums">
+                  {r.posicion != null ? `#${r.posicion}` : '—'}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Card>
   );
 }
