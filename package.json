@@ -9,7 +9,8 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
-    "format": "prettier --write \"src/**/*.{ts,tsx,css}\""
+    "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
+    "seed:mediciones": "node scripts/build_seed_mediciones.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.106.1",
