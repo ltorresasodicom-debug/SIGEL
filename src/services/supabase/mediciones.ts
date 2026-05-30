@@ -53,3 +53,21 @@ export async function listarMedicionesPorDimension(
   if (error) throw error;
   return data ?? [];
 }
+
+/**
+ * Lista todas las mediciones, opcionalmente filtradas por fuente y/o rango
+ * de fechas. Usada por el recálculo de ranking dinámico.
+ */
+export async function listarMediciones(opciones?: {
+  fuente?: string;
+  fechaDesde?: string;
+  fechaHasta?: string;
+}): Promise<MedicionRow[]> {
+  let q = supabase.from('mediciones').select('*');
+  if (opciones?.fuente) q = q.eq('fuente', opciones.fuente);
+  if (opciones?.fechaDesde) q = q.gte('fecha', opciones.fechaDesde);
+  if (opciones?.fechaHasta) q = q.lte('fecha', opciones.fechaHasta);
+  const { data, error } = await q.order('fecha', { ascending: false });
+  if (error) throw error;
+  return data ?? [];
+}
