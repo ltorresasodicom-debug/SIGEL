@@ -11,6 +11,12 @@ Pre-requisito: la migración inicial **`0001_init.sql` debe estar
 aplicada**. Si no lo está, aplícala primero con el mismo procedimiento
 del paso 1.
 
+> **Nota:** una vez aplicada también la migración
+> `0003_auto_profile.sql` (ver más abajo), cada nuevo `auth.users` recibe
+> automáticamente su fila en `public.profiles` con `rol = 'ciudadano'`.
+> El **paso 3B** queda como opcional, solo para *elevar* el rol a
+> `analista` / `gad_admin` / `admin`.
+
 ---
 
 ## Paso 1 · Aplicar `supabase/migrations/0002_motor_real.sql`
@@ -99,12 +105,12 @@ re-aplicar no duplica.
     limit 5;
    ```
 
-### B — (Opcional) Asignar rol elevado en `public.profiles`
+### B — (Opcional) Elevar el rol en `public.profiles`
 
-Por defecto un nuevo `auth.users` no tiene fila en `public.profiles`
-(no hay trigger automático en `0001_init`). Para probar las políticas de
-escritura staff-only (`analista`/`admin`) que añadió `0002`, créala a
-mano:
+Con la migración `0003_auto_profile.sql` aplicada, el perfil ya existe
+con `rol = 'ciudadano'`. Para elevar el rol y probar las políticas de
+escritura staff-only (`analista` / `admin`) de `0002`, sobrescribe la
+fila:
 
 ```sql
 insert into public.profiles (id, nombre, rol)
@@ -147,11 +153,50 @@ select p.id, u.email, p.rol, p.nombre
 
 ---
 
-## Estado tras estos tres pasos
+## Paso 4 · Aplicar `supabase/migrations/0003_auto_profile.sql`
+
+**Qué hace:** instala el trigger `on_auth_user_created` sobre
+`auth.users` que dispara `public.handle_new_user()` y crea
+automáticamente la fila en `public.profiles` con `rol = 'ciudadano'`.
+Incluye un backfill para usuarios pre-existentes sin perfil.
+Idempotente.
+
+1. SQL Editor → **+ New query** → pega
+   `supabase/migrations/0003_auto_profile.sql` → **Run**.
+2. Verifica:
+
+   ```sql
+   select proname from pg_proc where proname = 'handle_new_user';
+   -- 1 fila.
+   select tgname  from pg_trigger where tgname = 'on_auth_user_created';
+   -- 1 fila.
+
+   -- ningún auth.users debería quedar sin perfil
+   select u.email, p.rol
+     from auth.users u
+     left join public.profiles p on p.id = u.id
+    order by u.created_at desc;
+   ```
+3. **Prueba end-to-end:** crea un *segundo* usuario desde
+   Authentication → Users (Auto-Confirm). Debe aparecer al instante
+   con `rol = 'ciudadano'`:
+
+   ```sql
+   select u.email, p.rol, p.created_at
+     from auth.users u
+     join public.profiles p on p.id = u.id
+    order by u.created_at desc
+    limit 3;
+   ```
+
+---
+
+## Estado tras estos cuatro pasos
 
 - Esquema motor real desplegado (`mediciones`, `rankings`, RLS).
 - 244 GADs + 1 952 mediciones de demo cargadas.
 - Cuenta(s) listas para login real, con rol elevado opcional.
+- Auto-creación de perfiles para todo nuevo usuario.
 
 A partir de aquí, el siguiente paso del roadmap es **ranking dinámico
 end-to-end** (capacidad B): que `recalcularRankings(periodo)` lea
