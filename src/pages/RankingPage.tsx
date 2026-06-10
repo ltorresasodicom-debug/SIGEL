@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Fuse from 'fuse.js';
 import { useSigelData } from '@/hooks/useSigelData';
-import { useRankingDinamico, useRecalcularRankings } from '@/features/ranking';
+import { usePeriodosRanking, useRankingDinamico, useRecalcularRankings } from '@/features/ranking';
 import { useProfile, esStaff } from '@/hooks/useProfile';
 import { isSupabaseConfigured } from '@/lib/supabase';
 import { Badge, Card, DataBoundary, SemaforoDot } from '@/components/ui';
@@ -10,7 +10,7 @@ import { colorPorIngel } from '@/lib/colores';
 import type { Gad } from '@/types/sigel';
 import type { Nivel, Semaforo } from '@/evaluation-engine/types';
 
-const PERIODO = '2024';
+const PERIODO_FALLBACK = '2024';
 
 type FuenteRanking = 'persistido' | 'demo' | 'sin-supabase';
 
@@ -24,9 +24,14 @@ interface FilaRanking {
 
 export function RankingPage() {
   const { data, isLoading, error } = useSigelData();
-  const { data: rankingsDb = [], isLoading: cargandoDb } = useRankingDinamico(PERIODO);
+  const { data: periodos = [] } = usePeriodosRanking();
+  const [periodoSel, setPeriodoSel] = useState<string | null>(null);
+  // Período activo: el elegido por el usuario, o el más reciente persistido.
+  const periodo = periodoSel ?? periodos[0] ?? PERIODO_FALLBACK;
+  const { data: rankingsDb = [], isLoading: cargandoDb } = useRankingDinamico(periodo);
   const { data: profile } = useProfile();
-  const recalcular = useRecalcularRankings(PERIODO);
+  const recalcular = useRecalcularRankings();
+  const [periodoRecalc, setPeriodoRecalc] = useState('');
   const [q, setQ] = useState('');
   const [tipo, setTipo] = useState<'TODOS' | 'MUNICIPAL' | 'PROVINCIAL'>('TODOS');
   const [provincia, setProvincia] = useState('TODAS');
@@ -95,10 +100,22 @@ export function RankingPage() {
 
   const staff = esStaff(profile?.rol);
   const recalcMsg = recalcular.isSuccess
-    ? `Recalculado · ${recalcular.data?.length ?? 0} GADs procesados.`
+    ? recalcular.data.length > 0
+      ? `Recalculado · ${recalcular.data.length} GADs procesados.`
+      : 'Sin mediciones en ese período: no se generó ranking. ¿Aplicaste el seed correspondiente?'
     : recalcular.isError
       ? `Error: ${recalcular.error instanceof Error ? recalcular.error.message : 'desconocido'}`
       : null;
+
+  function onRecalcular() {
+    const objetivo = periodoRecalc.trim() || periodo;
+    if (!/^\d{4}$/.test(objetivo)) return;
+    recalcular.mutate(objetivo, {
+      onSuccess: (filas) => {
+        if (filas.length > 0 && objetivo !== periodo) setPeriodoSel(objetivo);
+      },
+    });
+  }
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10">
@@ -112,12 +129,32 @@ export function RankingPage() {
       </header>
 
       <DataBoundary loading={isLoading} error={error}>
-        <FuenteBadge fuente={fuente} periodo={PERIODO} cargando={cargandoDb} />
+        <div className="mb-4 flex flex-wrap items-center gap-3">
+          <FuenteBadge fuente={fuente} periodo={periodo} cargando={cargandoDb} />
+          {periodos.length > 0 && (
+            <label className="flex items-center gap-2 text-sm text-slate-600">
+              Período
+              <select
+                value={periodo}
+                onChange={(e) => setPeriodoSel(e.target.value)}
+                aria-label="Elegir período del ranking"
+                className="rounded-lg border border-slate-300 px-2.5 py-1.5 text-sm outline-none transition focus:border-sigel-primary focus:ring-2 focus:ring-sigel-primary/40"
+              >
+                {periodos.map((p) => (
+                  <option key={p} value={p}>
+                    {p}
+                  </option>
+                ))}
+                {!periodos.includes(periodo) && <option value={periodo}>{periodo}</option>}
+              </select>
+            </label>
+          )}
+        </div>
 
         {fuente === 'demo' && staff && (
           <Card className="mb-4 border-l-4 border-l-amber-400 bg-amber-50">
             <p className="text-sm text-amber-900">
-              Aún no se ha calculado el ranking persistido para el período <strong>{PERIODO}</strong>.
+              Aún no se ha calculado el ranking persistido para el período <strong>{periodo}</strong>.
               Como miembro del equipo, puedes generarlo ahora desde las mediciones cargadas.
             </p>
           </Card>
@@ -125,13 +162,27 @@ export function RankingPage() {
 
         {staff && (
           <div className="mb-4 flex flex-wrap items-center gap-3">
+            <label htmlFor="periodo-recalc" className="text-sm text-slate-600">
+              Período a recalcular
+            </label>
+            <input
+              id="periodo-recalc"
+              type="text"
+              inputMode="numeric"
+              pattern="\d{4}"
+              maxLength={4}
+              value={periodoRecalc}
+              onChange={(e) => setPeriodoRecalc(e.target.value)}
+              placeholder={periodo}
+              className="w-24 rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none transition focus:border-sigel-primary focus:ring-2 focus:ring-sigel-primary/40"
+            />
             <button
               type="button"
-              onClick={() => recalcular.mutate()}
+              onClick={onRecalcular}
               disabled={recalcular.isPending || !isSupabaseConfigured}
               className="rounded-lg bg-sigel-primary px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-sigel-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {recalcular.isPending ? 'Recalculando…' : `Recalcular ranking ${PERIODO}`}
+              {recalcular.isPending ? 'Recalculando…' : 'Recalcular'}
             </button>
             {recalcMsg && (
               <span
@@ -272,7 +323,7 @@ function FuenteBadge({
 }) {
   if (cargando && fuente !== 'sin-supabase') {
     return (
-      <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
+      <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
         <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-slate-400" />
         Cargando ranking persistido…
       </div>
@@ -297,7 +348,7 @@ function FuenteBadge({
   }[fuente];
   return (
     <div
-      className={`mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium ${cfg.cls}`}
+      className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium ${cfg.cls}`}
     >
       <span className={`h-1.5 w-1.5 rounded-full ${cfg.dot}`} />
       {cfg.txt}

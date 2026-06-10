@@ -48,9 +48,28 @@ export async function obtenerRankingsPorGad(gadId: string): Promise<RankingRow[]
   return data ?? [];
 }
 
+/** Períodos con ranking persistido, del más reciente al más antiguo. */
+export async function listarPeriodosRanking(): Promise<string[]> {
+  const { data, error } = await supabase.from('rankings').select('periodo');
+  if (error) throw error;
+  return [...new Set((data ?? []).map((r) => r.periodo))].sort().reverse();
+}
+
+/**
+ * Rango de fechas implícito de un período con formato año ('2024' → todo el
+ * año calendario). Otros formatos no acotan (el llamador filtra explícito).
+ */
+function rangoDelPeriodo(periodo: string): { fechaDesde?: string; fechaHasta?: string } {
+  if (/^\d{4}$/.test(periodo)) {
+    return { fechaDesde: `${periodo}-01-01`, fechaHasta: `${periodo}-12-31` };
+  }
+  return {};
+}
+
 /**
  * Recalcula el ranking dinámico para un período a partir de las mediciones:
- *   1) Lee mediciones (opcionalmente filtradas por fuente / rango de fechas).
+ *   1) Lee mediciones del período (rango de fechas derivado del período si es
+ *      un año 'YYYY'; opcionalmente filtradas por fuente / fechas explícitas).
  *   2) Agrega por GAD × dimensión (promedio de valor_norm).
  *   3) Compone INGEL/nivel/semáforo con el motor (evaluation-engine).
  *   4) Ordena y asigna posición.
@@ -62,7 +81,7 @@ export async function recalcularRankingsDesdeMediciones(
   periodo: string,
   opciones?: { fuente?: string; fechaDesde?: string; fechaHasta?: string },
 ): Promise<RankingRow[]> {
-  const mediciones = await listarMediciones(opciones);
+  const mediciones = await listarMediciones({ ...rangoDelPeriodo(periodo), ...opciones });
   const filas = computarRanking(mediciones, periodo);
   if (filas.length === 0) return [];
 

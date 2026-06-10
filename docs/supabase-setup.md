@@ -247,13 +247,45 @@ perfil de todos los usuarios) y `admin_set_rol(target_id, nuevo_rol)`
 
 ---
 
-## Estado tras estos cinco pasos
+## Paso 6 · (Opcional) Segundo período: seed 2025 + recálculo
+
+Activa la analítica longitudinal con un segundo período de mediciones.
+
+1. SQL Editor → **+ New query** → pega
+   `supabase/seeds/0002_demo_2025.sql` → **Run** (mismo procedimiento
+   que el paso 2; idempotente).
+2. Verifica:
+
+   ```sql
+   select fuente, count(*) from public.mediciones group by 1 order by 1;
+   -- SIGEL demo v1 → 1952  ·  SIGEL demo v2 → 1952
+   ```
+3. En la app, con tu usuario staff: `/ranking` → campo **"Período a
+   recalcular"** → escribe `2025` → **Recalcular**. La página salta al
+   período 2025 y el selector de período muestra ambos años.
+4. Verifica:
+
+   ```sql
+   select periodo, count(*) from public.rankings group by 1 order by 1;
+   -- 2024 → 244  ·  2025 → 244
+   ```
+5. El histórico por GAD (ficha de cada GAD) ahora muestra la evolución
+   2024 → 2025.
+
+> El recálculo filtra las mediciones por el año calendario del período
+> (`2025` → fechas entre 2025-01-01 y 2025-12-31), así los períodos no
+> se mezclan entre sí.
+
+---
+
+## Estado tras estos pasos
 
 - Esquema motor real desplegado (`mediciones`, `rankings`, RLS).
-- 244 GADs + 1 952 mediciones de demo cargadas.
+- 244 GADs + 1 952 mediciones de demo cargadas (×2 si aplicaste 2025).
 - Cuenta(s) listas para login real, con rol elevado opcional.
 - Auto-creación de perfiles para todo nuevo usuario.
 - Panel `/admin` operativo para gestionar roles sin SQL manual.
+- Ranking multi-período con selector y analítica longitudinal por GAD.
 
 A partir de aquí, el siguiente paso del roadmap es **ranking dinámico
 end-to-end** (capacidad B): que `recalcularRankings(periodo)` lea
