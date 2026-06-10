@@ -135,7 +135,21 @@ export interface Database {
       };
     };
     Views: Record<string, never>;
-    Functions: Record<string, never>;
+    Functions: {
+      current_rol: { Args: Record<PropertyKey, never>; Returns: string | null };
+      admin_listar_usuarios: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          id: string;
+          email: string;
+          nombre: string | null;
+          rol: string;
+          gad_id: string | null;
+          created_at: string;
+        }[];
+      };
+      admin_set_rol: { Args: { target_id: string; nuevo_rol: string }; Returns: undefined };
+    };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;
   };

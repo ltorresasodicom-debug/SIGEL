@@ -1,10 +1,12 @@
 // SIGEL — Menú compacto de autenticación para el header.
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+import { useProfile } from '@/hooks/useProfile';
 import { signOut } from '@/services/supabase/auth';
 
 export function AuthMenu() {
   const { user, loading } = useAuth();
+  const { data: profile } = useProfile();
   if (loading) return null;
 
   if (!user) {
@@ -20,6 +22,14 @@ export function AuthMenu() {
 
   return (
     <div className="flex items-center gap-2 text-sm">
+      {profile?.rol === 'admin' && (
+        <Link
+          to="/admin"
+          className="rounded-lg border border-white/30 bg-white/10 px-3 py-1.5 font-medium transition hover:bg-white/20"
+        >
+          Admin
+        </Link>
+      )}
       <Link
         to="/perfil"
         className="hidden max-w-[180px] truncate opacity-80 transition hover:opacity-100 hover:underline md:inline"

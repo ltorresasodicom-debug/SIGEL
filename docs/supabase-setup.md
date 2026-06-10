@@ -207,12 +207,36 @@ Idempotente.
 
 ---
 
-## Estado tras estos cuatro pasos
+## Paso 5 · Aplicar `supabase/migrations/0004_admin_usuarios.sql`
+
+**Qué hace:** instala dos funciones `security definer` que sustentan el
+panel `/admin` de la app: `admin_listar_usuarios()` (lista email +
+perfil de todos los usuarios) y `admin_set_rol(target_id, nuevo_rol)`
+(cambia roles). Ambas rechazan con `solo admin` si quien llama no tiene
+`rol = 'admin'`. Idempotente.
+
+1. SQL Editor → **+ New query** → pega
+   `supabase/migrations/0004_admin_usuarios.sql` → **Run**.
+2. Verifica:
+
+   ```sql
+   select proname from pg_proc where proname like 'admin_%';
+   -- 2 filas: admin_listar_usuarios, admin_set_rol.
+   ```
+3. **Prueba end-to-end:** inicia sesión en la app con tu usuario admin →
+   aparece el botón **Admin** en el header → la tabla lista todos los
+   usuarios y permite cambiar roles. Con un usuario `ciudadano`, la
+   página muestra "Acceso restringido" y la DB rechaza los RPC.
+
+---
+
+## Estado tras estos cinco pasos
 
 - Esquema motor real desplegado (`mediciones`, `rankings`, RLS).
 - 244 GADs + 1 952 mediciones de demo cargadas.
 - Cuenta(s) listas para login real, con rol elevado opcional.
 - Auto-creación de perfiles para todo nuevo usuario.
+- Panel `/admin` operativo para gestionar roles sin SQL manual.
 
 A partir de aquí, el siguiente paso del roadmap es **ranking dinámico
 end-to-end** (capacidad B): que `recalcularRankings(periodo)` lea
