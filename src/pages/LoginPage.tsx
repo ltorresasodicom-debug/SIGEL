@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui';
 import { Button } from '@/components/Button';
@@ -22,6 +22,19 @@ export function LoginPage() {
   const [pending, setPending] = useState(false);
   const navigate = useNavigate();
   const { user, loading } = useAuth();
+
+  // Tras confirmar el email, Supabase redirige a /login con la sesión en el
+  // hash; cuando supabase-js la procesa y aparece `user`, llevamos al home.
+  useEffect(() => {
+    if (!loading && user) {
+      const tieneHashAuth =
+        typeof window !== 'undefined' && window.location.hash.includes('access_token');
+      if (tieneHashAuth) {
+        history.replaceState(null, '', window.location.pathname);
+        navigate('/', { replace: true });
+      }
+    }
+  }, [loading, user, navigate]);
 
   function cambiarModo(m: Modo) {
     setModo(m);

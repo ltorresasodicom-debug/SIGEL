@@ -118,8 +118,25 @@ La app incluye una pestaña **"Crear cuenta"** en `/login` que llama a
      integrado de Supabase tiene límites bajos (≈2 emails/hora).
    - **OFF**: el registro inicia sesión de inmediato — recomendado para
      la demo mientras no haya SMTP propio configurado.
-3. El trigger `handle_new_user` (migración 0003) crea automáticamente
+3. **URL de redirección tras confirmar el email** (Dashboard →
+   **Authentication → URL Configuration**). El link del correo manda
+   al usuario al **Site URL** salvo que la app pase un
+   `emailRedirectTo` (que ya hace `signUpWithEmail`, hacia
+   `${origin}/login`). Para que esa redirección no falle:
+   - **Site URL:** la URL principal del despliegue (p. ej.
+     `https://sigel.example.com` en producción, o
+     `http://localhost:5173` para desarrollo local con `npm run dev`).
+   - **Redirect URLs:** lista blanca; **añade aquí cada URL desde la
+     que se pueda registrar la gente**: producción, previews de Vercel,
+     y `http://localhost:5173`. Si el link del correo lleva a un puerto
+     que no tiene la app sirviendo (típico: `localhost:3000`), corrige
+     estas dos opciones — el Site URL antiguo es la causa.
+4. El trigger `handle_new_user` (migración 0003) crea automáticamente
    el perfil con `rol = 'ciudadano'` y copia el nombre del formulario.
+   Esto es por diseño: el auto-registro nunca puede elegir su rol (eso
+   sería auto-escalación de privilegios). Para promover un ciudadano a
+   `analista` / `gad_admin` / `admin`, usa el panel `/admin` (ver paso 5)
+   o el SQL del paso 3B.
 
 ### B — (Opcional) Elevar el rol en `public.profiles`
 
