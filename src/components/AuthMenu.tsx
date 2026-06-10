@@ -20,9 +20,13 @@ export function AuthMenu() {
 
   return (
     <div className="flex items-center gap-2 text-sm">
-      <span className="hidden max-w-[180px] truncate opacity-80 md:inline" title={user.email}>
+      <Link
+        to="/perfil"
+        className="hidden max-w-[180px] truncate opacity-80 transition hover:opacity-100 hover:underline md:inline"
+        title={`Mi perfil — ${user.email}`}
+      >
         {user.email}
-      </span>
+      </Link>
       <button
         type="button"
         onClick={() => void signOut()}

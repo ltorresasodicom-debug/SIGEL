@@ -19,6 +19,9 @@ const CompararPage = lazy(() =>
   import('@/pages/CompararPage').then((m) => ({ default: m.CompararPage })),
 );
 const LoginPage = lazy(() => import('@/pages/LoginPage').then((m) => ({ default: m.LoginPage })));
+const PerfilPage = lazy(() =>
+  import('@/pages/PerfilPage').then((m) => ({ default: m.PerfilPage })),
+);
 const MetodologiaPage = lazy(() =>
   import('@/pages/MetodologiaPage').then((m) => ({ default: m.MetodologiaPage })),
 );
@@ -39,6 +42,7 @@ export function AppRoutes() {
         <Route path="calculadora" element={<CalculadoraPage />} />
         <Route path="comparar" element={<CompararPage />} />
         <Route path="login" element={<LoginPage />} />
+        <Route path="perfil" element={<PerfilPage />} />
         <Route path="metodologia" element={<MetodologiaPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
