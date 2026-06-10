@@ -21,9 +21,10 @@ import type { DimScoreMap } from '@/types/sigel';
 import { Badge, Card, DataBoundary, ProgressBar, SemaforoDot } from '@/components/ui';
 import { Button } from '@/components/Button';
 import { LikertScale } from '@/components/LikertScale';
-import { useGuardarEvaluacion } from '@/features/evaluation';
+import { useGuardarEvaluacion, useMisEvaluaciones } from '@/features/evaluation';
 import { isSupabaseConfigured } from '@/lib/supabase';
 import { useAuth } from '@/hooks/useAuth';
+import type { EvaluacionRow } from '@/types/domain';
 
 const NDIM = DIMENSIONES_CIUDADANAS.length;
 const LAST = NDIM + 1;
@@ -41,6 +42,7 @@ export function EvaluarPage() {
   const [guardadaEnNube, setGuardadaEnNube] = useState(false);
   const guardarRemote = useGuardarEvaluacion();
   const { user } = useAuth();
+  const { data: enNube = [], isLoading: cargandoNube } = useMisEvaluaciones();
 
   const gads = useMemo(() => data?.gads ?? [], [data]);
   const gad = gads.find((g) => g.id === gadId);
@@ -201,9 +203,65 @@ export function EvaluarPage() {
 
             <section className="mt-10">
               <h2 className="mb-3 font-display text-xl font-bold">Mis evaluaciones guardadas</h2>
+
+              {user && (
+                <div className="mb-6">
+                  <h3 className="mb-2 text-sm font-semibold uppercase tracking-wider text-slate-500">
+                    ☁️ En la nube (tu cuenta)
+                  </h3>
+                  {cargandoNube ? (
+                    <Card className="text-center text-slate-400">Cargando…</Card>
+                  ) : enNube.length === 0 ? (
+                    <Card className="text-center text-slate-500">
+                      Aún no tienes evaluaciones guardadas en tu cuenta.
+                    </Card>
+                  ) : (
+                    <div className="space-y-3">
+                      {enNube.map((e) => {
+                        const g = gads.find((x) => x.id === e.gad_id);
+                        return (
+                          <Card key={e.id} className="flex flex-wrap items-center gap-3">
+                            <div className="min-w-[200px] flex-1">
+                              <div className="font-semibold">{g ? g.nombre : 'GAD'}</div>
+                              <div className="text-xs text-slate-500">
+                                {new Date(e.created_at).toLocaleString('es-EC')} · INGEL{' '}
+                                <strong className="text-sigel-primary">
+                                  {Number(e.ingel).toFixed(1)}
+                                </strong>
+                              </div>
+                            </div>
+                            <Badge nivel={e.nivel as Nivel} />
+                            <button
+                              type="button"
+                              onClick={async () => {
+                                const { exportarEvaluacionPdf } = await import('@/lib/pdf');
+                                exportarEvaluacionPdf(aEvaluacionGuardada(e), g);
+                              }}
+                              className="rounded bg-sigel-primary px-3 py-1.5 text-sm font-semibold text-white"
+                            >
+                              📄 PDF
+                            </button>
+                          </Card>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {user && (
+                <h3 className="mb-2 text-sm font-semibold uppercase tracking-wider text-slate-500">
+                  💻 En este navegador
+                </h3>
+              )}
               {guardadas.length === 0 ? (
                 <Card className="text-center text-slate-500">
                   Aún no has guardado evaluaciones.
+                  {!user && isSupabaseConfigured && (
+                    <span className="mt-1 block text-xs">
+                      Inicia sesión para ver también las evaluaciones de tu cuenta.
+                    </span>
+                  )}
                 </Card>
               ) : (
                 <div className="space-y-3">
@@ -240,6 +298,11 @@ export function EvaluarPage() {
                       </Card>
                     );
                   })}
+                  {!user && isSupabaseConfigured && (
+                    <p className="text-xs text-muted">
+                      Inicia sesión para ver también las evaluaciones guardadas en tu cuenta.
+                    </p>
+                  )}
                 </div>
               )}
             </section>
@@ -339,6 +402,22 @@ export function EvaluarPage() {
       </DataBoundary>
     </div>
   );
+}
+
+/** Adapta una fila de Supabase al shape local que espera el exportador PDF. */
+function aEvaluacionGuardada(e: EvaluacionRow): EvaluacionGuardada {
+  return {
+    id: e.id,
+    fecha: e.created_at,
+    gadId: e.gad_id,
+    respuestas: e.respuestas as Record<string, number>,
+    dims: e.dims as DimScoreMap,
+    ingel: Number(e.ingel),
+    nivel: e.nivel as Nivel,
+    semaforo: e.semaforo as Semaforo,
+    iri: Number(e.iri),
+    comentario: e.comentario ?? '',
+  };
 }
 
 function PasoDimension({

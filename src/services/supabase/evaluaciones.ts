@@ -13,6 +13,17 @@ export async function guardarEvaluacion(data: EvaluacionInsert): Promise<Evaluac
   return row;
 }
 
+/** Lista las evaluaciones de un usuario, de la más reciente a la más antigua. */
+export async function listarEvaluacionesDeUsuario(userId: string): Promise<EvaluacionRow[]> {
+  const { data, error } = await supabase
+    .from('evaluaciones')
+    .select('*')
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false });
+  if (error) throw error;
+  return data ?? [];
+}
+
 /** Lista las evaluaciones de un GAD, de la más reciente a la más antigua. */
 export async function listarEvaluaciones(gadId: string): Promise<EvaluacionRow[]> {
   const { data, error } = await supabase
