@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
-    "seed:mediciones": "node scripts/build_seed_mediciones.mjs"
+    "seed:mediciones": "node scripts/build_seed_mediciones.mjs",
+    "seed:mediciones:2025": "node scripts/build_seed_mediciones.mjs 2"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.106.1",

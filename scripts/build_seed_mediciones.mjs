@@ -2,14 +2,19 @@
 // =============================================================================
 // SIGEL — Generador del seed `mediciones` (motor real)
 //
-// Lee public/data/electoral.json y produce supabase/seeds/0001_demo.sql con:
+// Lee public/data/electoral.json y produce un seed SQL con:
 //   1) INSERT de los 244 GADs (prov-N / cant-N, mismos IDs que la app en
 //      memoria) — necesario para satisfacer la FK mediciones.gad_id → gads.id.
 //   2) INSERT de 8 mediciones por GAD (una por dimensión canónica) con valores
 //      sintéticos deterministas (hash FNV-1a) en escala 0–100.
 //
+// Variantes (período de observación):
+//   node scripts/build_seed_mediciones.mjs       → v1 · 2024 → 0001_demo.sql
+//   node scripts/build_seed_mediciones.mjs 2     → v2 · 2025 → 0002_demo_2025.sql
+//
 // Ambos INSERTs usan ON CONFLICT DO NOTHING → idempotente.
 // Re-ejecutar el script regenera el mismo SQL bit a bit (sin dependencias).
+// La v1 es byte-idéntica a la generada antes de parametrizar el script.
 // =============================================================================
 import fs from 'node:fs';
 import path from 'node:path';
@@ -19,7 +24,32 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 
 const SRC = path.join(ROOT, 'public/data/electoral.json');
-const OUT = path.join(ROOT, 'supabase/seeds/0001_demo.sql');
+
+const VARIANTES = {
+  1: {
+    fuente: 'SIGEL demo v1',
+    fecha: '2024-12-01',
+    prefijo: 'demo_v1',
+    salt: '', // sin salt: preserva los valores originales de la v1
+    out: 'supabase/seeds/0001_demo.sql',
+  },
+  2: {
+    fuente: 'SIGEL demo v2',
+    fecha: '2025-06-01',
+    prefijo: 'demo_v2',
+    salt: '::p2025', // varía el hash → evolución determinista respecto a v1
+    out: 'supabase/seeds/0002_demo_2025.sql',
+  },
+};
+
+const version = Number(process.argv[2] ?? 1);
+const V = VARIANTES[version];
+if (!V) {
+  console.error(`Variante desconocida: ${process.argv[2]} (usa 1 o 2)`);
+  process.exit(1);
+}
+
+const OUT = path.join(ROOT, V.out);
 
 const DIMENSIONES = [
   'transparencia',
@@ -32,8 +62,6 @@ const DIMENSIONES = [
   'innovacion',
 ];
 
-const FUENTE = 'SIGEL demo v1';
-const FECHA = '2024-12-01';
 const UNIDAD = 'índice 0–100';
 
 // FNV-1a 32-bit — equivalente al hashStr() del motor en memoria.
@@ -46,9 +74,9 @@ function hashStr(s) {
   return h >>> 0;
 }
 
-// Score determinista en [25.00, 95.00] dependiente de (seedKey, dimensión).
+// Score determinista en [25.00, 95.00] dependiente de (seedKey, salt, dimensión).
 function syntheticScore(seedKey, dimIdx) {
-  const h = hashStr(`${seedKey}::dim${dimIdx}`);
+  const h = hashStr(`${seedKey}${V.salt}::dim${dimIdx}`);
   const raw = (h % 7000) / 100; // 0 – 69.99
   return Math.round((25 + raw) * 100) / 100;
 }
@@ -72,8 +100,8 @@ function addGad(id, tipo, nombre, provincia, canton, autoridad, partido, seedKey
   DIMENSIONES.forEach((dim, i) => {
     const valor = syntheticScore(seedKey, i);
     medRows.push(
-      `  (${sql(id)}, ${sql(dim)}, ${sql(`demo_v1_${dim}`)}, ${valor}, ${sql(UNIDAD)}, ` +
-        `${valor}, ${sql(FUENTE)}, DATE ${sql(FECHA)})`,
+      `  (${sql(id)}, ${sql(dim)}, ${sql(`${V.prefijo}_${dim}`)}, ${valor}, ${sql(UNIDAD)}, ` +
+        `${valor}, ${sql(V.fuente)}, DATE ${sql(V.fecha)})`,
     );
   });
 }
@@ -107,7 +135,7 @@ data.cantones.forEach((c, idx) => {
 const header = `-- =============================================================================
 -- SIGEL — Seed demo de mediciones (generado por scripts/build_seed_mediciones.mjs)
 -- ${gadsRows.length} GADs · ${medRows.length} mediciones (${DIMENSIONES.length} dimensiones × GAD)
--- Fuente: ${FUENTE}  ·  Fecha observación: ${FECHA}
+-- Fuente: ${V.fuente}  ·  Fecha observación: ${V.fecha}
 -- Idempotente: ON CONFLICT DO NOTHING. Re-aplicar no duplica.
 -- Requiere migraciones 0001_init.sql y 0002_motor_real.sql ya aplicadas.
 -- Aplicar pegándolo en el SQL Editor del dashboard de Supabase.
