@@ -105,6 +105,22 @@ re-aplicar no duplica.
     limit 5;
    ```
 
+### A.2 — Registro público desde la app
+
+La app incluye una pestaña **"Crear cuenta"** en `/login` que llama a
+`supabase.auth.signUp`. Para que funcione:
+
+1. El provider **Email** debe estar habilitado (Dashboard →
+   **Authentication → Sign In / Up**; viene activo por defecto).
+2. El toggle **Confirm email** (misma pantalla) decide el flujo:
+   - **ON** (default): el usuario recibe un correo y debe confirmarlo
+     antes de poder iniciar sesión. Requiere SMTP funcional; el SMTP
+     integrado de Supabase tiene límites bajos (≈2 emails/hora).
+   - **OFF**: el registro inicia sesión de inmediato — recomendado para
+     la demo mientras no haya SMTP propio configurado.
+3. El trigger `handle_new_user` (migración 0003) crea automáticamente
+   el perfil con `rol = 'ciudadano'` y copia el nombre del formulario.
+
 ### B — (Opcional) Elevar el rol en `public.profiles`
 
 Con la migración `0003_auto_profile.sql` aplicada, el perfil ya existe
