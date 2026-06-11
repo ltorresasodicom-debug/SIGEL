@@ -12,7 +12,8 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
     "seed:mediciones": "node scripts/build_seed_mediciones.mjs",
     "seed:mediciones:2025": "node scripts/build_seed_mediciones.mjs 2",
-    "seed:inec": "python3 scripts/build_seed_inec.py"
+    "seed:inec": "python3 scripts/build_seed_inec.py",
+    "seed:inec:finanzas": "python3 scripts/build_seed_inec_finanzas.py"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.106.1",

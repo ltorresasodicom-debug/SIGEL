@@ -312,6 +312,36 @@ por dataset y cantón (440 filas en total).
 
 ---
 
+## Paso 8 · (Opcional) Datos reales: INEC → dimensión `finanzas`
+
+Primera capa real en `finanzas`: índice de **sostenibilidad financiera
+del servicio de residuos** (0–100) por cantón, desde el módulo
+financiero del CSV INEC GIRS 2024. Metodología: media de tres banderas
+binarias — `MSF=1` (servicio financieramente sostenible), `SUBSIDIO=0`
+(opera sin subsidio municipal), `RDES=1` (recaudación destinada al
+servicio). 221 cantones, cobertura 100% del CSV.
+
+1. (Regenerar si hace falta: `npm run seed:inec:finanzas`.)
+2. SQL Editor → **+ New query** → pega
+   `supabase/seeds/0004_finanzas_reales_inec.sql` → **Run**. Idempotente.
+3. Verifica:
+
+   ```sql
+   select indicador, count(*), round(avg(valor),1) as promedio
+     from public.mediciones where fuente = 'INEC GADM 2024'
+    group by 1 order by 1;
+   -- finanzas: inec_girs_2024_sostenibilidad_financiera → 221 filas
+   -- servicios: inec_girs/apa_2024_indice → 220 c/u (paso 7)
+   ```
+4. Recalcula el ranking 2024 desde `/ranking` (staff). El índice real
+   entra al promedio de `finanzas` junto al valor demo.
+
+> Alcance: proxy acotado al servicio GIRS — no mide ejecución
+> presupuestaria global (pendiente: API Defensoría del Pueblo /
+> eSIGEF) ni calidad del gasto (Contraloría).
+
+---
+
 ## Estado tras estos pasos
 
 - Esquema motor real desplegado (`mediciones`, `rankings`, RLS).
