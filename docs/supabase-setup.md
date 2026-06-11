@@ -278,6 +278,40 @@ Activa la analítica longitudinal con un segundo período de mediciones.
 
 ---
 
+## Paso 7 · (Opcional) Datos reales: INEC GADM 2024 (GIRS + APA)
+
+Sustituye/complementa los valores sintéticos de la dimensión `servicios`
+del período 2024 con índices reales del INEC (Gestión Integral de
+Residuos Sólidos + Agua Potable y Alcantarillado), una medición real
+por dataset y cantón (440 filas en total).
+
+1. **Si necesitas regenerar el SQL desde el JSON fuente** (ya commiteado):
+   `npm run seed:inec`. Produce `supabase/seeds/0003_indicadores_reales_inec.sql`.
+2. SQL Editor → **+ New query** → pega ese archivo → **Run**. Idempotente.
+3. Verifica:
+
+   ```sql
+   select fuente, count(*) from public.mediciones group by 1 order by 1;
+   -- SIGEL demo v1 → 1952  ·  INEC GADM 2024 → 440  (·  SIGEL demo v2 si aplicaste el paso 6)
+
+   select indicador, count(*), round(avg(valor),1) as promedio
+     from public.mediciones where fuente = 'INEC GADM 2024'
+    group by 1;
+   -- inec_girs_2024_indice → 220 cantones  ·  inec_apa_2024_indice → 220 cantones
+   ```
+4. **Recalcula el ranking 2024** desde `/ranking` (botón staff). Los
+   índices reales entran al promedio de `servicios` junto a la fila demo;
+   las posiciones se actualizan. Cobertura actual: solo cantones (220
+   con datos reales · provincias siguen 100% demo en `servicios`).
+
+> **Por qué este patrón:** cada fuente real (INEC, Contraloría, AME,
+> Fiscalía) se suma como mediciones nuevas con su propio `(indicador,
+> fuente, fecha)`. La clave natural única evita duplicados, y el promedio
+> por dimensión del motor de ranking las combina automáticamente al
+> recalcular. No hay que tocar código de la app.
+
+---
+
 ## Estado tras estos pasos
 
 - Esquema motor real desplegado (`mediciones`, `rankings`, RLS).
@@ -286,6 +320,7 @@ Activa la analítica longitudinal con un segundo período de mediciones.
 - Auto-creación de perfiles para todo nuevo usuario.
 - Panel `/admin` operativo para gestionar roles sin SQL manual.
 - Ranking multi-período con selector y analítica longitudinal por GAD.
+- Primera capa de indicadores reales (INEC) ingresada en `servicios`.
 
 A partir de aquí, el siguiente paso del roadmap es **ranking dinámico
 end-to-end** (capacidad B): que `recalcularRankings(periodo)` lea
