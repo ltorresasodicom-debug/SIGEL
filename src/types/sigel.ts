@@ -22,6 +22,22 @@ export interface IndicadorInec {
   apa: IndicadorDataset | null;
 }
 
+/**
+ * Ejecución presupuestaria 2024 publicada vía LOTAIP Núm. 6 (DPE), por GAD.
+ * Los montos son la suma de cuentas hoja del clasificador presupuestario; el
+ * cómputo y la fuente cruda se documentan en `scripts/build_seed_dpe_finanzas.py`.
+ */
+export interface FinanzasDpe {
+  /** Presupuesto anual asignado en USD. */
+  presupuesto: number;
+  /** Gasto anual devengado en USD. */
+  gasto: number;
+  /** Ejecución presupuestaria: devengado / presupuesto * 100. */
+  ejecucionPct: number;
+  /** Mes (1–12) del corte usado para este cantón. */
+  mesCorte: number;
+}
+
 /** Gobierno local enriquecido (unidad central del modelo). */
 export interface Gad {
   id: string;
@@ -42,6 +58,7 @@ export interface Gad {
   iri: number;
   featureId?: string;
   indicadores?: IndicadorInec;
+  finanzasDpe?: FinanzasDpe;
 }
 
 export interface Asambleista {

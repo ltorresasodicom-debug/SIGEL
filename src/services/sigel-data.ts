@@ -206,6 +206,29 @@ function attachIndicadores(data: SigelData, indic: IndicadoresJson | null): void
   }
 }
 
+interface FinanzasDpeJson {
+  fuente: string;
+  fecha_corte: string;
+  indicador_pct: string;
+  byGadId: Record<
+    string,
+    { presupuesto: number; gasto: number; ejecucion_pct: number; mes_corte: number }
+  >;
+}
+function attachFinanzasDpe(data: SigelData, json: FinanzasDpeJson | null): void {
+  if (!json?.byGadId) return;
+  for (const g of data.cantones) {
+    const rec = json.byGadId[g.id];
+    if (!rec) continue;
+    g.finanzasDpe = {
+      presupuesto: rec.presupuesto,
+      gasto: rec.gasto,
+      ejecucionPct: rec.ejecucion_pct,
+      mesCorte: rec.mes_corte,
+    };
+  }
+}
+
 async function fetchJson<T>(url: string): Promise<T> {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`No se pudo cargar ${url} (HTTP ${res.status})`);
@@ -214,10 +237,11 @@ async function fetchJson<T>(url: string): Promise<T> {
 
 /** Carga electoral.json + geojson + indicadores y construye el dataset SIGEL. */
 export async function cargarSigelData(): Promise<SigelData> {
-  const [raw, geo, indic] = await Promise.all([
+  const [raw, geo, indic, finanzas] = await Promise.all([
     fetchJson<RawElectoral>('/data/electoral.json'),
     fetchJson<GeoCollection>('/data/cantones-ec.geojson').catch(() => null),
     fetchJson<IndicadoresJson>('/data/indicadores_inec_2024.json').catch(() => null),
+    fetchJson<FinanzasDpeJson>('/data/finanzas-dpe-2024.json').catch(() => null),
   ]);
 
   const provincias: Gad[] = raw.provincias.map((p, idx) =>
@@ -288,6 +312,7 @@ export async function cargarSigelData(): Promise<SigelData> {
   };
   attachGeo(data, geo);
   attachIndicadores(data, indic);
+  attachFinanzasDpe(data, finanzas);
   return data;
 }
 

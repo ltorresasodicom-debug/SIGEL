@@ -6,7 +6,60 @@ import { Badge, Card, DataBoundary, ProgressBar, SemaforoDot } from '@/component
 import { Button } from '@/components/Button';
 import { colorPorIngel } from '@/lib/colores';
 import { useRankingsPorGad } from '@/features/ranking';
-import type { IndicadorDataset } from '@/types/sigel';
+import type { FinanzasDpe, IndicadorDataset } from '@/types/sigel';
+
+const fmtUsd = new Intl.NumberFormat('es-EC', {
+  style: 'currency',
+  currency: 'USD',
+  maximumFractionDigits: 0,
+});
+
+const MESES_ES = [
+  '', 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+  'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre',
+];
+
+function PanelFinanzasDpe({ d }: { d: FinanzasDpe | null }) {
+  if (!d) {
+    return (
+      <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-5">
+        <div className="font-display font-semibold">Ejecución presupuestaria</div>
+        <p className="mt-2 text-sm text-slate-500">Sin reporte DPE para este cantón.</p>
+      </div>
+    );
+  }
+  const ejec = d.ejecucionPct;
+  const ejecCapado = Math.max(0, Math.min(100, ejec));
+  return (
+    <div className="rounded-xl border border-slate-200 p-5">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <div className="font-display font-semibold">Ejecución presupuestaria</div>
+          <div className="text-xs text-slate-500">
+            DPE LOTAIP Núm. 6 · corte a {MESES_ES[d.mesCorte] ?? '—'} 2024
+          </div>
+        </div>
+        <div
+          className="font-display text-3xl font-extrabold tabular-nums"
+          style={{ color: colorPorIngel(ejecCapado) }}
+        >
+          {ejec.toFixed(1)}%
+        </div>
+      </div>
+      <div className="mt-4 space-y-3 text-sm">
+        <div className="flex justify-between">
+          <span className="text-slate-600">Presupuesto anual</span>
+          <span className="font-display font-bold tabular-nums">{fmtUsd.format(d.presupuesto)}</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-slate-600">Gasto anual</span>
+          <span className="font-display font-bold tabular-nums">{fmtUsd.format(d.gasto)}</span>
+        </div>
+        <ProgressBar value={ejecCapado} color={colorPorIngel(ejecCapado)} />
+      </div>
+    </div>
+  );
+}
 
 function PanelInec({ titulo, sigla, d }: { titulo: string; sigla: string; d: IndicadorDataset | null }) {
   if (!d) {
@@ -163,24 +216,26 @@ export function GadPage() {
               </div>
             </Card>
 
-            {gad.indicadores && (
+            {(gad.indicadores || gad.finanzasDpe) && (
               <Card className="mt-5">
-                <h2 className="font-display text-xl font-bold">Indicadores oficiales INEC 2024</h2>
+                <h2 className="font-display text-xl font-bold">Indicadores oficiales 2024</h2>
                 <p className="mb-5 mt-1 text-sm text-slate-500">
-                  Gestión de servicios municipales según el Censo de Información Ambiental Económica
-                  en GADM 2024. Complementan el INGEL; no lo modifican.
+                  Servicios municipales según el Censo INEC GADM 2024 y ejecución
+                  presupuestaria publicada vía DPE (LOTAIP Núm. 6). Complementan
+                  el INGEL; no lo modifican.
                 </p>
-                <div className="grid gap-4 md:grid-cols-2">
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                   <PanelInec
                     titulo="Residuos sólidos"
                     sigla="GIRS · gestión integral"
-                    d={gad.indicadores.girs}
+                    d={gad.indicadores?.girs ?? null}
                   />
                   <PanelInec
                     titulo="Agua potable y alcantarillado"
                     sigla="APA · cobertura y operación"
-                    d={gad.indicadores.apa}
+                    d={gad.indicadores?.apa ?? null}
                   />
+                  <PanelFinanzasDpe d={gad.finanzasDpe ?? null} />
                 </div>
               </Card>
             )}

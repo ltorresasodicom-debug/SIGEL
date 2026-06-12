@@ -2,18 +2,71 @@
 import { Link } from 'react-router-dom';
 import { useSigelData } from '@/hooks/useSigelData';
 import { DIMENSIONES } from '@/evaluation-engine';
+import type { Nivel, Semaforo } from '@/evaluation-engine/types';
+import { useRankingDinamico } from '@/features/ranking';
 import { Badge, Card, DataBoundary, SemaforoDot, Stat } from '@/components/ui';
+
+interface FilaTop {
+  id: string;
+  nombre: string;
+  provincia: string;
+  autoridad: string;
+  ingel: number;
+  nivel: Nivel;
+  semaforo: Semaforo;
+}
+
+const PERIODO_TOP = '2024';
 
 /**
  * Panel principal de SIGEL: consolida los KPIs institucionales y el Top 5 de
  * gobiernos locales mejor evaluados. Es autónomo (carga sus propios datos) y
  * maneja explícitamente los estados carga → vacío → error → contenido.
+ *
+ * El Top 5 prefiere `public.rankings` (motor real combinando demo + INEC + DPE);
+ * si Supabase no responde o no hay datos, cae al cálculo sintético del cliente.
  */
 export function Dashboard() {
   const { data, isLoading, error } = useSigelData();
+  const { data: rankingReal } = useRankingDinamico(PERIODO_TOP);
   const stats = data?.stats;
-  const top5 = data ? [...data.gads].sort((a, b) => b.ingel - a.ingel).slice(0, 5) : [];
   const sinDatos = data != null && data.gads.length === 0;
+
+  const { top5, fuenteReal } = (() => {
+    if (!data) return { top5: [] as FilaTop[], fuenteReal: false };
+    if (rankingReal && rankingReal.length >= 5) {
+      const byId = new Map(data.gads.map((g) => [g.id, g]));
+      const filas: FilaTop[] = [];
+      for (const r of rankingReal) {
+        const g = byId.get(r.gad_id);
+        if (!g) continue;
+        filas.push({
+          id: g.id,
+          nombre: g.nombre,
+          provincia: g.provincia,
+          autoridad: g.autoridad,
+          ingel: Number(r.score_total),
+          nivel: r.nivel as Nivel,
+          semaforo: r.semaforo as Semaforo,
+        });
+        if (filas.length === 5) break;
+      }
+      if (filas.length === 5) return { top5: filas, fuenteReal: true };
+    }
+    const sintetico: FilaTop[] = [...data.gads]
+      .sort((a, b) => b.ingel - a.ingel)
+      .slice(0, 5)
+      .map((g) => ({
+        id: g.id,
+        nombre: g.nombre,
+        provincia: g.provincia,
+        autoridad: g.autoridad,
+        ingel: g.ingel,
+        nivel: g.nivel,
+        semaforo: g.semaforo,
+      }));
+    return { top5: sintetico, fuenteReal: false };
+  })();
 
   return (
     <section aria-labelledby="dashboard-titulo" className="mx-auto max-w-7xl px-4 py-16">
@@ -59,7 +112,23 @@ export function Dashboard() {
             </div>
 
             <div className="mt-10">
-              <h3 className="mb-3 font-display text-xl font-bold tracking-tight">Top 5 nacional</h3>
+              <div className="mb-3 flex items-baseline justify-between gap-3">
+                <h3 className="font-display text-xl font-bold tracking-tight">Top 5 nacional</h3>
+                <span
+                  className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+                    fuenteReal
+                      ? 'bg-emerald-50 text-emerald-700'
+                      : 'bg-amber-50 text-amber-700'
+                  }`}
+                  title={
+                    fuenteReal
+                      ? `Calculado por el motor INGEL sobre mediciones reales del período ${PERIODO_TOP}.`
+                      : 'Vista preliminar con scores sintéticos. Aplica los seeds y recalcula el ranking para ver datos oficiales.'
+                  }
+                >
+                  {fuenteReal ? `datos oficiales ${PERIODO_TOP}` : 'demo sintético'}
+                </span>
+              </div>
               <ol className="space-y-2.5">
                 {top5.map((g, i) => (
                   <li key={g.id}>

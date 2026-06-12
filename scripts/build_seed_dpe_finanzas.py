@@ -27,6 +27,7 @@ Uso:
 import argparse
 import calendar
 import csv
+import json
 import re
 import sys
 import unicodedata
@@ -35,6 +36,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CSV_DIR = ROOT / "data" / "sources" / "dpe_csv"
 OUT = ROOT / "supabase" / "seeds" / "0005_dpe_finanzas_reales.sql"
+JSON_OUT = ROOT / "public" / "data" / "finanzas-dpe-2024.json"
 
 DIMENSION = "finanzas"
 UNIDAD = "porcentaje"
@@ -231,6 +233,7 @@ def main() -> int:
         return 1
 
     rows: list[str] = []
+    json_by_gad: dict[str, dict] = {}
     sin_asignado: list[str] = []
     sin_datos: list[tuple[str, str]] = []
     fuera_rango: list[tuple[str, float]] = []
@@ -278,6 +281,12 @@ def main() -> int:
             f"DATE {sql_str(fecha)}"
             ")"
         )
+        json_by_gad[gad_id] = {
+            "presupuesto": round(asignado, 2),
+            "gasto": round(devengado, 2),
+            "ejecucion_pct": valor,
+            "mes_corte": mes_usado,
+        }
 
     if not rows:
         print("No se generó ninguna fila — revisa los CSVs fuente.", file=sys.stderr)
@@ -309,7 +318,23 @@ def main() -> int:
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(header + ",\n".join(rows) + footer, encoding="utf-8")
 
+    # JSON consumido por public/data/ desde el frontend (src/services/sigel-data.ts).
+    # Mismos números que el seed SQL pero con los montos absolutos preservados,
+    # que el seed no almacena porque mediciones.dimension acepta solo el catálogo
+    # del motor de ranking y los USD no entran al promedio.
+    json_payload = {
+        "fuente": FUENTE,
+        "fecha_corte": fecha,
+        "indicador_pct": indicador,
+        "byGadId": {k: json_by_gad[k] for k in sorted(json_by_gad)},
+    }
+    JSON_OUT.parent.mkdir(parents=True, exist_ok=True)
+    JSON_OUT.write_text(
+        json.dumps(json_payload, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
     print(f"✓ {OUT.relative_to(ROOT)}  ·  {len(rows)} mediciones reales (finanzas DPE)")
+    print(f"✓ {JSON_OUT.relative_to(ROOT)}  ·  {len(json_by_gad)} cantones (montos y % ejecución)")
     if con_fallback:
         print(
             f"  · {len(con_fallback)} usaron mes alterno: "
