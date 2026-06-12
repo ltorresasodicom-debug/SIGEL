@@ -336,9 +336,52 @@ servicio). 221 cantones, cobertura 100% del CSV.
 4. Recalcula el ranking 2024 desde `/ranking` (staff). El índice real
    entra al promedio de `finanzas` junto al valor demo.
 
-> Alcance: proxy acotado al servicio GIRS — no mide ejecución
-> presupuestaria global (pendiente: API Defensoría del Pueblo /
-> eSIGEF) ni calidad del gasto (Contraloría).
+> Alcance: proxy acotado al servicio GIRS — no mide calidad del gasto
+> (Contraloría). La ejecución presupuestaria global se cubre con datos
+> DPE en el paso 9.
+
+---
+
+## Paso 9 · (Opcional) Datos reales: DPE LOTAIP Núm. 6 → ejecución presupuestaria en `finanzas`
+
+Segunda capa real en `finanzas`: **ejecución presupuestaria 2024**
+(`sum(Devengado)/sum(Asignado)*100`, sumando solo cuentas hoja del
+clasificador presupuestario para no duplicar por jerarquía) por cantón,
+desde los CSV de transparencia LOTAIP Numeral 6 de la Defensoría del
+Pueblo. 137 cantones con corte fiscal 2024-12-31.
+
+1. (Regenerar si hace falta — requiere los CSV cacheados localmente por
+   `scripts/fetch_dpe.py`: `npm run seed:dpe:finanzas`.)
+2. SQL Editor → **+ New query** → pega
+   `supabase/seeds/0005_dpe_finanzas_reales.sql` → **Run**. Idempotente.
+3. Verifica:
+
+   ```sql
+   select fuente, count(*) from public.mediciones group by 1 order by 1;
+   -- DPE LOTAIP Numeral 6 → 137  (más las fuentes de pasos anteriores)
+
+   select indicador, count(*) as n,
+          round(avg(valor), 1)      as promedio,
+          round(avg(valor_norm), 1) as promedio_norm
+     from public.mediciones
+    where fuente = 'DPE LOTAIP Numeral 6'
+    group by 1;
+   -- dpe_lotaip6_2024_ejecucion_presupuestaria → 137 filas
+   ```
+4. Recalcula el ranking 2024 desde `/ranking` (staff). La ejecución
+   real entra al promedio de `finanzas` junto al valor demo y al índice
+   INEC del paso 8 — el motor promedia `valor_norm` por dimensión sin
+   tocar código.
+
+> **Outliers:** 4 cantones reportan ejecución >150% (hasta 8177%) por
+> denominadores diminutos o reformas presupuestarias en el CSV fuente.
+> Se conserva el dato crudo en `valor` (auditabilidad) pero `valor_norm`
+> está capado a 0–100, así no distorsionan el ranking.
+
+> **Cobertura:** 137/221 cantones. Los faltantes no publicaron Numeral 6
+> en oct–dic 2024 o su CSV no es parseable; la cobertura se amplía
+> re-corriendo `scripts/fetch_dpe.py csv` sobre más meses y regenerando
+> el seed, sin cambios de esquema.
 
 ---
 
@@ -350,7 +393,8 @@ servicio). 221 cantones, cobertura 100% del CSV.
 - Auto-creación de perfiles para todo nuevo usuario.
 - Panel `/admin` operativo para gestionar roles sin SQL manual.
 - Ranking multi-período con selector y analítica longitudinal por GAD.
-- Primera capa de indicadores reales (INEC) ingresada en `servicios`.
+- Indicadores reales INEC en `servicios` (paso 7) y `finanzas` (paso 8).
+- Ejecución presupuestaria real DPE en `finanzas` para 137 cantones (paso 9).
 
 A partir de aquí, el siguiente paso del roadmap es **ranking dinámico
 end-to-end** (capacidad B): que `recalcularRankings(periodo)` lea
