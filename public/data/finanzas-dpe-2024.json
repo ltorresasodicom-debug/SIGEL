@@ -1,0 +1,853 @@
+{
+  "fuente": "DPE LOTAIP Numeral 6",
+  "fecha_corte": "2024-12-31",
+  "indicador_pct": "dpe_lotaip6_2024_ejecucion_presupuestaria",
+  "byGadId": {
+    "cant-1": {
+      "presupuesto": 5417877.48,
+      "gasto": 4210669.12,
+      "ejecucion_pct": 77.72,
+      "mes_corte": 12
+    },
+    "cant-10": {
+      "presupuesto": 5412171.64,
+      "gasto": 3937661.29,
+      "ejecucion_pct": 72.76,
+      "mes_corte": 12
+    },
+    "cant-101": {
+      "presupuesto": 29029285.69,
+      "gasto": 19672053.33,
+      "ejecucion_pct": 67.77,
+      "mes_corte": 12
+    },
+    "cant-102": {
+      "presupuesto": 9657454.44,
+      "gasto": 7940840.63,
+      "ejecucion_pct": 82.22,
+      "mes_corte": 12
+    },
+    "cant-105": {
+      "presupuesto": 18177971.16,
+      "gasto": 9881035.28,
+      "ejecucion_pct": 54.36,
+      "mes_corte": 12
+    },
+    "cant-106": {
+      "presupuesto": 888633393.0,
+      "gasto": 52521425.0,
+      "ejecucion_pct": 5.91,
+      "mes_corte": 12
+    },
+    "cant-107": {
+      "presupuesto": 10257458.98,
+      "gasto": 3347637.59,
+      "ejecucion_pct": 32.64,
+      "mes_corte": 12
+    },
+    "cant-108": {
+      "presupuesto": 8298428.64,
+      "gasto": 5838118.78,
+      "ejecucion_pct": 70.35,
+      "mes_corte": 12
+    },
+    "cant-11": {
+      "presupuesto": 2407035.84,
+      "gasto": 116786.77,
+      "ejecucion_pct": 4.85,
+      "mes_corte": 12
+    },
+    "cant-111": {
+      "presupuesto": 4203291.0,
+      "gasto": 446635.92,
+      "ejecucion_pct": 10.63,
+      "mes_corte": 12
+    },
+    "cant-114": {
+      "presupuesto": 3570942.36,
+      "gasto": 2591002.18,
+      "ejecucion_pct": 72.56,
+      "mes_corte": 12
+    },
+    "cant-115": {
+      "presupuesto": 5747679.1,
+      "gasto": 2560575.82,
+      "ejecucion_pct": 44.55,
+      "mes_corte": 12
+    },
+    "cant-117": {
+      "presupuesto": 15377125.68,
+      "gasto": 7675797.53,
+      "ejecucion_pct": 49.92,
+      "mes_corte": 12
+    },
+    "cant-12": {
+      "presupuesto": 6850798.92,
+      "gasto": 5146175.36,
+      "ejecucion_pct": 75.12,
+      "mes_corte": 12
+    },
+    "cant-120": {
+      "presupuesto": 20009198.23,
+      "gasto": 10505919.35,
+      "ejecucion_pct": 52.51,
+      "mes_corte": 12
+    },
+    "cant-121": {
+      "presupuesto": 33695444.22,
+      "gasto": 2755338002.0,
+      "ejecucion_pct": 8177.18,
+      "mes_corte": 12
+    },
+    "cant-122": {
+      "presupuesto": 1900000000.0,
+      "gasto": 1444151667.0,
+      "ejecucion_pct": 76.01,
+      "mes_corte": 12
+    },
+    "cant-123": {
+      "presupuesto": 18550304.05,
+      "gasto": 1877174.31,
+      "ejecucion_pct": 10.12,
+      "mes_corte": 11
+    },
+    "cant-124": {
+      "presupuesto": 8491125.53,
+      "gasto": 5536737.81,
+      "ejecucion_pct": 65.21,
+      "mes_corte": 12
+    },
+    "cant-125": {
+      "presupuesto": 9681616.58,
+      "gasto": 717778.87,
+      "ejecucion_pct": 7.41,
+      "mes_corte": 12
+    },
+    "cant-126": {
+      "presupuesto": 8798090.39,
+      "gasto": 8349129.3,
+      "ejecucion_pct": 94.9,
+      "mes_corte": 12
+    },
+    "cant-127": {
+      "presupuesto": 62716570.05,
+      "gasto": 34206841.64,
+      "ejecucion_pct": 54.54,
+      "mes_corte": 12
+    },
+    "cant-133": {
+      "presupuesto": 21659000.66,
+      "gasto": 4430497.8,
+      "ejecucion_pct": 20.46,
+      "mes_corte": 12
+    },
+    "cant-135": {
+      "presupuesto": 50320936.3,
+      "gasto": 10975352.64,
+      "ejecucion_pct": 21.81,
+      "mes_corte": 12
+    },
+    "cant-136": {
+      "presupuesto": 28579983.15,
+      "gasto": 22487895.14,
+      "ejecucion_pct": 78.68,
+      "mes_corte": 12
+    },
+    "cant-138": {
+      "presupuesto": 6502208.95,
+      "gasto": 614499.56,
+      "ejecucion_pct": 9.45,
+      "mes_corte": 12
+    },
+    "cant-14": {
+      "presupuesto": 39481157.48,
+      "gasto": 15530248.32,
+      "ejecucion_pct": 39.34,
+      "mes_corte": 12
+    },
+    "cant-140": {
+      "presupuesto": 12500352.65,
+      "gasto": 12231332.74,
+      "ejecucion_pct": 97.85,
+      "mes_corte": 12
+    },
+    "cant-141": {
+      "presupuesto": 10918835.55,
+      "gasto": 648153.18,
+      "ejecucion_pct": 5.94,
+      "mes_corte": 12
+    },
+    "cant-142": {
+      "presupuesto": 156822679.45,
+      "gasto": 113095428.72,
+      "ejecucion_pct": 72.12,
+      "mes_corte": 12
+    },
+    "cant-144": {
+      "presupuesto": 3356042.15,
+      "gasto": 2688574.62,
+      "ejecucion_pct": 80.11,
+      "mes_corte": 11
+    },
+    "cant-145": {
+      "presupuesto": 17810720.83,
+      "gasto": 8868805.34,
+      "ejecucion_pct": 49.79,
+      "mes_corte": 12
+    },
+    "cant-146": {
+      "presupuesto": 14797221.51,
+      "gasto": 9398031.02,
+      "ejecucion_pct": 63.51,
+      "mes_corte": 12
+    },
+    "cant-147": {
+      "presupuesto": 14278569.64,
+      "gasto": 9234042.53,
+      "ejecucion_pct": 64.67,
+      "mes_corte": 12
+    },
+    "cant-148": {
+      "presupuesto": 112037695.91,
+      "gasto": 101367973.33,
+      "ejecucion_pct": 90.48,
+      "mes_corte": 12
+    },
+    "cant-149": {
+      "presupuesto": 23128767.19,
+      "gasto": 8256215.39,
+      "ejecucion_pct": 35.7,
+      "mes_corte": 12
+    },
+    "cant-151": {
+      "presupuesto": 7224179.32,
+      "gasto": 6296107.29,
+      "ejecucion_pct": 87.15,
+      "mes_corte": 12
+    },
+    "cant-152": {
+      "presupuesto": 2420564.3,
+      "gasto": 195540.57,
+      "ejecucion_pct": 8.08,
+      "mes_corte": 12
+    },
+    "cant-153": {
+      "presupuesto": 11570293.55,
+      "gasto": 1007799.76,
+      "ejecucion_pct": 8.71,
+      "mes_corte": 12
+    },
+    "cant-154": {
+      "presupuesto": 11949110.0,
+      "gasto": 7755465.65,
+      "ejecucion_pct": 64.9,
+      "mes_corte": 12
+    },
+    "cant-155": {
+      "presupuesto": 13548952.09,
+      "gasto": 9407301.44,
+      "ejecucion_pct": 69.43,
+      "mes_corte": 12
+    },
+    "cant-156": {
+      "presupuesto": 6294851.95,
+      "gasto": 2741143.66,
+      "ejecucion_pct": 43.55,
+      "mes_corte": 12
+    },
+    "cant-159": {
+      "presupuesto": 122221526.56,
+      "gasto": 7205623.84,
+      "ejecucion_pct": 5.9,
+      "mes_corte": 12
+    },
+    "cant-16": {
+      "presupuesto": 5290498.64,
+      "gasto": 3531904.92,
+      "ejecucion_pct": 66.76,
+      "mes_corte": 12
+    },
+    "cant-161": {
+      "presupuesto": 265511024.0,
+      "gasto": 517608870.0,
+      "ejecucion_pct": 194.95,
+      "mes_corte": 12
+    },
+    "cant-162": {
+      "presupuesto": 7501574.63,
+      "gasto": 5468440.01,
+      "ejecucion_pct": 72.9,
+      "mes_corte": 12
+    },
+    "cant-163": {
+      "presupuesto": 8629006.95,
+      "gasto": 5476991.05,
+      "ejecucion_pct": 63.47,
+      "mes_corte": 11
+    },
+    "cant-167": {
+      "presupuesto": 9576456.22,
+      "gasto": 1075342.08,
+      "ejecucion_pct": 11.23,
+      "mes_corte": 12
+    },
+    "cant-168": {
+      "presupuesto": 4553823.09,
+      "gasto": 197581.19,
+      "ejecucion_pct": 4.34,
+      "mes_corte": 12
+    },
+    "cant-171": {
+      "presupuesto": 72133124.06,
+      "gasto": 58036300.26,
+      "ejecucion_pct": 80.46,
+      "mes_corte": 12
+    },
+    "cant-172": {
+      "presupuesto": 6512085.53,
+      "gasto": 7729371.7,
+      "ejecucion_pct": 118.69,
+      "mes_corte": 12
+    },
+    "cant-173": {
+      "presupuesto": 9598687.51,
+      "gasto": 886454.09,
+      "ejecucion_pct": 9.24,
+      "mes_corte": 12
+    },
+    "cant-174": {
+      "presupuesto": 43121894.6,
+      "gasto": 23410591.86,
+      "ejecucion_pct": 54.29,
+      "mes_corte": 12
+    },
+    "cant-175": {
+      "presupuesto": 1005533172.0,
+      "gasto": 412433677.0,
+      "ejecucion_pct": 41.02,
+      "mes_corte": 12
+    },
+    "cant-177": {
+      "presupuesto": 41471342.5,
+      "gasto": 20259766.49,
+      "ejecucion_pct": 48.85,
+      "mes_corte": 12
+    },
+    "cant-178": {
+      "presupuesto": 12468957.21,
+      "gasto": 8790454.45,
+      "ejecucion_pct": 70.5,
+      "mes_corte": 12
+    },
+    "cant-179": {
+      "presupuesto": 6540211.0,
+      "gasto": 5164693.59,
+      "ejecucion_pct": 78.97,
+      "mes_corte": 12
+    },
+    "cant-18": {
+      "presupuesto": 1222234.96,
+      "gasto": 979359.51,
+      "ejecucion_pct": 80.13,
+      "mes_corte": 11
+    },
+    "cant-180": {
+      "presupuesto": 24112250.44,
+      "gasto": 693481502.11,
+      "ejecucion_pct": 2876.05,
+      "mes_corte": 12
+    },
+    "cant-182": {
+      "presupuesto": 63846066.73,
+      "gasto": 41341840.45,
+      "ejecucion_pct": 64.75,
+      "mes_corte": 12
+    },
+    "cant-183": {
+      "presupuesto": 15114765.0,
+      "gasto": 4053877.87,
+      "ejecucion_pct": 26.82,
+      "mes_corte": 12
+    },
+    "cant-185": {
+      "presupuesto": 31332282.76,
+      "gasto": 22018070.07,
+      "ejecucion_pct": 70.27,
+      "mes_corte": 12
+    },
+    "cant-186": {
+      "presupuesto": 5541403.24,
+      "gasto": 2238375.72,
+      "ejecucion_pct": 40.39,
+      "mes_corte": 12
+    },
+    "cant-187": {
+      "presupuesto": 4688862.76,
+      "gasto": 2204106.82,
+      "ejecucion_pct": 47.01,
+      "mes_corte": 12
+    },
+    "cant-189": {
+      "presupuesto": 19300000.0,
+      "gasto": 11118902.36,
+      "ejecucion_pct": 57.61,
+      "mes_corte": 12
+    },
+    "cant-190": {
+      "presupuesto": 2591384.4,
+      "gasto": 2528916.76,
+      "ejecucion_pct": 97.59,
+      "mes_corte": 12
+    },
+    "cant-191": {
+      "presupuesto": 14504043.17,
+      "gasto": 3660573.34,
+      "ejecucion_pct": 25.24,
+      "mes_corte": 12
+    },
+    "cant-192": {
+      "presupuesto": 6312340.43,
+      "gasto": 1129149.05,
+      "ejecucion_pct": 17.89,
+      "mes_corte": 12
+    },
+    "cant-194": {
+      "presupuesto": 873817440.0,
+      "gasto": 138400773.0,
+      "ejecucion_pct": 15.84,
+      "mes_corte": 12
+    },
+    "cant-198": {
+      "presupuesto": 11536919.76,
+      "gasto": 11657101.11,
+      "ejecucion_pct": 101.04,
+      "mes_corte": 12
+    },
+    "cant-199": {
+      "presupuesto": 10015750.84,
+      "gasto": 3754859.33,
+      "ejecucion_pct": 37.49,
+      "mes_corte": 12
+    },
+    "cant-202": {
+      "presupuesto": 1000000000.0,
+      "gasto": 65343613.0,
+      "ejecucion_pct": 6.53,
+      "mes_corte": 12
+    },
+    "cant-205": {
+      "presupuesto": 9853967.28,
+      "gasto": 794320.49,
+      "ejecucion_pct": 8.06,
+      "mes_corte": 11
+    },
+    "cant-206": {
+      "presupuesto": 16311192.53,
+      "gasto": 210851798.45,
+      "ejecucion_pct": 1292.68,
+      "mes_corte": 12
+    },
+    "cant-207": {
+      "presupuesto": 45418715.7,
+      "gasto": 1464493.64,
+      "ejecucion_pct": 3.22,
+      "mes_corte": 12
+    },
+    "cant-208": {
+      "presupuesto": 4936187.68,
+      "gasto": 264818.26,
+      "ejecucion_pct": 5.36,
+      "mes_corte": 12
+    },
+    "cant-209": {
+      "presupuesto": 15363020.47,
+      "gasto": 1485460.86,
+      "ejecucion_pct": 9.67,
+      "mes_corte": 12
+    },
+    "cant-210": {
+      "presupuesto": 52966525.2,
+      "gasto": 35177102.64,
+      "ejecucion_pct": 66.41,
+      "mes_corte": 12
+    },
+    "cant-211": {
+      "presupuesto": 19748443.59,
+      "gasto": 19755699.83,
+      "ejecucion_pct": 100.04,
+      "mes_corte": 11
+    },
+    "cant-212": {
+      "presupuesto": 20939438.05,
+      "gasto": 16232660.17,
+      "ejecucion_pct": 77.52,
+      "mes_corte": 12
+    },
+    "cant-214": {
+      "presupuesto": 246600135.58,
+      "gasto": 118709049.34,
+      "ejecucion_pct": 48.14,
+      "mes_corte": 12
+    },
+    "cant-215": {
+      "presupuesto": 52000000.0,
+      "gasto": 28071063.77,
+      "ejecucion_pct": 53.98,
+      "mes_corte": 12
+    },
+    "cant-217": {
+      "presupuesto": 66401219.31,
+      "gasto": 31912354.14,
+      "ejecucion_pct": 48.06,
+      "mes_corte": 12
+    },
+    "cant-218": {
+      "presupuesto": 8144302.87,
+      "gasto": 5227065.98,
+      "ejecucion_pct": 64.18,
+      "mes_corte": 12
+    },
+    "cant-22": {
+      "presupuesto": 69144682.66,
+      "gasto": 2883320.19,
+      "ejecucion_pct": 4.17,
+      "mes_corte": 12
+    },
+    "cant-23": {
+      "presupuesto": 13285320.0,
+      "gasto": 705815.1,
+      "ejecucion_pct": 5.31,
+      "mes_corte": 12
+    },
+    "cant-25": {
+      "presupuesto": 10071134.38,
+      "gasto": 4434389.69,
+      "ejecucion_pct": 44.03,
+      "mes_corte": 11
+    },
+    "cant-27": {
+      "presupuesto": 170493329.93,
+      "gasto": 89682303.75,
+      "ejecucion_pct": 52.6,
+      "mes_corte": 12
+    },
+    "cant-29": {
+      "presupuesto": 6913400.0,
+      "gasto": 4242104.94,
+      "ejecucion_pct": 61.36,
+      "mes_corte": 12
+    },
+    "cant-30": {
+      "presupuesto": 209530603.89,
+      "gasto": 64028673.74,
+      "ejecucion_pct": 30.56,
+      "mes_corte": 12
+    },
+    "cant-32": {
+      "presupuesto": 35972626.32,
+      "gasto": 1019675.26,
+      "ejecucion_pct": 2.83,
+      "mes_corte": 12
+    },
+    "cant-33": {
+      "presupuesto": 3880554.0,
+      "gasto": 137455.36,
+      "ejecucion_pct": 3.54,
+      "mes_corte": 12
+    },
+    "cant-34": {
+      "presupuesto": 45998765.97,
+      "gasto": 2406951.77,
+      "ejecucion_pct": 5.23,
+      "mes_corte": 12
+    },
+    "cant-35": {
+      "presupuesto": 4952.0,
+      "gasto": 1977.65,
+      "ejecucion_pct": 39.94,
+      "mes_corte": 12
+    },
+    "cant-36": {
+      "presupuesto": 93081533.46,
+      "gasto": 41597077.79,
+      "ejecucion_pct": 44.69,
+      "mes_corte": 12
+    },
+    "cant-37": {
+      "presupuesto": 8200000.0,
+      "gasto": 5725533.73,
+      "ejecucion_pct": 69.82,
+      "mes_corte": 12
+    },
+    "cant-38": {
+      "presupuesto": 64460972.82,
+      "gasto": 2760278.45,
+      "ejecucion_pct": 4.28,
+      "mes_corte": 12
+    },
+    "cant-39": {
+      "presupuesto": 28138429.8,
+      "gasto": 12182162.41,
+      "ejecucion_pct": 43.29,
+      "mes_corte": 12
+    },
+    "cant-40": {
+      "presupuesto": 14719895.95,
+      "gasto": 6212394.29,
+      "ejecucion_pct": 42.2,
+      "mes_corte": 12
+    },
+    "cant-41": {
+      "presupuesto": 11835399.08,
+      "gasto": 6009151.99,
+      "ejecucion_pct": 50.77,
+      "mes_corte": 12
+    },
+    "cant-43": {
+      "presupuesto": 9137626.42,
+      "gasto": 2219499.21,
+      "ejecucion_pct": 24.29,
+      "mes_corte": 12
+    },
+    "cant-44": {
+      "presupuesto": 7544158.55,
+      "gasto": 4014370.52,
+      "ejecucion_pct": 53.21,
+      "mes_corte": 12
+    },
+    "cant-45": {
+      "presupuesto": 41208000.0,
+      "gasto": 2570287.63,
+      "ejecucion_pct": 6.24,
+      "mes_corte": 12
+    },
+    "cant-48": {
+      "presupuesto": 4504373.11,
+      "gasto": 3768486.69,
+      "ejecucion_pct": 83.66,
+      "mes_corte": 12
+    },
+    "cant-49": {
+      "presupuesto": 5307349.0,
+      "gasto": 4221740.56,
+      "ejecucion_pct": 79.55,
+      "mes_corte": 12
+    },
+    "cant-50": {
+      "presupuesto": 21777180.14,
+      "gasto": 10096922.4,
+      "ejecucion_pct": 46.36,
+      "mes_corte": 12
+    },
+    "cant-51": {
+      "presupuesto": 101916115.21,
+      "gasto": 49532114.82,
+      "ejecucion_pct": 48.6,
+      "mes_corte": 12
+    },
+    "cant-52": {
+      "presupuesto": 12420494.05,
+      "gasto": 10042111.08,
+      "ejecucion_pct": 80.85,
+      "mes_corte": 12
+    },
+    "cant-54": {
+      "presupuesto": 7607305.73,
+      "gasto": 5301439.58,
+      "ejecucion_pct": 69.69,
+      "mes_corte": 12
+    },
+    "cant-56": {
+      "presupuesto": 25775434.36,
+      "gasto": 951443.24,
+      "ejecucion_pct": 3.69,
+      "mes_corte": 12
+    },
+    "cant-57": {
+      "presupuesto": 25048834.0,
+      "gasto": 1411231.0,
+      "ejecucion_pct": 5.63,
+      "mes_corte": 12
+    },
+    "cant-6": {
+      "presupuesto": 21192091.65,
+      "gasto": 12614700.66,
+      "ejecucion_pct": 59.53,
+      "mes_corte": 12
+    },
+    "cant-61": {
+      "presupuesto": 25180827.74,
+      "gasto": 19471784.64,
+      "ejecucion_pct": 77.33,
+      "mes_corte": 12
+    },
+    "cant-62": {
+      "presupuesto": 7321248.0,
+      "gasto": 6092273.1,
+      "ejecucion_pct": 83.21,
+      "mes_corte": 12
+    },
+    "cant-63": {
+      "presupuesto": 1810966.0,
+      "gasto": 1661891.04,
+      "ejecucion_pct": 91.77,
+      "mes_corte": 12
+    },
+    "cant-64": {
+      "presupuesto": 29732636.55,
+      "gasto": 2123128.69,
+      "ejecucion_pct": 7.14,
+      "mes_corte": 12
+    },
+    "cant-66": {
+      "presupuesto": 21918667.6,
+      "gasto": 1382010.14,
+      "ejecucion_pct": 6.31,
+      "mes_corte": 12
+    },
+    "cant-67": {
+      "presupuesto": 26930118.57,
+      "gasto": 4603275.63,
+      "ejecucion_pct": 17.09,
+      "mes_corte": 12
+    },
+    "cant-68": {
+      "presupuesto": 38858026.29,
+      "gasto": 25116037.39,
+      "ejecucion_pct": 64.64,
+      "mes_corte": 12
+    },
+    "cant-7": {
+      "presupuesto": 12635241.0,
+      "gasto": 9110124.02,
+      "ejecucion_pct": 72.1,
+      "mes_corte": 12
+    },
+    "cant-71": {
+      "presupuesto": 1079123000.0,
+      "gasto": 785481942.0,
+      "ejecucion_pct": 72.79,
+      "mes_corte": 12
+    },
+    "cant-73": {
+      "presupuesto": 4688810.0,
+      "gasto": 1323217.75,
+      "ejecucion_pct": 28.22,
+      "mes_corte": 12
+    },
+    "cant-75": {
+      "presupuesto": 17950173.25,
+      "gasto": 7859285.7,
+      "ejecucion_pct": 43.78,
+      "mes_corte": 12
+    },
+    "cant-79": {
+      "presupuesto": 75005190.0,
+      "gasto": 49205688.88,
+      "ejecucion_pct": 65.6,
+      "mes_corte": 12
+    },
+    "cant-80": {
+      "presupuesto": 17536141.01,
+      "gasto": 16081546.14,
+      "ejecucion_pct": 91.71,
+      "mes_corte": 12
+    },
+    "cant-81": {
+      "presupuesto": 17617021.43,
+      "gasto": 9727956.06,
+      "ejecucion_pct": 55.22,
+      "mes_corte": 12
+    },
+    "cant-82": {
+      "presupuesto": 10514497.54,
+      "gasto": 5257248.77,
+      "ejecucion_pct": 50.0,
+      "mes_corte": 10
+    },
+    "cant-83": {
+      "presupuesto": 685000000.0,
+      "gasto": 468178207.74,
+      "ejecucion_pct": 68.35,
+      "mes_corte": 11
+    },
+    "cant-84": {
+      "presupuesto": 8173088.98,
+      "gasto": 9768815.21,
+      "ejecucion_pct": 119.52,
+      "mes_corte": 12
+    },
+    "cant-86": {
+      "presupuesto": 38700000.0,
+      "gasto": 28966084.38,
+      "ejecucion_pct": 74.85,
+      "mes_corte": 12
+    },
+    "cant-87": {
+      "presupuesto": 17183159.74,
+      "gasto": 15879137.11,
+      "ejecucion_pct": 92.41,
+      "mes_corte": 12
+    },
+    "cant-89": {
+      "presupuesto": 7290169.5,
+      "gasto": 5245886.12,
+      "ejecucion_pct": 71.96,
+      "mes_corte": 12
+    },
+    "cant-9": {
+      "presupuesto": 11988364.23,
+      "gasto": 1464578.37,
+      "ejecucion_pct": 12.22,
+      "mes_corte": 12
+    },
+    "cant-90": {
+      "presupuesto": 432794391.0,
+      "gasto": 243904419.0,
+      "ejecucion_pct": 56.36,
+      "mes_corte": 12
+    },
+    "cant-91": {
+      "presupuesto": 13485358.18,
+      "gasto": 10296008.63,
+      "ejecucion_pct": 76.35,
+      "mes_corte": 12
+    },
+    "cant-92": {
+      "presupuesto": 89442714.46,
+      "gasto": 24194314.95,
+      "ejecucion_pct": 27.05,
+      "mes_corte": 12
+    },
+    "cant-93": {
+      "presupuesto": 16668895.11,
+      "gasto": 3895501.98,
+      "ejecucion_pct": 23.37,
+      "mes_corte": 12
+    },
+    "cant-94": {
+      "presupuesto": 62907758.54,
+      "gasto": 56808526.31,
+      "ejecucion_pct": 90.3,
+      "mes_corte": 12
+    },
+    "cant-95": {
+      "presupuesto": 9174417.0,
+      "gasto": 8690859.58,
+      "ejecucion_pct": 94.73,
+      "mes_corte": 12
+    },
+    "cant-96": {
+      "presupuesto": 32811859.0,
+      "gasto": 28357095.38,
+      "ejecucion_pct": 86.42,
+      "mes_corte": 12
+    },
+    "cant-99": {
+      "presupuesto": 12010200.0,
+      "gasto": 9098161.0,
+      "ejecucion_pct": 75.75,
+      "mes_corte": 12
+    }
+  }
+}

@@ -110,6 +110,23 @@ def buscar_col(cabeceras: list[str], objetivo: str) -> int:
     return -1
 
 
+# Variantes de cabecera entre GADs (la DPE no es consistente):
+#   cant-91 usa "Código Presupuestario"; cant-217 "Presupuesto Inicial" +
+#   "Devengado Acumulado"; cant-89 "Asignación".
+COL_CUENTA = ("cuenta", "codigo presupuestario", "codigo", "partida")
+COL_ASIGNADO = ("asignado", "asignacion", "presupuesto inicial", "asignacion inicial")
+COL_DEVENGADO = ("devengado", "devengado acumulado")
+
+
+def buscar_col_alias(cabeceras: list[str], objetivos: tuple[str, ...]) -> int:
+    """Primer alias de `objetivos` presente (exacto, luego contains). -1 si nada."""
+    for obj in objetivos:
+        i = buscar_col(cabeceras, obj)
+        if i >= 0:
+            return i
+    return -1
+
+
 def localizar_tabla(texto: str) -> tuple[list[list[str]], int, int, int] | None:
     """Encuentra la tabla resumen dentro del CSV, tolerando variantes.
 
@@ -124,9 +141,9 @@ def localizar_tabla(texto: str) -> tuple[list[list[str]], int, int, int] | None:
         rows = list(csv.reader(lineas, delimiter=delim))
         for idx, row in enumerate(rows[:30]):
             cab = [norm_header(c) for c in row]
-            i_cuenta = buscar_col(cab, "cuenta")
-            i_asig = buscar_col(cab, "asignado")
-            i_dev = buscar_col(cab, "devengado")
+            i_cuenta = buscar_col_alias(cab, COL_CUENTA)
+            i_asig = buscar_col_alias(cab, COL_ASIGNADO)
+            i_dev = buscar_col_alias(cab, COL_DEVENGADO)
             if i_cuenta >= 0 and i_asig >= 0 and i_dev >= 0 and len(row) >= 4:
                 return rows[idx + 1:], i_cuenta, i_asig, i_dev
     return None
@@ -157,7 +174,7 @@ def procesar_csv(path: Path) -> tuple[float, float, int]:
         cuenta = row[i_cuenta].strip()
         if not cuenta:
             continue
-        codigo = cuenta.replace(".", "")
+        codigo = cuenta.replace(".", "").replace(" ", "")  # cant-89 usa "510105 11"
         if not codigo or not codigo[0].isdigit():
             continue
         filas.append((codigo, row[i_asig], row[i_dev]))
@@ -199,6 +216,14 @@ def sql_str(v: str) -> str:
 
 
 def main() -> int:
+    # En Windows la consola suele ser cp1252 y los prints con ✓/· revientan
+    # (UnicodeEncodeError). Forzar UTF-8 en la salida hace el script portable.
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8")
+        except (AttributeError, ValueError):
+            pass
+
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--year", type=int, default=2024)
     ap.add_argument("--month", type=int, default=12)
