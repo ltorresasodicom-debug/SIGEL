@@ -39,6 +39,7 @@ una pausa de cortesía con el servicio público.
 """
 import argparse
 import csv
+import difflib
 import json
 import re
 import sys
@@ -53,13 +54,12 @@ ROOT = Path(__file__).resolve().parent.parent
 BASE_API = "https://transparencia.dpe.gob.ec/backend/v1/public/public"
 SPEC_URL = "https://transparencia.dpe.gob.ec/backend/v1/public/swagger/?format=openapi"
 
-# Patrones de URL del CSV de Numeral 6 — se prueban en orden hasta el primer 200.
-# El primero es la ruta real que sirve Django (descubierta por reverse-engineering
-# del frontend: wf="/backend" + Xi="/v1/transparency"). El segundo es la heurística
-# inicial del repo, dejada como fallback hasta que un éxito real confirme la primera.
+# URL real del CSV de Numeral 6, confirmada contra el servicio en vivo: base
+# /backend/v1/transparency/media/ + la ruta tal cual viene en url_download
+# (que empieza por 'transparencia/<RUC>/Numeral 6/...'). El handler Django
+# ^media/(?P<path>.*)$ devuelve 404 limpio si el archivo no existe.
 CSV_URL_PATTERNS = [
     "https://transparencia.dpe.gob.ec/backend/v1/transparency/media/{ruta}",
-    "https://transparencia.dpe.gob.ec/media/transparencia/{ruta}",
 ]
 
 SRC = ROOT / "data" / "sources"
@@ -83,7 +83,13 @@ HEADERS_FILE = {
 
 def http_json(url: str, body: dict | None = None):
     data = json.dumps(body).encode() if body is not None else None
-    req = urllib.request.Request(url, data=data, headers=HEADERS_JSON)
+    # Accept con */* porque el spec se sirve como application/openapi+json
+    # (un Accept estricto a application/json provoca HTTP 406). Content-Type
+    # solo cuando hay cuerpo (un GET con Content-Type también irrita al server).
+    headers = {"User-Agent": HEADERS_JSON["User-Agent"], "Accept": "application/json, */*"}
+    if data is not None:
+        headers["Content-Type"] = "application/json"
+    req = urllib.request.Request(url, data=data, headers=headers)
     with urllib.request.urlopen(req, timeout=120) as resp:
         return json.loads(resp.read().decode("utf-8"))
 
@@ -92,6 +98,8 @@ def http_download(url: str, destino: Path) -> int:
     req = urllib.request.Request(url, headers=HEADERS_FILE)
     with urllib.request.urlopen(req, timeout=120) as resp:
         contenido = resp.read()
+    if contenido[:15].lstrip().lower().startswith((b"<!doctype", b"<html")):
+        raise ValueError("respuesta HTML (archivo no disponible)")
     destino.write_bytes(contenido)
     return len(contenido)
 
@@ -104,17 +112,82 @@ def norm(s: str) -> str:
     return " ".join(s.lower().split())
 
 
-def es_gad_municipal(nombre: str) -> bool:
-    """Filtra instituciones que son GAD Municipales (cantones)."""
+# Alias nombre-corto (electoral) → nombre oficial (DPE), ya normalizado.
+# Portado de src/lib/canton-aliases.ts.
+CANTON_ALIASES = {
+    "rio verde": "rioverde",
+    "a baquerizo moreno": "alfredo baquerizo moreno",
+    "crnl marcelino mariduenas": "crnel. marcelino mariduena",
+    "el empalme": "empalme",
+    "gral. a erizalde": "gnral. antonio elizalde",
+    "gral a erizalde": "gnral. antonio elizalde",
+    "fco. de orellana": "orellana",
+    "fco de orellana": "orellana",
+    "nobol/piedrahita": "nobol",
+    "yahuachi": "san jacinto de yaguachi",
+    "urcuqui": "san miguel de urcuqui",
+    "pueblo viejo": "puebloviejo",
+    "c.j. arosemena tola": "carlos julio arosemena tola",
+    "cj arosemena tola": "carlos julio arosemena tola",
+    "banos": "banos de agua santa",
+    "pelileo": "san pedro de pelileo",
+    "pillaro": "santiago de pillaro",
+    "yanzatza": "yantzaza",
+    "joya de los sachas": "la joya de los sachas",
+}
+
+
+def _strip_punct(s: str) -> str:
+    return " ".join(re.sub(r"[^a-z0-9 ]+", " ", s).split())
+
+
+def ruc_desde_record(record: dict) -> str:
+    """El RUC va embebido en files[].url_download: /transparencia/<RUC>/..."""
+    for f in record.get("files") or []:
+        url = f.get("url_download") or ""
+        partes = [urllib.parse.unquote(p) for p in url.strip("/").split("/")]
+        for i, seg in enumerate(partes):
+            if seg.lower() == "transparencia" and i + 1 < len(partes) and partes[i + 1].isdigit():
+                return partes[i + 1]
+        for seg in partes:  # respaldo: primer segmento numérico largo
+            if seg.isdigit() and len(seg) >= 10:
+                return seg
+    return ""
+
+
+def extraer_canton(nombre: str) -> str | None:
+    """Cantón si el nombre ES un GAD Municipal (empieza por el prefijo); si no, None.
+
+    Estricto (startswith) para excluir agencias del GAD: 'ACCIÓN SOCIAL DEL
+    GOBIERNO ... MUNICIPAL ...', 'CUERPO DE BOMBEROS ...', 'EMPRESA MUNICIPAL ...'.
+    """
     n = norm(nombre)
-    # GAD Municipal / Gobierno Autónomo Descentralizado Municipal / Municipio de X
-    return (
-        "gad municipal" in n
-        or "gobierno autonomo descentralizado municipal" in n
-        or n.startswith("municipio de ")
-        or n.startswith("ilustre municipio")
-        or "municipalidad" in n
-    )
+    m = re.match(r"^gobierno autonomo descentralizado municipal\s+(.*)$", n)
+    if m:
+        resto = m.group(1)
+    else:
+        resto = None
+        for pat in (r"^gobierno municipal\s+(.*)$",
+                    r"^i?\.?\s*ilustre municipalidad\s+(.*)$",
+                    r"^municipalidad\s+(.*)$",
+                    r"^municipio\s+(.*)$"):
+            m = re.match(pat, n)
+            if m:
+                resto = m.group(1)
+                break
+    if not resto:
+        return None
+    # Quita modificadores y conector inicial sin romper artículos (La/Las/Los/El).
+    resto = re.sub(r"^(intercultural y plurinacional|intercultural|y plurinacional|plurinacional)\b", "", resto).strip()
+    resto = re.sub(r"^(del canton|de el canton|canton|del|de)\s+", "", resto)
+    # Corta colas: " - GADM...", "(...)", "provincia de ...", "... gad/gadm...".
+    resto = re.split(r"\s+-\s+|\s*\(|\bprovincia de[l]?\b|\bgad", resto)[0]
+    return resto.strip(" .,-") or None
+
+
+def es_gad_municipal(nombre: str) -> bool:
+    """True solo si el nombre ES un GAD Municipal (no una empresa/agencia del GAD)."""
+    return extraer_canton(nombre) is not None
 
 
 def encontrar_campo(obj: dict, *posibles: str) -> str | None:
@@ -140,39 +213,51 @@ def cmd_spec(_args) -> int:
     return 0
 
 
-def cargar_indice_electoral() -> dict[str, str]:
-    """Mapea nombre-cantón normalizado → gad_id (cant-N).
+def cargar_indice_electoral() -> tuple[dict[str, str], dict[str, str]]:
+    """Índices nombre-cantón normalizado → gad_id (cant-N): directo+alias y sin puntuación.
 
-    Lazy: solo se carga si hace falta para emparejar el catastro DPE
-    con la dimensión cantonal del repo.
+    cant-N = 'cant-' + índice 0-based del arreglo cantones de electoral.json
+    (igual que src/services/sigel-data.ts).
     """
     if not ELECTORAL_JSON.exists():
-        return {}
+        return {}, {}
     data = json.loads(ELECTORAL_JSON.read_text(encoding="utf-8"))
-    out: dict[str, str] = {}
+    by_norm: dict[str, str] = {}
     for idx, c in enumerate(data["cantones"]):
-        out.setdefault(norm(c["canton"]), f"cant-{idx}")
-    return out
+        key = norm(c["canton"])
+        if not key:
+            continue
+        by_norm.setdefault(key, f"cant-{idx}")
+        oficial = CANTON_ALIASES.get(key)
+        if oficial:
+            by_norm.setdefault(norm(oficial), f"cant-{idx}")
+    by_norm_np = {}
+    for k, gid in by_norm.items():
+        by_norm_np.setdefault(_strip_punct(k), gid)
+    return by_norm, by_norm_np
 
 
-def nombre_canton_desde_institucion(nombre: str) -> str:
-    """'GAD MUNICIPAL DE CUENCA' / 'MUNICIPIO DE GIRÓN' → 'cuenca' / 'giron'."""
-    n = norm(nombre)
-    for prefijo in (
-        "gobierno autonomo descentralizado municipal de ",
-        "gobierno autonomo descentralizado municipal del ",
-        "gad municipal de ",
-        "gad municipal del ",
-        "municipio de ",
-        "municipio del ",
-        "ilustre municipio de ",
-        "ilustre municipio del ",
-        "municipalidad de ",
-        "municipalidad del ",
-    ):
-        if n.startswith(prefijo):
-            return n[len(prefijo):]
-    return n
+def match_canton(nombre: str, indices: tuple[dict[str, str], dict[str, str]]) -> str:
+    """Empareja un GAD con su cant-N: exacto → sin-puntuación → sufijo → fuzzy. '' si nada."""
+    by_norm, by_norm_np = indices
+    canton = extraer_canton(nombre)
+    if not canton:
+        return ""
+    n = norm(canton)
+    if n in by_norm:
+        return by_norm[n]
+    if _strip_punct(n) in by_norm_np:
+        return by_norm_np[_strip_punct(n)]
+    # Nombres oficiales anteponen santo/cualificador: "San Pedro de Pimampiro" → "Pimampiro".
+    toks = n.split()
+    for i in range(1, len(toks)):
+        suf = " ".join(toks[i:])
+        if suf in by_norm:
+            return by_norm[suf]
+        if _strip_punct(suf) in by_norm_np:
+            return by_norm_np[_strip_punct(suf)]
+    cerca = difflib.get_close_matches(n, list(by_norm.keys()), n=1, cutoff=0.84)
+    return by_norm[cerca[0]] if cerca else ""
 
 
 def descargar_dump_mes(year: int, mes: int, refrescar: bool) -> list[dict]:
@@ -199,29 +284,15 @@ def cmd_catastro(args) -> int:
     meses: list[int] = args.meses_resueltos  # garantizado por main()
     # ruc → (nombre, set(meses_vistos)). Primera aparición fija el nombre.
     acumulado: dict[str, tuple[str, set[int]]] = {}
-    campo_ruc = campo_nombre = None
     for mes in meses:
         items = descargar_dump_mes(args.year, mes, args.refrescar)
         if not items:
             print(f"  · {args.year}-{mes:02d}: respuesta vacía, salto", file=sys.stderr)
             continue
-        if campo_ruc is None:
-            muestra = items[0]
-            campo_ruc = encontrar_campo(muestra, "ruc")
-            campo_nombre = encontrar_campo(
-                muestra, "razonSocial", "razon_social", "nombre", "institucion", "name"
-            )
-            if not campo_ruc or not campo_nombre:
-                print(
-                    f"  ✗ No pude detectar los campos ruc/nombre. "
-                    f"Claves disponibles: {list(muestra.keys())}",
-                    file=sys.stderr,
-                )
-                return 1
-            print(f"  · campos detectados: ruc='{campo_ruc}'  nombre='{campo_nombre}'")
+        # La API devuelve 'establishment_name'; el RUC va embebido en url_download.
         for it in items:
-            nombre = (it.get(campo_nombre) or "").strip()
-            ruc = (it.get(campo_ruc) or "").strip()
+            nombre = (it.get("establishment_name") or "").strip()
+            ruc = ruc_desde_record(it)
             if not nombre or not ruc or not es_gad_municipal(nombre):
                 continue
             if ruc not in acumulado:
@@ -232,12 +303,11 @@ def cmd_catastro(args) -> int:
         print("  ✗ Ningún GAD Municipal encontrado en los meses solicitados.", file=sys.stderr)
         return 1
 
-    indice_electoral = cargar_indice_electoral()
+    indices = cargar_indice_electoral()
     filas: list[tuple[str, str, str, str]] = []  # (gad_id, ruc, nombre, meses_visto)
     sin_match: list[str] = []
     for ruc, (nombre, meses_set) in acumulado.items():
-        canton = nombre_canton_desde_institucion(nombre)
-        gad_id = indice_electoral.get(canton, "")
+        gad_id = match_canton(nombre, indices)
         if not gad_id:
             sin_match.append(f"{nombre} ({ruc})")
         meses_visto = ",".join(str(m) for m in sorted(meses_set))
@@ -335,7 +405,7 @@ def cmd_csv(args) -> int:
             saltados += 1
             continue
         ruta = urllib.parse.quote(
-            f"{ruc}/Numeral 6/{args.year}/{args.month:02d}/Conjunto de datos.csv"
+            f"transparencia/{ruc}/Numeral 6/{args.year}/{args.month:02d}/Conjunto de datos.csv"
         )
         # Prioriza el patrón que ya funcionó; si aún no hay ganador, todos.
         patrones = [patron_ganador] if patron_ganador else CSV_URL_PATTERNS

@@ -9,3 +9,15 @@ dist-ssr
 .DS_Store
 *.tsbuildinfo
 npm-debug.log*
+
+# Python
+__pycache__/
+*.pyc
+
+# Salidas regenerables de scripts/fetch_dpe.py (cachés del ETL de la DPE).
+# gad_rucs.csv se deja fuera a propósito: es el catastro derivado y podrías
+# querer versionarlo.
+data/sources/dpe_openapi.json
+data/sources/dpe_catastro/
+data/sources/dpe_presupuesto/
+data/sources/dpe_csv/
