@@ -112,15 +112,26 @@ def norm(s: str) -> str:
     return " ".join(s.lower().split())
 
 
-# Alias nombre-corto (electoral) → nombre oficial (DPE), ya normalizado.
+# Alias nombre-corto (electoral) → nombre(s) oficial(es) (DPE), ya normalizado.
+# Valores: str o tupla de variantes (la DPE no es consistente entre GADs).
 # Portado de src/lib/canton-aliases.ts.
 CANTON_ALIASES = {
     "rio verde": "rioverde",
     "a baquerizo moreno": "alfredo baquerizo moreno",
     "crnl marcelino mariduenas": "crnel. marcelino mariduena",
     "el empalme": "empalme",
-    "gral. a erizalde": "gnral. antonio elizalde",
-    "gral a erizalde": "gnral. antonio elizalde",
+    # electoral.json trae "GRAL. A Erizalde" (sic); la DPE publica como
+    # "GENERAL ANTONIO ELIZALDE BUCAY".
+    "gral. a erizalde": (
+        "gnral. antonio elizalde",
+        "general antonio elizalde",
+        "general antonio elizalde bucay",
+    ),
+    "gral a erizalde": (
+        "gnral. antonio elizalde",
+        "general antonio elizalde",
+        "general antonio elizalde bucay",
+    ),
     "fco. de orellana": "orellana",
     "fco de orellana": "orellana",
     "nobol/piedrahita": "nobol",
@@ -227,10 +238,19 @@ def cargar_indice_electoral() -> tuple[dict[str, str], dict[str, str]]:
         key = norm(c["canton"])
         if not key:
             continue
-        by_norm.setdefault(key, f"cant-{idx}")
+        gid = f"cant-{idx}"
+        by_norm.setdefault(key, gid)
+        # Clave cualificada "<cantón> <provincia>" para nombres duplicados:
+        # hay dos cantones Olmedo (Loja y Manabí) y el de Manabí se publica
+        # como "OLMEDO-MANABÍ", que sin puntuación cae en esta clave.
+        prov = norm(c.get("provincia") or "")
+        if prov:
+            by_norm.setdefault(f"{key} {prov}", gid)
         oficial = CANTON_ALIASES.get(key)
         if oficial:
-            by_norm.setdefault(norm(oficial), f"cant-{idx}")
+            variantes = (oficial,) if isinstance(oficial, str) else oficial
+            for v in variantes:
+                by_norm.setdefault(norm(v), gid)
     by_norm_np = {}
     for k, gid in by_norm.items():
         by_norm_np.setdefault(_strip_punct(k), gid)
@@ -350,16 +370,26 @@ def leer_catastro() -> list[dict]:
     return filas
 
 
+def filtro_solo(args) -> set[str] | None:
+    """Set de gad_ids del flag --solo, o None para procesar todos."""
+    if not getattr(args, "solo", None):
+        return None
+    return {g.strip() for g in args.solo.split(",") if g.strip()}
+
+
 def cmd_presupuesto(args) -> int:
     catastro = leer_catastro()
     if not catastro:
         return 1
+    solo = filtro_solo(args)
     PRESUPUESTO_DIR.mkdir(parents=True, exist_ok=True)
     ok = saltados = errores = 0
     for fila in catastro:
         gad_id, ruc = fila["gad_id"].strip(), fila["ruc"].strip()
         if not gad_id:
             continue  # sin match con cant-N → no podemos asociarlo a la dimensión
+        if solo is not None and gad_id not in solo:
+            continue
         destino = PRESUPUESTO_DIR / f"{gad_id}_{args.year}_{args.month:02d}.json"
         if destino.exists():
             saltados += 1
@@ -391,14 +421,25 @@ def cmd_csv(args) -> int:
     catastro = leer_catastro()
     if not catastro:
         return 1
+    solo = filtro_solo(args)
     CSV_DIR.mkdir(parents=True, exist_ok=True)
     log_path = CSV_DIR / "_errores.log"
-    log_path.unlink(missing_ok=True)
+    # En corridas completas el log arranca de cero; con --solo se conservan
+    # las entradas de otros GAD y solo se reescriben las de los reintentados.
+    errores_previos: dict[str, str] = {}
+    if solo is not None and log_path.exists():
+        for linea in log_path.read_text(encoding="utf-8").splitlines():
+            if linea.strip():
+                errores_previos[linea.split(";", 1)[0]] = linea
+        for gid in solo:
+            errores_previos.pop(gid, None)
     ok = saltados = errores = 0
     patron_ganador: str | None = None
     for fila in catastro:
         gad_id, ruc = fila["gad_id"].strip(), fila["ruc"].strip()
         if not gad_id:
+            continue
+        if solo is not None and gad_id not in solo:
             continue
         destino = CSV_DIR / f"{gad_id}_{args.year}_{args.month:02d}.csv"
         if destino.exists():
@@ -424,8 +465,7 @@ def cmd_csv(args) -> int:
             except Exception as e:
                 ultimo_error = str(e)
         else:
-            with log_path.open("a", encoding="utf-8") as logf:
-                logf.write(f"{gad_id};{ruc};{ultimo_error}\n")
+            errores_previos[gad_id] = f"{gad_id};{ruc};{ultimo_error}"
             errores += 1
             time.sleep(args.pausa)
             continue
@@ -433,6 +473,12 @@ def cmd_csv(args) -> int:
         if args.verbose:
             print(f"  ✓ {gad_id} ({ruc}): {size} bytes")
         time.sleep(args.pausa)
+    if errores_previos:
+        log_path.write_text(
+            "\n".join(sorted(errores_previos.values())) + "\n", encoding="utf-8"
+        )
+    else:
+        log_path.unlink(missing_ok=True)
     msg_log = f" (ver {log_path.relative_to(ROOT)})" if errores else ""
     print(
         f"✓ CSV {args.year}-{args.month:02d}: {ok} nuevos · "
@@ -458,6 +504,10 @@ def main() -> int:
         s.add_argument("--year", type=int, required=True)
         s.add_argument("--month", type=int, required=True)
         s.add_argument("--pausa", type=float, default=0.4, help="segundos entre requests")
+        s.add_argument(
+            "--solo", type=str, default="",
+            help='restringe a estos gad_ids, e.g. "cant-82,cant-144" (para reintentos puntuales)',
+        )
         if nombre == "csv":
             s.add_argument("--verbose", action="store_true")
 
