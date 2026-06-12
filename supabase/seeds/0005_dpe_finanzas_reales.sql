@@ -1,7 +1,7 @@
 -- =============================================================================
 -- SIGEL — Mediciones reales DPE LOTAIP Núm. 6 2024-12
 --          → dimensión finanzas
--- Generado por scripts/build_seed_dpe_finanzas.py · 127 mediciones
+-- Generado por scripts/build_seed_dpe_finanzas.py · 137 mediciones
 -- Fuente: DPE LOTAIP Numeral 6  ·  Fecha observación: 2024-12-31
 -- Indicador: dpe_lotaip6_2024_ejecucion_presupuestaria (porcentaje)
 -- Metodología: ejecución presupuestaria = sum(Devengado)/sum(Asignado)*100,
@@ -16,14 +16,17 @@ begin;
 insert into public.mediciones (gad_id, dimension, indicador, valor, unidad, valor_norm, fuente, fecha) values
   ('cant-1', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 77.72, 'porcentaje', 77.72, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-6', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 59.53, 'porcentaje', 59.53, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
+  ('cant-7', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 72.1, 'porcentaje', 72.1, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-9', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 12.22, 'porcentaje', 12.22, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-10', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 72.76, 'porcentaje', 72.76, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-11', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 4.85, 'porcentaje', 4.85, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-12', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 75.12, 'porcentaje', 75.12, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-14', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 39.34, 'porcentaje', 39.34, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-16', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 66.76, 'porcentaje', 66.76, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
+  ('cant-18', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 80.13, 'porcentaje', 80.13, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-22', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 4.17, 'porcentaje', 4.17, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-23', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 5.31, 'porcentaje', 5.31, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
+  ('cant-25', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 44.03, 'porcentaje', 44.03, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-27', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 52.6, 'porcentaje', 52.6, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-29', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 61.36, 'porcentaje', 61.36, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-30', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 30.56, 'porcentaje', 30.56, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
@@ -61,6 +64,8 @@ insert into public.mediciones (gad_id, dimension, indicador, valor, unidad, valo
   ('cant-79', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 65.6, 'porcentaje', 65.6, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-80', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 91.71, 'porcentaje', 91.71, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-81', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 55.22, 'porcentaje', 55.22, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
+  ('cant-82', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 50.0, 'porcentaje', 50.0, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
+  ('cant-83', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 68.35, 'porcentaje', 68.35, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-84', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 119.52, 'porcentaje', 100.0, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-86', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 74.85, 'porcentaje', 74.85, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-87', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 92.41, 'porcentaje', 92.41, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
@@ -84,6 +89,7 @@ insert into public.mediciones (gad_id, dimension, indicador, valor, unidad, valo
   ('cant-120', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 52.51, 'porcentaje', 52.51, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-121', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 8177.18, 'porcentaje', 100.0, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-122', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 76.01, 'porcentaje', 76.01, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
+  ('cant-123', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 10.12, 'porcentaje', 10.12, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-124', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 65.21, 'porcentaje', 65.21, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-125', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 7.41, 'porcentaje', 7.41, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-126', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 94.9, 'porcentaje', 94.9, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
@@ -95,6 +101,7 @@ insert into public.mediciones (gad_id, dimension, indicador, valor, unidad, valo
   ('cant-140', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 97.85, 'porcentaje', 97.85, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-141', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 5.94, 'porcentaje', 5.94, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-142', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 72.12, 'porcentaje', 72.12, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
+  ('cant-144', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 80.11, 'porcentaje', 80.11, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-145', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 49.79, 'porcentaje', 49.79, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-146', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 63.51, 'porcentaje', 63.51, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-147', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 64.67, 'porcentaje', 64.67, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
@@ -109,6 +116,7 @@ insert into public.mediciones (gad_id, dimension, indicador, valor, unidad, valo
   ('cant-159', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 5.9, 'porcentaje', 5.9, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-161', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 194.95, 'porcentaje', 100.0, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-162', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 72.9, 'porcentaje', 72.9, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
+  ('cant-163', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 63.47, 'porcentaje', 63.47, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-167', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 11.23, 'porcentaje', 11.23, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-168', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 4.34, 'porcentaje', 4.34, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-171', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 80.46, 'porcentaje', 80.46, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
@@ -132,11 +140,13 @@ insert into public.mediciones (gad_id, dimension, indicador, valor, unidad, valo
   ('cant-198', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 101.04, 'porcentaje', 100.0, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-199', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 37.49, 'porcentaje', 37.49, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-202', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 6.53, 'porcentaje', 6.53, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
+  ('cant-205', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 8.06, 'porcentaje', 8.06, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-206', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 1292.68, 'porcentaje', 100.0, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-207', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 3.22, 'porcentaje', 3.22, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-208', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 5.36, 'porcentaje', 5.36, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-209', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 9.67, 'porcentaje', 9.67, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-210', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 66.41, 'porcentaje', 66.41, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
+  ('cant-211', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 100.04, 'porcentaje', 100.0, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-212', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 77.52, 'porcentaje', 77.52, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-214', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 48.14, 'porcentaje', 48.14, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
   ('cant-215', 'finanzas', 'dpe_lotaip6_2024_ejecucion_presupuestaria', 53.98, 'porcentaje', 53.98, 'DPE LOTAIP Numeral 6', DATE '2024-12-31'),
