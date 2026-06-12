@@ -14,18 +14,23 @@ Subcomandos:
   catastro    POST /presupuesto con {ruc:null, year, month} →
               guarda la respuesta cruda en data/sources/dpe_catastro/
               y deriva data/sources/gad_rucs.csv filtrando a GAD
-              Municipales (~221 cantones). Es el bootstrap: corre
-              esto una vez antes de los otros subcomandos.
+              Municipales (~221 cantones). Acepta --month N (un mes)
+              o --months 10,11,12 (unión, dedup por RUC) para
+              maximizar cobertura cuando algunos GAD no publicaron
+              en un mes dado. Es el bootstrap: corre esto una vez
+              antes de los otros subcomandos.
   presupuesto Para cada RUC del catastro hace POST /presupuesto
               con {ruc, year, month} y cachea en
               data/sources/dpe_presupuesto/.
   csv         Descarga el "Conjunto de datos.csv" detallado por GAD
-              desde /media/transparencia/<RUC>/Numeral 6/<año>/<mes>/
-              a data/sources/dpe_csv/<gad_id>_<año>_<mes>.csv.
+              probando los patrones de CSV_URL_PATTERNS (primer hit
+              gana y se memoriza) a data/sources/dpe_csv/
+              <gad_id>_<año>_<mes>.csv. Los 404 se registran en
+              data/sources/dpe_csv/_errores.log y el loop continúa.
 
 Uso típico (PowerShell):
   python scripts/fetch_dpe.py spec
-  python scripts/fetch_dpe.py catastro --year 2024 --month 12
+  python scripts/fetch_dpe.py catastro --year 2024 --months 10,11,12
   python scripts/fetch_dpe.py presupuesto --year 2024 --month 12
   python scripts/fetch_dpe.py csv --year 2024 --month 12
 
@@ -47,7 +52,15 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 BASE_API = "https://transparencia.dpe.gob.ec/backend/v1/public/public"
 SPEC_URL = "https://transparencia.dpe.gob.ec/backend/v1/public/swagger/?format=openapi"
-BASE_MEDIA = "https://transparencia.dpe.gob.ec/media/transparencia"
+
+# Patrones de URL del CSV de Numeral 6 — se prueban en orden hasta el primer 200.
+# El primero es la ruta real que sirve Django (descubierta por reverse-engineering
+# del frontend: wf="/backend" + Xi="/v1/transparency"). El segundo es la heurística
+# inicial del repo, dejada como fallback hasta que un éxito real confirme la primera.
+CSV_URL_PATTERNS = [
+    "https://transparencia.dpe.gob.ec/backend/v1/transparency/media/{ruta}",
+    "https://transparencia.dpe.gob.ec/media/transparencia/{ruta}",
+]
 
 SRC = ROOT / "data" / "sources"
 SPEC_OUT = SRC / "dpe_openapi.json"
@@ -162,63 +175,85 @@ def nombre_canton_desde_institucion(nombre: str) -> str:
     return n
 
 
-def cmd_catastro(args) -> int:
+def descargar_dump_mes(year: int, mes: int, refrescar: bool) -> list[dict]:
+    """Devuelve la lista cruda de instituciones para un (year, mes), con cache."""
     CATASTRO_DIR.mkdir(parents=True, exist_ok=True)
-    raw_out = CATASTRO_DIR / f"{args.year}_{args.month:02d}.json"
-
-    if raw_out.exists() and not args.refrescar:
+    raw_out = CATASTRO_DIR / f"{year}_{mes:02d}.json"
+    if raw_out.exists() and not refrescar:
         print(f"  · usando cache {raw_out.relative_to(ROOT)} (--refrescar para forzar)")
         items = json.loads(raw_out.read_text(encoding="utf-8"))
     else:
-        print(f"  ↓ POST {BASE_API}/presupuesto  body={{ruc:null, year:{args.year}, month:{args.month}}}")
+        print(f"  ↓ POST {BASE_API}/presupuesto  body={{ruc:null, year:{year}, month:{mes}}}")
         items = http_json(
             f"{BASE_API}/presupuesto",
-            {"ruc": None, "year": args.year, "month": args.month},
+            {"ruc": None, "year": year, "month": mes},
         )
         raw_out.write_text(json.dumps(items, ensure_ascii=False, indent=2), encoding="utf-8")
         print(f"  ✓ {raw_out.relative_to(ROOT)}  ·  {len(items)} instituciones")
+    if not isinstance(items, list):
+        return []
+    return items
 
-    if not isinstance(items, list) or not items:
-        print("  ✗ Respuesta vacía o con forma inesperada.", file=sys.stderr)
-        return 1
 
-    muestra = items[0]
-    campo_ruc = encontrar_campo(muestra, "ruc")
-    campo_nombre = encontrar_campo(
-        muestra, "razonSocial", "razon_social", "nombre", "institucion", "name"
-    )
-    if not campo_ruc or not campo_nombre:
-        print(
-            f"  ✗ No pude detectar los campos ruc/nombre en la respuesta. "
-            f"Claves disponibles: {list(muestra.keys())}",
-            file=sys.stderr,
-        )
+def cmd_catastro(args) -> int:
+    meses: list[int] = args.meses_resueltos  # garantizado por main()
+    # ruc → (nombre, set(meses_vistos)). Primera aparición fija el nombre.
+    acumulado: dict[str, tuple[str, set[int]]] = {}
+    campo_ruc = campo_nombre = None
+    for mes in meses:
+        items = descargar_dump_mes(args.year, mes, args.refrescar)
+        if not items:
+            print(f"  · {args.year}-{mes:02d}: respuesta vacía, salto", file=sys.stderr)
+            continue
+        if campo_ruc is None:
+            muestra = items[0]
+            campo_ruc = encontrar_campo(muestra, "ruc")
+            campo_nombre = encontrar_campo(
+                muestra, "razonSocial", "razon_social", "nombre", "institucion", "name"
+            )
+            if not campo_ruc or not campo_nombre:
+                print(
+                    f"  ✗ No pude detectar los campos ruc/nombre. "
+                    f"Claves disponibles: {list(muestra.keys())}",
+                    file=sys.stderr,
+                )
+                return 1
+            print(f"  · campos detectados: ruc='{campo_ruc}'  nombre='{campo_nombre}'")
+        for it in items:
+            nombre = (it.get(campo_nombre) or "").strip()
+            ruc = (it.get(campo_ruc) or "").strip()
+            if not nombre or not ruc or not es_gad_municipal(nombre):
+                continue
+            if ruc not in acumulado:
+                acumulado[ruc] = (nombre, set())
+            acumulado[ruc][1].add(mes)
+
+    if not acumulado:
+        print("  ✗ Ningún GAD Municipal encontrado en los meses solicitados.", file=sys.stderr)
         return 1
-    print(f"  · campos detectados: ruc='{campo_ruc}'  nombre='{campo_nombre}'")
 
     indice_electoral = cargar_indice_electoral()
-    filas: list[tuple[str, str, str]] = []  # (gad_id, ruc, nombre)
+    filas: list[tuple[str, str, str, str]] = []  # (gad_id, ruc, nombre, meses_visto)
     sin_match: list[str] = []
-    for it in items:
-        nombre = (it.get(campo_nombre) or "").strip()
-        ruc = (it.get(campo_ruc) or "").strip()
-        if not nombre or not ruc or not es_gad_municipal(nombre):
-            continue
+    for ruc, (nombre, meses_set) in acumulado.items():
         canton = nombre_canton_desde_institucion(nombre)
         gad_id = indice_electoral.get(canton, "")
         if not gad_id:
             sin_match.append(f"{nombre} ({ruc})")
-        filas.append((gad_id, ruc, nombre))
+        meses_visto = ",".join(str(m) for m in sorted(meses_set))
+        filas.append((gad_id, ruc, nombre, meses_visto))
 
     filas.sort(key=lambda r: (r[0] or "zz", r[2]))
     with RUCS_CSV.open("w", encoding="utf-8", newline="") as f:
         w = csv.writer(f, delimiter=";")
-        w.writerow(["gad_id", "ruc", "nombre"])
+        w.writerow(["gad_id", "ruc", "nombre", "meses_visto"])
         w.writerows(filas)
     emparejados = sum(1 for r in filas if r[0])
+    meses_str = ",".join(f"{m:02d}" for m in meses)
     print(
         f"✓ {RUCS_CSV.relative_to(ROOT)}  ·  {len(filas)} GAD Municipales "
-        f"({emparejados} con cant-id, {len(sin_match)} sin match)"
+        f"(unión {args.year}-{{{meses_str}}}, {emparejados} con cant-id, "
+        f"{len(sin_match)} sin match)"
     )
     if sin_match:
         print("  · sin match en electoral.json — revisar manualmente:")
@@ -233,12 +268,16 @@ def leer_catastro() -> list[dict]:
     if not RUCS_CSV.exists():
         print(
             f"Falta {RUCS_CSV.relative_to(ROOT)}. "
-            "Corre primero: python scripts/fetch_dpe.py catastro --year YYYY --month MM",
+            "Corre primero: python scripts/fetch_dpe.py catastro --year YYYY --months 10,11,12",
             file=sys.stderr,
         )
         return []
     with RUCS_CSV.open(encoding="utf-8", newline="") as f:
-        return list(csv.DictReader(f, delimiter=";"))
+        filas = list(csv.DictReader(f, delimiter=";"))
+    # Compatibilidad con CSVs viejos (3 columnas, sin meses_visto):
+    for fila in filas:
+        fila.setdefault("meses_visto", "")
+    return filas
 
 
 def cmd_presupuesto(args) -> int:
@@ -283,7 +322,10 @@ def cmd_csv(args) -> int:
     if not catastro:
         return 1
     CSV_DIR.mkdir(parents=True, exist_ok=True)
+    log_path = CSV_DIR / "_errores.log"
+    log_path.unlink(missing_ok=True)
     ok = saltados = errores = 0
+    patron_ganador: str | None = None
     for fila in catastro:
         gad_id, ruc = fila["gad_id"].strip(), fila["ruc"].strip()
         if not gad_id:
@@ -292,23 +334,39 @@ def cmd_csv(args) -> int:
         if destino.exists():
             saltados += 1
             continue
-        ruta = f"{ruc}/Numeral 6/{args.year}/{args.month:02d}/Conjunto de datos.csv"
-        url = f"{BASE_MEDIA}/{urllib.parse.quote(ruta)}"
-        try:
-            size = http_download(url, destino)
-            ok += 1
-            if args.verbose:
-                print(f"  ✓ {gad_id} ({ruc}): {size} bytes")
-        except urllib.error.HTTPError as e:
-            print(f"  ✗ {gad_id} ({ruc}): HTTP {e.code}", file=sys.stderr)
+        ruta = urllib.parse.quote(
+            f"{ruc}/Numeral 6/{args.year}/{args.month:02d}/Conjunto de datos.csv"
+        )
+        # Prioriza el patrón que ya funcionó; si aún no hay ganador, todos.
+        patrones = [patron_ganador] if patron_ganador else CSV_URL_PATTERNS
+        ultimo_error: str = ""
+        size = 0
+        for patron in patrones:
+            url = patron.format(ruta=ruta)
+            try:
+                size = http_download(url, destino)
+                if patron_ganador is None:
+                    patron_ganador = patron
+                    print(f"  · patrón ganador: {patron}")
+                break
+            except urllib.error.HTTPError as e:
+                ultimo_error = f"HTTP {e.code}"
+            except Exception as e:
+                ultimo_error = str(e)
+        else:
+            with log_path.open("a", encoding="utf-8") as logf:
+                logf.write(f"{gad_id};{ruc};{ultimo_error}\n")
             errores += 1
-        except Exception as e:
-            print(f"  ✗ {gad_id} ({ruc}): {e}", file=sys.stderr)
-            errores += 1
+            time.sleep(args.pausa)
+            continue
+        ok += 1
+        if args.verbose:
+            print(f"  ✓ {gad_id} ({ruc}): {size} bytes")
         time.sleep(args.pausa)
+    msg_log = f" (ver {log_path.relative_to(ROOT)})" if errores else ""
     print(
         f"✓ CSV {args.year}-{args.month:02d}: {ok} nuevos · "
-        f"{saltados} en caché · {errores} errores → {CSV_DIR.relative_to(ROOT)}/"
+        f"{saltados} en caché · {errores} errores{msg_log} → {CSV_DIR.relative_to(ROOT)}/"
     )
     return 0 if errores == 0 else 2
 
@@ -320,7 +378,9 @@ def main() -> int:
 
     c = sub.add_parser("catastro")
     c.add_argument("--year", type=int, required=True)
-    c.add_argument("--month", type=int, required=True)
+    g = c.add_mutually_exclusive_group(required=True)
+    g.add_argument("--month", type=int, help="un solo mes (1-12)")
+    g.add_argument("--months", type=str, help='lista CSV de meses, e.g. "10,11,12"')
     c.add_argument("--refrescar", action="store_true", help="re-descarga el dump aunque exista cache")
 
     for nombre in ("presupuesto", "csv"):
@@ -332,6 +392,16 @@ def main() -> int:
             s.add_argument("--verbose", action="store_true")
 
     args = p.parse_args()
+    if args.cmd == "catastro":
+        if args.months:
+            try:
+                args.meses_resueltos = [int(m.strip()) for m in args.months.split(",") if m.strip()]
+            except ValueError:
+                p.error(f"--months espera enteros separados por coma, recibí: {args.months!r}")
+            if not all(1 <= m <= 12 for m in args.meses_resueltos):
+                p.error("--months debe contener valores entre 1 y 12")
+        else:
+            args.meses_resueltos = [args.month]
     return {
         "spec": cmd_spec,
         "catastro": cmd_catastro,
