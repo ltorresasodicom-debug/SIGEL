@@ -148,6 +148,16 @@ CANTON_ALIASES = {
 }
 
 
+# Alias nombre-provincia (electoral) → nombre(s) que publica la DPE, normalizado.
+# electoral.json abrevia algunos; la DPE suele traer el nombre completo.
+PROVINCIA_ALIASES = {
+    "sto dgo de los tsachilas": (
+        "santo domingo de los tsachilas",
+        "santo domingo",
+    ),
+}
+
+
 def _strip_punct(s: str) -> str:
     return " ".join(re.sub(r"[^a-z0-9 ]+", " ", s).split())
 
@@ -199,6 +209,40 @@ def extraer_canton(nombre: str) -> str | None:
 def es_gad_municipal(nombre: str) -> bool:
     """True solo si el nombre ES un GAD Municipal (no una empresa/agencia del GAD)."""
     return extraer_canton(nombre) is not None
+
+
+def extraer_provincia(nombre: str) -> str | None:
+    """Provincia si el nombre ES un GAD Provincial (Prefectura); si no, None.
+
+    Estricto (los prefijos exigen 'provincial'/'prefectura') para excluir
+    empresas/agencias provinciales que no son el GAD en sí. Nunca colisiona con
+    municipios: aquellos empiezan por '... descentralizado municipal'.
+    """
+    n = norm(nombre)
+    resto = None
+    for pat in (r"^gobierno autonomo descentralizado provincial\s+(.*)$",
+                r"^gobierno autonomo descentralizado de la provincia\s+(.*)$",
+                r"^gobierno provincial\s+(.*)$",
+                r"^gad provincial\s+(.*)$",
+                r"^h?\.?\s*consejo provincial\s+(.*)$",
+                r"^prefectura\s+(.*)$"):
+        m = re.match(pat, n)
+        if m:
+            resto = m.group(1)
+            break
+    if not resto:
+        return None
+    # Quita el conector inicial sin romper el artículo El ("El Oro"): NO se
+    # incluye "de el" en la lista, para que "de el oro" → "el oro" (vía "de ").
+    resto = re.sub(r"^(de la provincia de|de la|del|de)\s+", "", resto)
+    # Corta colas: " - GAD...", "(...)", "... gad/gadp...".
+    resto = re.split(r"\s+-\s+|\s*\(|\bgad", resto)[0]
+    return resto.strip(" .,-") or None
+
+
+def es_gad_provincial(nombre: str) -> bool:
+    """True solo si el nombre ES un GAD Provincial / Prefectura."""
+    return extraer_provincia(nombre) is not None
 
 
 def encontrar_campo(obj: dict, *posibles: str) -> str | None:
@@ -257,6 +301,33 @@ def cargar_indice_electoral() -> tuple[dict[str, str], dict[str, str]]:
     return by_norm, by_norm_np
 
 
+def cargar_indice_provincial() -> tuple[dict[str, str], dict[str, str]]:
+    """Índices nombre-provincia normalizado → gad_id (prov-N): directo+alias y sin puntuación.
+
+    prov-N = 'prov-' + índice 0-based del arreglo provincias de electoral.json
+    (igual que src/services/sigel-data.ts).
+    """
+    if not ELECTORAL_JSON.exists():
+        return {}, {}
+    data = json.loads(ELECTORAL_JSON.read_text(encoding="utf-8"))
+    by_norm: dict[str, str] = {}
+    for idx, p in enumerate(data["provincias"]):
+        key = norm(p["provincia"])
+        if not key:
+            continue
+        gid = f"prov-{idx}"
+        by_norm.setdefault(key, gid)
+        oficial = PROVINCIA_ALIASES.get(key)
+        if oficial:
+            variantes = (oficial,) if isinstance(oficial, str) else oficial
+            for v in variantes:
+                by_norm.setdefault(norm(v), gid)
+    by_norm_np = {}
+    for k, gid in by_norm.items():
+        by_norm_np.setdefault(_strip_punct(k), gid)
+    return by_norm, by_norm_np
+
+
 def match_canton(nombre: str, indices: tuple[dict[str, str], dict[str, str]]) -> str:
     """Empareja un GAD con su cant-N: exacto → sin-puntuación → sufijo → fuzzy. '' si nada."""
     by_norm, by_norm_np = indices
@@ -276,6 +347,21 @@ def match_canton(nombre: str, indices: tuple[dict[str, str], dict[str, str]]) ->
             return by_norm[suf]
         if _strip_punct(suf) in by_norm_np:
             return by_norm_np[_strip_punct(suf)]
+    cerca = difflib.get_close_matches(n, list(by_norm.keys()), n=1, cutoff=0.84)
+    return by_norm[cerca[0]] if cerca else ""
+
+
+def match_provincia(nombre: str, indices: tuple[dict[str, str], dict[str, str]]) -> str:
+    """Empareja un GAD Provincial con su prov-N: exacto → sin-puntuación → fuzzy. '' si nada."""
+    by_norm, by_norm_np = indices
+    provincia = extraer_provincia(nombre)
+    if not provincia:
+        return ""
+    n = norm(provincia)
+    if n in by_norm:
+        return by_norm[n]
+    if _strip_punct(n) in by_norm_np:
+        return by_norm_np[_strip_punct(n)]
     cerca = difflib.get_close_matches(n, list(by_norm.keys()), n=1, cutoff=0.84)
     return by_norm[cerca[0]] if cerca else ""
 
@@ -302,8 +388,10 @@ def descargar_dump_mes(year: int, mes: int, refrescar: bool) -> list[dict]:
 
 def cmd_catastro(args) -> int:
     meses: list[int] = args.meses_resueltos  # garantizado por main()
-    # ruc → (nombre, set(meses_vistos)). Primera aparición fija el nombre.
-    acumulado: dict[str, tuple[str, set[int]]] = {}
+    quiere_muni = args.tipo in ("municipal", "ambos")
+    quiere_prov = args.tipo in ("provincial", "ambos")
+    # ruc → (nombre, clase, set(meses_vistos)). Primera aparición fija nombre/clase.
+    acumulado: dict[str, tuple[str, str, set[int]]] = {}
     for mes in meses:
         items = descargar_dump_mes(args.year, mes, args.refrescar)
         if not items:
@@ -313,21 +401,32 @@ def cmd_catastro(args) -> int:
         for it in items:
             nombre = (it.get("establishment_name") or "").strip()
             ruc = ruc_desde_record(it)
-            if not nombre or not ruc or not es_gad_municipal(nombre):
+            if not nombre or not ruc:
+                continue
+            if quiere_muni and es_gad_municipal(nombre):
+                clase = "municipal"
+            elif quiere_prov and es_gad_provincial(nombre):
+                clase = "provincial"
+            else:
                 continue
             if ruc not in acumulado:
-                acumulado[ruc] = (nombre, set())
-            acumulado[ruc][1].add(mes)
+                acumulado[ruc] = (nombre, clase, set())
+            acumulado[ruc][2].add(mes)
 
     if not acumulado:
-        print("  ✗ Ningún GAD Municipal encontrado en los meses solicitados.", file=sys.stderr)
+        print("  ✗ Ningún GAD encontrado en los meses solicitados.", file=sys.stderr)
         return 1
 
-    indices = cargar_indice_electoral()
+    idx_muni = cargar_indice_electoral()
+    idx_prov = cargar_indice_provincial()
     filas: list[tuple[str, str, str, str]] = []  # (gad_id, ruc, nombre, meses_visto)
     sin_match: list[str] = []
-    for ruc, (nombre, meses_set) in acumulado.items():
-        gad_id = match_canton(nombre, indices)
+    for ruc, (nombre, clase, meses_set) in acumulado.items():
+        gad_id = (
+            match_canton(nombre, idx_muni)
+            if clase == "municipal"
+            else match_provincia(nombre, idx_prov)
+        )
         if not gad_id:
             sin_match.append(f"{nombre} ({ruc})")
         meses_visto = ",".join(str(m) for m in sorted(meses_set))
@@ -338,12 +437,13 @@ def cmd_catastro(args) -> int:
         w = csv.writer(f, delimiter=";")
         w.writerow(["gad_id", "ruc", "nombre", "meses_visto"])
         w.writerows(filas)
-    emparejados = sum(1 for r in filas if r[0])
+    n_cant = sum(1 for r in filas if r[0].startswith("cant-"))
+    n_prov = sum(1 for r in filas if r[0].startswith("prov-"))
     meses_str = ",".join(f"{m:02d}" for m in meses)
     print(
-        f"✓ {RUCS_CSV.relative_to(ROOT)}  ·  {len(filas)} GAD Municipales "
-        f"(unión {args.year}-{{{meses_str}}}, {emparejados} con cant-id, "
-        f"{len(sin_match)} sin match)"
+        f"✓ {RUCS_CSV.relative_to(ROOT)}  ·  {len(filas)} GAD "
+        f"(unión {args.year}-{{{meses_str}}}, tipo={args.tipo}: "
+        f"{n_cant} cant + {n_prov} prov, {len(sin_match)} sin match)"
     )
     if sin_match:
         print("  · sin match en electoral.json — revisar manualmente:")
@@ -358,7 +458,7 @@ def leer_catastro() -> list[dict]:
     if not RUCS_CSV.exists():
         print(
             f"Falta {RUCS_CSV.relative_to(ROOT)}. "
-            "Corre primero: python scripts/fetch_dpe.py catastro --year YYYY --months 10,11,12",
+            "Corre primero: python scripts/fetch_dpe.py catastro --year YYYY --months 10,11,12 --tipo ambos",
             file=sys.stderr,
         )
         return []
@@ -497,6 +597,10 @@ def main() -> int:
     g = c.add_mutually_exclusive_group(required=True)
     g.add_argument("--month", type=int, help="un solo mes (1-12)")
     g.add_argument("--months", type=str, help='lista CSV de meses, e.g. "10,11,12"')
+    c.add_argument(
+        "--tipo", choices=["municipal", "provincial", "ambos"], default="municipal",
+        help="qué GAD capturar: municipal (default), provincial (prefecturas) o ambos",
+    )
     c.add_argument("--refrescar", action="store_true", help="re-descarga el dump aunque exista cache")
 
     for nombre in ("presupuesto", "csv"):
