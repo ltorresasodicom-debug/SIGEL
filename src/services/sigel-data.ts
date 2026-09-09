@@ -217,7 +217,9 @@ interface FinanzasDpeJson {
 }
 function attachFinanzasDpe(data: SigelData, json: FinanzasDpeJson | null): void {
   if (!json?.byGadId) return;
-  for (const g of data.cantones) {
+  // Recorre TODOS los GAD (cantones y prefecturas): la DPE publica ejecución
+  // presupuestaria de ambos, indexada por g.id (cant-N / prov-N).
+  for (const g of data.gads) {
     const rec = json.byGadId[g.id];
     if (!rec) continue;
     g.finanzasDpe = {

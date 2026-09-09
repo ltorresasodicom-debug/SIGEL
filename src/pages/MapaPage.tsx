@@ -1,17 +1,29 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useSigelData } from '@/hooks/useSigelData';
+import { useRankingDinamico } from '@/features/ranking';
+import { aplicarRankingReal } from '@/services/rankings/aplicar-real';
 import { DataBoundary } from '@/components/ui';
 import { SEMAFORO_COLOR } from '@/lib/colores';
 import { normalize } from '@/lib/normalize';
 import type { Gad } from '@/types/sigel';
 
+const PERIODO_MAPA = '2024';
+
 export function MapaPage() {
   const { data, isLoading, error } = useSigelData();
+  const { data: rankingReal } = useRankingDinamico(PERIODO_MAPA);
   const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+
+  // Colorea por el INGEL real de public.rankings cuando existe; sintético si no.
+  const { cantones, fuenteReal } = useMemo(() => {
+    if (!data) return { cantones: [] as Gad[], fuenteReal: false };
+    const r = aplicarRankingReal(data.cantones, rankingReal);
+    return { cantones: r.gads, fuenteReal: r.fuenteReal };
+  }, [data, rankingReal]);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -27,7 +39,7 @@ export function MapaPage() {
     }).addTo(map);
 
     const gadByCanton = new Map<string, Gad>(
-      data.cantones.map((g) => [normalize(g.canton ?? ''), g]),
+      cantones.map((g) => [normalize(g.canton ?? ''), g]),
     );
     const gadDe = (f?: GeoJSON.Feature): Gad | undefined => {
       const canton = f?.properties?.['canton'] as string | undefined;
@@ -65,14 +77,28 @@ export function MapaPage() {
     return () => {
       map.remove();
     };
-  }, [data, navigate]);
+  }, [data, cantones, navigate]);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10">
       <header className="mb-6">
-        <h1 className="font-display text-3xl font-extrabold tracking-tight md:text-4xl">
-          Mapa Nacional de Desempeño
-        </h1>
+        <div className="flex flex-wrap items-center gap-3">
+          <h1 className="font-display text-3xl font-extrabold tracking-tight md:text-4xl">
+            Mapa Nacional de Desempeño
+          </h1>
+          <span
+            className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+              fuenteReal ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'
+            }`}
+            title={
+              fuenteReal
+                ? `Coloreado por el INGEL real del período ${PERIODO_MAPA} (public.rankings).`
+                : 'Vista preliminar con scores sintéticos. Recalcula el ranking para ver datos oficiales.'
+            }
+          >
+            {fuenteReal ? `datos oficiales ${PERIODO_MAPA}` : 'demo sintético'}
+          </span>
+        </div>
         <p className="mt-2 text-lg text-slate-600">
           Coropleta del INGEL en los cantones del Ecuador. Haz clic en un cantón para ver su ficha.
         </p>
