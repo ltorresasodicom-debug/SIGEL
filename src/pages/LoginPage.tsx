@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui';
 import { Button } from '@/components/Button';
 import { signInWithEmail, signUpWithEmail } from '@/services/supabase/auth';
+import { mensajeErrorAuth } from '@/lib/auth-errors';
 import { isSupabaseConfigured } from '@/lib/supabase';
 import { useAuth } from '@/hooks/useAuth';
 
@@ -65,7 +66,7 @@ export function LoginPage() {
       if (modo === 'login') {
         const { error } = await signInWithEmail(email, pwd);
         if (error) {
-          setErr(error.message);
+          setErr(mensajeErrorAuth(error));
           return;
         }
         navigate('/');
@@ -73,7 +74,7 @@ export function LoginPage() {
       }
       const { data, error } = await signUpWithEmail(email, pwd, nombre.trim() || undefined);
       if (error) {
-        setErr(error.message);
+        setErr(mensajeErrorAuth(error));
         return;
       }
       // Con confirmación por email activada, un email ya registrado
@@ -88,13 +89,7 @@ export function LoginPage() {
       }
       setOk('Cuenta creada. Revisa tu correo para confirmarla antes de iniciar sesión.');
     } catch (ex) {
-      setErr(
-        ex instanceof Error
-          ? ex.message
-          : modo === 'login'
-            ? 'Error al iniciar sesión.'
-            : 'Error al crear la cuenta.',
-      );
+      setErr(mensajeErrorAuth(ex as { code?: string; message?: string }));
     } finally {
       setPending(false);
     }
