@@ -245,11 +245,14 @@ def main() -> int:
     fecha = f"{args.year}-{args.month:02d}-{calendar.monthrange(args.year, args.month)[1]:02d}"
     indicador = f"dpe_lotaip6_{args.year}_ejecucion_presupuestaria"
 
-    gad_nums: set[int] = set()
+    # Recolecta gad_ids municipales (cant-N) y provinciales/prefecturas (prov-N).
+    gad_ids: set[str] = set()
     for mes in meses:
-        for p in CSV_DIR.glob(f"cant-*_{args.year}_{mes:02d}.csv"):
-            gad_nums.add(int(re.match(r"cant-(\d+)_", p.name).group(1)))
-    if not gad_nums:
+        for p in CSV_DIR.glob(f"*_{args.year}_{mes:02d}.csv"):
+            m = re.match(r"((?:cant|prov)-\d+)_", p.name)
+            if m:
+                gad_ids.add(m.group(1))
+    if not gad_ids:
         print(
             f"No hay CSVs para {args.year} meses {meses} en {CSV_DIR.relative_to(ROOT)}/. "
             f"Corre primero: python scripts/fetch_dpe.py csv --year {args.year} --month {args.month}",
@@ -264,8 +267,11 @@ def main() -> int:
     fuera_rango: list[tuple[str, float]] = []
     con_fallback: list[tuple[str, int]] = []
 
-    for n in sorted(gad_nums):
-        gad_id = f"cant-{n}"
+    def _orden(gid: str) -> tuple[int, int]:
+        pref, num = gid.split("-")
+        return (0 if pref == "cant" else 1, int(num))
+
+    for gad_id in sorted(gad_ids, key=_orden):
         path = mes_usado = None
         for mes in meses:
             candidato = CSV_DIR / f"{gad_id}_{args.year}_{mes:02d}.csv"
@@ -359,7 +365,7 @@ def main() -> int:
     )
 
     print(f"✓ {OUT.relative_to(ROOT)}  ·  {len(rows)} mediciones reales (finanzas DPE)")
-    print(f"✓ {JSON_OUT.relative_to(ROOT)}  ·  {len(json_by_gad)} cantones (montos y % ejecución)")
+    print(f"✓ {JSON_OUT.relative_to(ROOT)}  ·  {len(json_by_gad)} GAD (montos y % ejecución)")
     if con_fallback:
         print(
             f"  · {len(con_fallback)} usaron mes alterno: "
